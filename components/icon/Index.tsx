@@ -9,8 +9,7 @@ interface IconProps extends SVGAttributes<SVGElement> {
 
 const Index: FC<IconProps> = ({ className, name, ...rest }) => {
     return (
-        <svg
-            className={ classes('drug-icon', className) }
+        <svg className={ classes('drug-icon', className) }
             { ...rest }>
             <use xlinkHref={ `#${ name }` }/>
         </svg>

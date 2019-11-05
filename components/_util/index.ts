@@ -1,3 +1,3 @@
 export const classes = (...rest: (string | undefined)[]) => {
-    return rest.join(' ').trim();
+    return rest.filter(Boolean).join(' ').trim();
 };
