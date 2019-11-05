@@ -1,7 +1,10 @@
 module.exports = {
     verbose: true,
     clearMocks: false,
-    collectCoverage: false,
+    collectCoverage: true,
+    collectCoverageFrom: ['components/**/*.{ts,tsx}', '!**/node_modules/**'],
+    coverageDirectory: 'coverage',
+    coverageReporters: ['text', 'lcov'],
     reporters: ['default'],
     moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
     moduleDirectories: ['node_modules'],
