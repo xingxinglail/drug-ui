@@ -1,3 +1,4 @@
 import Button from './button';
+import Index from './icon/Index';
 
-export { Button };
+export { Button, Index };
