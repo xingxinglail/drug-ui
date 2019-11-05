@@ -2,6 +2,7 @@
 
 .idea/
 dist/
+test-results/
 
 ### Node template
 # Logs
