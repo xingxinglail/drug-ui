@@ -1,6 +1,6 @@
 import React, { FC, MouseEventHandler } from 'react';
 import ReactDOM from 'react-dom';
-import Index from './icon/Index';
+import { Icon } from '../components';
 
 const App: FC = () => {
     const click: MouseEventHandler = () => {
@@ -16,9 +16,9 @@ const App: FC = () => {
     };
     return (
         <div>
-            <Index className="star" name="left" onClick={ click } />
-            <Index name="down" onMouseEnter={ enter } />
-            <Index name="right" onMouseLeave={ level } />
+            <Icon className="star" name="left" onClick={ click } />
+            <Icon name="down" onMouseEnter={ enter } />
+            <Icon name="right" onMouseLeave={ level } />
         </div>
     );
 };
