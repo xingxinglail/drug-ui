@@ -3,6 +3,7 @@ import './style/index.scss';
 
 export interface Options {
     ref: RefObject<HTMLElement>;
+    center?: boolean;
 }
 
 const getRippleSize = (width: number, height: number, positionX: number, positionY: number) => {
@@ -20,8 +21,9 @@ const getRippleSize = (width: number, height: number, positionX: number, positio
 };
 
 export function useRipple (options: Options) {
-    const { ref } = options;
-    // default color rgba(0, 0, 0, 0.87)
+    const { ref, center } = options;
+    let childDom: HTMLSpanElement;
+
     const init = () => {
         const spanDom = document.createElement('span');
         spanDom.className = 'drug-ripple-root';
@@ -33,30 +35,44 @@ export function useRipple (options: Options) {
             const { left: _left, top: _top, width, height } = ref.current.getBoundingClientRect();
             const spanDom = document.createElement('span');
             spanDom.className = 'drug-ripple';
-            const { size, left, top } = getRippleSize(width, height, e.pageX - _left, e.pageY - _top);
-            spanDom.style.top = `${ top }px`;
-            spanDom.style.left = `${ left }px`;
+            let { size, left, top } = getRippleSize(width, height, e.pageX - _left, e.pageY - _top);
+            if (center) {
+                size = Math.max(width, height);
+                left = (width - size) / 2;
+                top = (height - size) / 2;
+            }
             spanDom.style.width = `${ size }px`;
             spanDom.style.height = `${ size }px`;
+            spanDom.style.top = `${ top }px`;
+            spanDom.style.left = `${ left }px`;
             const rootDom = ref.current.querySelector('.drug-ripple-root');
-            const childDom = document.createElement('span');
+            childDom = document.createElement('span');
             childDom.className = 'drug-ripple-child';
             spanDom.appendChild(childDom);
             rootDom!.appendChild(spanDom);
-            spanDom.addEventListener('animationend', () => {
-                spanDom.removeChild(childDom);
-                rootDom!.removeChild(spanDom);
-            });
+            const remove = () => {
+                childDom.removeEventListener('animationend', remove);
+                spanDom.remove();
+            };
+            childDom.addEventListener('animationend', remove);
         }
+    };
+
+    const removeRipple = () => {
+        childDom.classList.add('drug-ripple-child-leaving');
     };
 
     useEffect(() => {
         if (ref && ref.current) {
             init();
             ref.current.addEventListener('mousedown', touchRipple);
+            ref.current.addEventListener('mouseup', removeRipple);
         }
         return () => {
-            if (ref && ref.current) ref.current.removeEventListener('mousedown', touchRipple);
+            if (ref && ref.current) {
+                ref.current.removeEventListener('mousedown', touchRipple);
+                ref.current.removeEventListener('mouseup', removeRipple);
+            }
         };
     }, []);
 };

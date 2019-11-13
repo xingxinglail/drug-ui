@@ -5,25 +5,22 @@ import { useRipple } from '../_use';
 import './style/index.scss';
 
 interface ButtonProps {
-    disable?: boolean;
+    disabled?: boolean;
     disableRipple?: boolean;
 }
 
-const Button: FC<ButtonProps> = ({ disable = false, disableRipple = false, children }) => {
+const Button: FC<ButtonProps> = ({ disabled = false, disableRipple = false, children }) => {
     const ref = useRef<HTMLButtonElement>(null);
 
     if (!disableRipple) useRipple({ ref });
 
     return (
-        <>
-            <button
-                ref={ ref }
-                disabled={ disable }
-                className={ classes('drug-button', 'drug-button-primary') }>
-                { children }
-            </button>
-        </>
-
+        <button
+            ref={ ref }
+            disabled={ disabled }
+            className={ classes('drug-button', 'drug-button-primary') }>
+            { children }
+        </button>
     );
 };
 
