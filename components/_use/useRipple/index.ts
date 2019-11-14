@@ -59,19 +59,26 @@ export function useRipple (options: Options) {
     };
 
     const removeRipple = () => {
-        childDom.classList.add('drug-ripple-child-leaving');
+        if (childDom) childDom.classList.add('drug-ripple-child-leaving');
     };
 
     useEffect(() => {
         if (ref && ref.current) {
             init();
-            ref.current.addEventListener('mousedown', touchRipple);
-            ref.current.addEventListener('mouseup', removeRipple);
+            const { current } = ref;
+            current.addEventListener('mousedown', touchRipple);
+            document.addEventListener('mouseup', removeRipple);
+            current.addEventListener('mouseleave', removeRipple);
+            current.addEventListener('dragleave', removeRipple);
         }
         return () => {
             if (ref && ref.current) {
-                ref.current.removeEventListener('mousedown', touchRipple);
-                ref.current.removeEventListener('mouseup', removeRipple);
+                const { current } = ref;
+                current.removeEventListener('mousedown', touchRipple);
+                document.removeEventListener('mouseup', removeRipple);
+                current.addEventListener('mouseleave', removeRipple);
+                current.removeEventListener('mouseleave', removeRipple);
+                current.addEventListener('dragleave', removeRipple);
             }
         };
     }, []);
