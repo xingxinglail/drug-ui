@@ -22,7 +22,7 @@
     }
 }
 
-.drug-ripple-root {
+.drug-ripple {
     position: absolute;
     top: 0;
     right: 0;
@@ -32,7 +32,7 @@
     overflow: hidden;
     border-radius: inherit;
 
-    .drug-ripple {
+    &-visible {
         position: absolute;
         animation: drug-ripple-enter 550ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
 
