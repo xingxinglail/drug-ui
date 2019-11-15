@@ -195,7 +195,37 @@
         border-color: currentColor;
     }
 
-    &-disabled {
+    &-loading {
+
+        @keyframes spin {
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg)
+            }
+        }
+
+        .icon-spin {
+            animation: spin 1s infinite linear;
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            right: -1px;
+            bottom: -1px;
+            left: -1px;
+            z-index: 1;
+            background: #fff;
+            border-radius: inherit;
+            opacity: .35;
+            -webkit-transition: opacity .2s;
+            transition: opacity .2s;
+        }
+    }
+
+    &-disabled, &-loading {
         cursor: default;
         pointer-events: none;
     }

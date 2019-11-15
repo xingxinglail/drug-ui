@@ -12,10 +12,11 @@ import { classes, scopedClassMaker } from '../_util';
 import Ripple from './Ripple';
 
 import './style/index.scss';
+import { Icon } from '../index';
 
-type Variant = 'text' | 'outlined' | 'contained' | 'fab';
-type Color = 'default' | 'primary' | 'secondary' | 'inherit';
-type Size = 'small' | 'medium' | 'large';
+export type Variant = 'text' | 'outlined' | 'contained' | 'fab';
+export type Color = 'default' | 'primary' | 'secondary' | 'inherit';
+export type Size = 'small' | 'medium' | 'large';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: Variant;
@@ -28,6 +29,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     round?: boolean;
     fab?: boolean;
     icon?: boolean;
+    loading?: boolean;
     children?: ReactNode,
     component?: ElementType;
     ref?: React.Ref<HTMLButtonElement>
@@ -35,52 +37,8 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const scopedClass = scopedClassMaker('drug-button');
 
-// const Button: FC<ButtonProps> = (props) => {
-//     const { variant, color, size, disabled, disableRipple, component, fullWidth, href, round, fab, icon, children } = props;
-//     const ref = useRef<HTMLElement>(null);
-//     const _component = href ? 'a' : component === void 0 ? 'button' : component;
-//     const isCenterRipple = () => {
-//         return icon;
-//     };
-//     if (!disableRipple) useRipple({ ref, center: isCenterRipple() });
-//
-//     let colorClassName = '';
-//     if (color === 'inherit') {
-//         colorClassName = scopedClass('color-inherit');
-//     } else if (color !== 'default') {
-//         colorClassName = scopedClass(`${ variant }-${ color }`);
-//     }
-//
-//     const className = classes(
-//         scopedClass(),
-//         scopedClass(variant),
-//         colorClassName,
-//         round ? scopedClass('round') : '',
-//         size !== 'medium' ? scopedClass(`${ variant }-${ size }`) : '',
-//         fullWidth ? scopedClass('full-width') : '',
-//         fab ? scopedClass('fab') : '',
-//         icon ? scopedClass('icon') : '',
-//         disabled ? scopedClass(`${ variant }-disabled`) : '',
-//         disabled ? scopedClass('disabled') : '');
-//
-//     const newChildren = Children.map(children, child => {
-//         const type = typeof child;
-//         if (type === 'string' || type === 'number') {
-//             return (<span className={ scopedClass('label') }>{ child }</span>)
-//         }
-//         return child;
-//     });
-//
-//     return createElement(_component, {
-//         className,
-//         ref,
-//         href,
-//         disabled
-//     }, newChildren);
-// };
-
 const Button: FC<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-    const { variant, color, size, disabled, disableRipple, component, fullWidth, href, round, fab, icon, children, ...rest } = props;
+    const { variant, color, size, disabled, disableRipple, component, fullWidth, href, round, fab, icon, loading, children, ...rest } = props;
     const Component = href ? 'a' : component === void 0 ? 'button' : component;
     let colorClassName = '';
     if (color === 'inherit') {
@@ -98,6 +56,7 @@ const Button: FC<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>((prop
         fullWidth ? scopedClass('full-width') : '',
         fab ? scopedClass('fab') : '',
         icon ? scopedClass('icon') : '',
+        loading ? scopedClass('loading') : '',
         disabled ? scopedClass(`${ variant }-disabled`) : '',
         disabled ? scopedClass('disabled') : '');
 
@@ -117,7 +76,8 @@ const Button: FC<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>((prop
             disabled={ disabled }
             { ...rest }>
             { newChildren }
-            <Ripple center={ icon }/>
+            { loading ? <Icon className="icon-spin" name="loading" /> : null }
+            { !disableRipple ? <Ripple center={ icon }/> : null }
         </Component>
     );
 });
@@ -133,6 +93,7 @@ Button.defaultProps = {
     href: undefined,
     round: false,
     icon: false,
+    loading: false,
     component: 'button'
 };
 
@@ -145,7 +106,8 @@ Button.propTypes = {
     fullWidth: PropTypes.bool,
     href: PropTypes.string,
     round: PropTypes.bool,
-    icon: PropTypes.bool
+    icon: PropTypes.bool,
+    loading: PropTypes.bool
     // component: PropTypes.elementType
 };
 

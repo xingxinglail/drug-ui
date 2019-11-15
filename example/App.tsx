@@ -1,7 +1,7 @@
 import React, { FC, MouseEventHandler, useState, useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { Icon } from '../components';
-import Button from '../components/button/Index';
+import Button, { Variant } from '../components/button/Index';
 
 const Test: FC = ((props) => {
     const { children, ...rest } = props;
@@ -10,6 +10,8 @@ const Test: FC = ((props) => {
 
 const App: FC = () => {
     const [a, setA] = useState(true);
+    const [loading, setLoading] = useState(false);
+    const [variant, setVariant] = useState<Variant>('contained');
     const buttonEl = useRef(null);
     const iconEl = useRef(null);
 
@@ -33,7 +35,7 @@ const App: FC = () => {
 
     return (
         <div>
-            <Icon className="star" name="left" ref={iconEl} />
+            <Icon className="star" name="left" ref={ iconEl }/>
             <Icon name="down" onMouseEnter={ enter }/>
             <Icon name="right" onMouseLeave={ level }/>
             <br/>
@@ -42,24 +44,28 @@ const App: FC = () => {
                     a ? <Button component={ Test }>你好，世界</Button> : '6777'
                 }
                 <Button fullWidth href="/">世界，你好</Button>
-                <Button fullWidth onClick={ (e) => click(e) } onMouseEnter={ enter }>世界，你好</Button>
+                <Button fullWidth onClick={ (e) => click(e) }>世界，你好</Button>
                 <br/>
                 <br/>
                 <br/>
                 <div>
-                    <Button variant="contained"></Button>
-                    <Button variant="contained" color="primary">世界，你好</Button>
-                    <Button variant="contained" color="secondary"><Icon name="setting"/>23434</Button>
-                    <Button disabled variant="contained" color="secondary">世界，你好<Icon name="setting"/></Button>
+                    <Button variant={ variant } loading={ loading }>嘻嘻哈哈</Button>
+                    <Button variant="contained" color="primary" onClick={ () => setLoading(true) }>世界，你好</Button>
+                    <Button variant="contained" color="secondary" onClick={ () => setLoading(false) }><Icon
+                        name="setting"/>23434</Button>
+                    <Button variant="contained" color="secondary" onClick={ () => setVariant('outlined') }>世界，你好<Icon
+                        name="setting"/></Button>
+                    <Button disabled variant="contained" color="secondary" onClick={ () => setVariant('outlined') }>世界，你好<Icon
+                        name="setting"/></Button>
                     <Button variant="contained" color="secondary"><Icon name="setting"/>世界，你好<Icon
                         name="setting"/></Button>
                 </div>
                 <br/>
                 <br/>
                 <div>
-                    <Button>世界，你好</Button>
+                    <Button loading>世界，你好</Button>
                     <Button color="primary">世界，你好</Button>
-                    <Button color="secondary">世界，你好</Button>
+                    <Button color="secondary" loading>世界，你好</Button>
                     <Button disabled color="secondary">世界，你好</Button>
                     <Button color="secondary">世界，你好</Button>
                 </div>
@@ -67,7 +73,7 @@ const App: FC = () => {
                 <br/>
                 <div>
                     <Button variant="outlined">世界，你好</Button>
-                    <Button variant="outlined" color="primary">世界，你好</Button>
+                    <Button variant="outlined" loading color="primary">世界，你好</Button>
                     <Button variant="outlined" color="secondary">世界，你好</Button>
                     <Button variant="outlined" disabled color="secondary">世界，你好</Button>
                     <Button variant="outlined" color="secondary">世界，你好</Button>
@@ -93,7 +99,7 @@ const App: FC = () => {
                 <div>
                     <Button variant="contained" color="primary" size="small" round><Icon name="setting"/>世界，你好</Button>
                     <Button variant="contained" color="primary" size="medium"><Icon name="setting"/>世界，你好</Button>
-                    <Button variant="contained" color="primary" size="large">世界，你好<Icon name="setting"/></Button>
+                    <Button variant="contained" color="primary" size="large" loading>世界，你好</Button>
                 </div>
                 <br/>
                 <div>
@@ -101,11 +107,13 @@ const App: FC = () => {
                     <Button variant="fab" color="secondary" size="medium"><Icon name="setting"
                                                                                 style={ { fontSize: 24 } }/></Button>
                     <Button variant="fab" color="primary" size="large"><Icon name="setting" style={ { fontSize: 28 } }/></Button>
-                    <Button variant="fab" color="primary" disabled size="large"><Icon name="setting" style={ { fontSize: 28 } }/></Button>
+                    <Button variant="fab" color="primary" disabled size="large"><Icon name="setting"
+                                                                                      style={ { fontSize: 28 } }/></Button>
                 </div>
                 <br/>
                 <div>
-                    <Button ref={buttonEl} onClick={ click } color="primary" icon><Icon name="setting" style={ { fontSize: 20 } }/></Button>
+                    <Button ref={ buttonEl } onClick={ click } color="primary" icon><Icon name="setting"
+                                                                                          style={ { fontSize: 20 } }/></Button>
                     <Button color="secondary" icon><Icon name="setting" style={ { fontSize: 20 } }/></Button>
                 </div>
             </div>
