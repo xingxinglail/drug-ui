@@ -1,5 +1,4 @@
-import
-    React, {
+import React, {
     forwardRef,
     ElementType,
     FC,
@@ -8,11 +7,10 @@ import
     ButtonHTMLAttributes
 } from 'react';
 import PropTypes from 'prop-types';
+import './style/index.scss';
 import { classes, scopedClassMaker } from '../_util';
 import Ripple from './Ripple';
-
-import './style/index.scss';
-import { Icon } from '../index';
+import Icon from '../icon/Index';
 
 export type Variant = 'text' | 'outlined' | 'contained' | 'fab';
 export type Color = 'default' | 'primary' | 'secondary' | 'inherit';
@@ -38,7 +36,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const scopedClass = scopedClassMaker('drug-button');
 
 const Button: FC<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-    const { variant, color, size, disabled, disableRipple, component, fullWidth, href, round, fab, icon, loading, children, ...rest } = props;
+    const { className, variant, color, size, disabled, disableRipple, component, fullWidth, href, round, fab, icon, loading, children, ...rest } = props;
     const Component = href ? 'a' : component === void 0 ? 'button' : component;
     let colorClassName = '';
     if (color === 'inherit') {
@@ -47,7 +45,7 @@ const Button: FC<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>((prop
         colorClassName = scopedClass(`${ variant }-${ color }`);
     }
 
-    const className = classes(
+    const classNames = classes(
         scopedClass(),
         scopedClass(variant),
         colorClassName,
@@ -58,7 +56,8 @@ const Button: FC<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>((prop
         icon ? scopedClass('icon') : '',
         loading ? scopedClass('loading') : '',
         disabled ? scopedClass(`${ variant }-disabled`) : '',
-        disabled ? scopedClass('disabled') : '');
+        disabled ? scopedClass('disabled') : '',
+        className);
 
     const newChildren = Children.map(children, child => {
         const type = typeof child;
@@ -70,13 +69,13 @@ const Button: FC<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>((prop
 
     return (
         <Component
-            className={ className }
+            className={ classNames }
             ref={ ref }
             href={ href }
             disabled={ disabled }
             { ...rest }>
             { newChildren }
-            { loading ? <Icon className="icon-spin" name="loading" /> : null }
+            { loading ? <Icon className="icon-spin" name="loading"/> : null }
             { !disableRipple ? <Ripple center={ icon }/> : null }
         </Component>
     );

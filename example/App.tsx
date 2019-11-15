@@ -1,6 +1,6 @@
 import React, { FC, MouseEventHandler, useState, useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { Icon } from '../components';
+import Icon from '../components/icon/Index';
 import Button, { Variant } from '../components/button/Index';
 
 const Test: FC = ((props) => {
@@ -49,7 +49,7 @@ const App: FC = () => {
                 <br/>
                 <br/>
                 <div>
-                    <Button variant={ variant } loading={ loading }>嘻嘻哈哈</Button>
+                    <Button className="asd" variant={ variant } loading={ loading }>嘻嘻哈哈</Button>
                     <Button variant="contained" color="primary" onClick={ () => setLoading(true) }>世界，你好</Button>
                     <Button variant="contained" color="secondary" onClick={ () => setLoading(false) }><Icon
                         name="setting"/>23434</Button>
