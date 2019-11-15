@@ -4,7 +4,8 @@ import React, {
     FC,
     ReactNode,
     Children,
-    ButtonHTMLAttributes
+    ButtonHTMLAttributes,
+    Ref
 } from 'react';
 import PropTypes from 'prop-types';
 import './style/index.scss';
@@ -30,7 +31,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     loading?: boolean;
     children?: ReactNode,
     component?: ElementType;
-    ref?: React.Ref<HTMLButtonElement>
+    ref?: Ref<HTMLButtonElement>
 }
 
 const scopedClass = scopedClassMaker('drug-button');
