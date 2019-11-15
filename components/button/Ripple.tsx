@@ -1,4 +1,5 @@
-import { FC, createElement, useRef } from 'react';
+import { FC, createElement, useRef, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { scopedClassMaker } from '../_util';
 import './style/ripple.scss';
 
@@ -26,9 +27,10 @@ const Ripple: FC<RippleProps> = (props) => {
     const ref = useRef<HTMLElement>(null);
     let childDom: HTMLSpanElement;
 
-    const handleMouseDown = (e: MouseEvent) => {
-        if (ref.current) {
-            const { left: _left, top: _top, width, height } = ref.current.getBoundingClientRect();
+    const handleMouseDown = useCallback((e: MouseEvent) => {
+        const root = ref.current;
+        if (root) {
+            const { left: _left, top: _top, width, height } = root.getBoundingClientRect();
             const spanDom = document.createElement('span');
             spanDom.className = scopedClass('visible');
             let { size, left, top } = getRippleSize(width, height, e.pageX - _left, e.pageY - _top);
@@ -43,20 +45,19 @@ const Ripple: FC<RippleProps> = (props) => {
             spanDom.style.left = `${ left }px`;
             childDom = document.createElement('span');
             childDom.className = scopedClass('child');
-            ;
             spanDom.appendChild(childDom);
-            ref.current.appendChild(spanDom);
+            root.appendChild(spanDom);
             const remove = () => {
                 childDom.removeEventListener('animationend', remove);
                 spanDom.remove();
             };
             childDom.addEventListener('animationend', remove);
         }
-    };
+    }, []);
 
-    const handleMouseUp = () => {
+    const handleMouseUp = useCallback(() => {
         if (childDom) childDom.classList.add(scopedClass('child-leaving'));
-    };
+    }, []);
 
     return createElement('span', {
         className: scopedClass(),
@@ -70,6 +71,10 @@ const Ripple: FC<RippleProps> = (props) => {
 
 Ripple.defaultProps = {
     center: false
+};
+
+Ripple.propTypes = {
+    center: PropTypes.bool
 };
 
 export default Ripple;
