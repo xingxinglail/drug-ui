@@ -1,5 +1,6 @@
 {
     "name": "@drug-ui/core",
+    "version": "0.0.0",
     "private": false,
     "description": "A UI Design Language and React UI library",
     "author": "star <istarcoming@163.com>",
@@ -24,5 +25,6 @@
     "typings": "build/index.d.ts",
     "publishConfig": {
         "access": "public"
-    }
+    },
+    "gitHead": "9e5295afc4c1e893c77328400aaf097e88adf1c0"
 }
