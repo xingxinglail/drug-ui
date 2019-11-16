@@ -1,6 +1,6 @@
 {
     "name": "drug-ui",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "A UI Design Language and React UI library",
     "main": "dist/core/index",
     "types": "dist/core/index",
