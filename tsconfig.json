@@ -1,40 +1,31 @@
 {
-  "compilerOptions": {
-    "outDir": "dist/lib",
-    "declaration": true,
-    "baseUrl": ".",
-    "module": "esnext",
-    "target": "es5",
-    "lib": ["es6", "dom"],
-    "sourceMap": true,
-    "jsx": "react",
-    "moduleResolution": "node",
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
-    "importHelpers": true,
-    "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "allowSyntheticDefaultImports": true,
-    // https://github.com/Microsoft/TypeScript/issues/28762#issuecomment-443406607
-    // "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "noUnusedLocals": true
-  },
-  "include": [
-    "components",
-    "types"
-  ],
-  "exclude": [
-    "node_modules",
-    "build",
-    "dist",
-    "scripts",
-    "acceptance-tests",
-    "webpack",
-    "jest",
-    "src/setupTests.ts",
-    "*.js"
-  ]
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es6",
+        "lib": ["es6", "dom"],
+        "jsx": "react",
+        "declaration": true,
+        "moduleResolution": "node",
+        "forceConsistentCasingInFileNames": false,
+        "strict": true,
+        "experimentalDecorators": true,
+        "noErrorTruncation": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "baseUrl": "./packages"
+    },
+    "exclude": [
+        "**/build/",
+        "node_modules",
+        "example",
+        "scripts",
+        "dist",
+        "build",
+        "public",
+        "**/*.test.ts",
+        "**/*.test.tsx"
+    ]
 }

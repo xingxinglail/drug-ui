@@ -1,23 +1,15 @@
-import React, {
-    forwardRef,
-    ElementType,
-    FC,
-    ReactNode,
-    Children,
-    ButtonHTMLAttributes,
-    Ref
-} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import './style/index.scss';
-import { classes, scopedClassMaker } from '../_util';
+import { classes, scopedClassMaker } from '../utils';
 import Ripple from './Ripple';
-import Icons from '../icon';
+import Icons from '../Icon';
 
 export type Variant = 'text' | 'outlined' | 'contained' | 'fab';
 export type Color = 'default' | 'primary' | 'secondary' | 'inherit';
 export type Size = 'small' | 'medium' | 'large';
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: Variant;
     color?: Color;
     size?: Size;
@@ -29,14 +21,14 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     fab?: boolean;
     icon?: boolean;
     loading?: boolean;
-    children?: ReactNode,
-    component?: ElementType;
-    ref?: Ref<HTMLButtonElement>
+    children?: React.ReactNode,
+    component?: React.ElementType;
+    ref?: React.Ref<HTMLButtonElement>
 }
 
 const scopedClass = scopedClassMaker('drug-button');
 
-const Button: FC<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
+const Button: React.FC<ButtonProps> = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     const { className, variant, color, size, disabled, disableRipple, component, fullWidth, href, round, fab, icon, loading, children, ...rest } = props;
     const Component = href ? 'a' : component === void 0 ? 'button' : component;
     let colorClassName = '';
@@ -60,7 +52,7 @@ const Button: FC<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>((prop
         disabled ? scopedClass('disabled') : '',
         className);
 
-    const newChildren = Children.map(children, child => {
+    const newChildren = React.Children.map(children, child => {
         const type = typeof child;
         if (type === 'string' || type === 'number') {
             return <span className={ scopedClass('label') }>{ child }</span>;

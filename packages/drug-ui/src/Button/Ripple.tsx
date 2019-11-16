@@ -1,6 +1,6 @@
-import { FC, createElement, useRef } from 'react';
-import PropTypes from 'prop-types';
-import { scopedClassMaker } from '../_util';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
+import { scopedClassMaker } from '../utils';
 import './style/ripple.scss';
 
 const scopedClass = scopedClassMaker('drug-ripple');
@@ -23,8 +23,8 @@ const getRippleSize = (width: number, height: number, positionX: number, positio
     return { size, left, top };
 };
 
-const Ripple: FC<RippleProps> = (props) => {
-    const ref = useRef<HTMLElement>(null);
+const Ripple: React.FC<RippleProps> = (props) => {
+    const ref = React.useRef<HTMLElement>(null);
     let childDom: HTMLSpanElement;
 
     const handleMouseDown = (e: MouseEvent) => {
@@ -59,7 +59,7 @@ const Ripple: FC<RippleProps> = (props) => {
         if (childDom) childDom.classList.add(scopedClass('child-leaving'));
     };
 
-    return createElement('span', {
+    return React.createElement('span', {
         className: scopedClass(),
         ref,
         onMouseDown: handleMouseDown,
