@@ -1,9 +1,9 @@
 const base = require('./webpack.config');
 
 module.exports = Object.assign({}, base, {
-    mode: 'production',
+    mode: 'development',
     entry: {
-        index: './components/index.ts'
+        button: './components/button/Button.tsx'
     },
     externals: {
         react: {

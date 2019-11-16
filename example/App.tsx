@@ -1,7 +1,8 @@
 import React, { FC, MouseEventHandler, useState, useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import Button, { Variant } from '../components/button';
+import { Variant } from '../components/button';
 import Icon from '../components/icon';
+import Button from '../dist/lib/button'
 
 const Test: FC = ((props) => {
     const { children, ...rest } = props;

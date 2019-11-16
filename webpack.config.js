@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
     output: {
-        path: path.resolve(__dirname, 'dist/core'),
+        path: path.resolve(__dirname, 'dist/lib/button'),
         library: 'drug-ui',
         libraryTarget: 'umd'
     },
