@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import './style/index.scss';
 import { classes, scopedClassMaker } from '../_util';
 import Ripple from './Ripple';
-import Icon from '../icon/Index';
+import Icons from '../icon';
 
 export type Variant = 'text' | 'outlined' | 'contained' | 'fab';
 export type Color = 'default' | 'primary' | 'secondary' | 'inherit';
@@ -76,7 +76,7 @@ const Button: FC<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>((prop
             disabled={ disabled }
             { ...rest }>
             { newChildren }
-            { loading ? <Icon className="icon-spin" name="loading"/> : null }
+            { loading ? <Icons className="icon-spin" name="loading"/> : null }
             { !disableRipple ? <Ripple center={ icon }/> : null }
         </Component>
     );

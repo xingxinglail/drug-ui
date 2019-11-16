@@ -1,7 +1,7 @@
 import React, { FC, MouseEventHandler, useState, useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import Icon from '../components/icon/Index';
-import Button, { Variant } from '../components/button/Index';
+import Button, { Variant } from '../components/button';
+import Icon from '../components/icon';
 
 const Test: FC = ((props) => {
     const { children, ...rest } = props;
@@ -35,6 +35,8 @@ const App: FC = () => {
 
     return (
         <div>
+            <Button fullWidth href="/">世界，你好</Button>
+            11
             <Icon className="star" name="left" ref={ iconEl }/>
             <Icon name="down" onMouseEnter={ enter }/>
             <Icon name="right" onMouseLeave={ level }/>

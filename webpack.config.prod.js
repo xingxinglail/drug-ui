@@ -3,7 +3,7 @@ const base = require('./webpack.config');
 module.exports = Object.assign({}, base, {
     mode: 'production',
     entry: {
-        index: './components/index.tsx'
+        index: './components/index.ts'
     },
     externals: {
         react: {

@@ -1,4 +1,4 @@
-import { FC, createElement, useRef, useCallback } from 'react';
+import { FC, createElement, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { scopedClassMaker } from '../_util';
 import './style/ripple.scss';
@@ -27,7 +27,7 @@ const Ripple: FC<RippleProps> = (props) => {
     const ref = useRef<HTMLElement>(null);
     let childDom: HTMLSpanElement;
 
-    const handleMouseDown = useCallback((e: MouseEvent) => {
+    const handleMouseDown = (e: MouseEvent) => {
         const root = ref.current;
         if (root) {
             const { left: _left, top: _top, width, height } = root.getBoundingClientRect();
@@ -53,11 +53,11 @@ const Ripple: FC<RippleProps> = (props) => {
             };
             childDom.addEventListener('animationend', remove);
         }
-    }, []);
+    };
 
-    const handleMouseUp = useCallback(() => {
+    const handleMouseUp = () => {
         if (childDom) childDom.classList.add(scopedClass('child-leaving'));
-    }, []);
+    };
 
     return createElement('span', {
         className: scopedClass(),
