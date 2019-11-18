@@ -1,35 +1,35 @@
-import React, { FC, MouseEventHandler, useState, useRef, useEffect } from 'react';
-import ReactDOM from 'react-dom';
-import { Variant } from '../components/button';
-import Icon from '../components/icon';
-import Button from '../dist/lib/button'
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import { Variant } from '../../packages/drug-ui/src/Button';
+import Icon from '../../packages/drug-ui/src/Icon';
+import Button from '../../packages/drug-ui/src/Button';
 
-const Test: FC = ((props) => {
+const Test: React.FC = ((props) => {
     const { children, ...rest } = props;
     return <a href="https://baidu.com" { ...rest }>{ children }</a>;
 });
 
-const App: FC = () => {
-    const [a, setA] = useState(true);
-    const [loading, setLoading] = useState(false);
-    const [variant, setVariant] = useState<Variant>('contained');
-    const buttonEl = useRef(null);
-    const iconEl = useRef(null);
+const App: React.FC = () => {
+    const [a, setA] = React.useState(true);
+    const [loading, setLoading] = React.useState(false);
+    const [variant, setVariant] = React.useState<Variant>('contained');
+    const buttonEl = React.useRef(null);
+    const iconEl = React.useRef(null);
 
-    const click: MouseEventHandler = (e) => {
+    const click: React.MouseEventHandler = (e) => {
         console.log(e);
         setA(true);
     };
 
-    const enter: MouseEventHandler = (e) => {
+    const enter: React.MouseEventHandler = (e) => {
         console.log('enter');
         setA(false);
     };
 
-    const level: MouseEventHandler = (e) => {
+    const level: React.MouseEventHandler = (e) => {
         console.log(e.target);
     };
-    useEffect(() => {
+    React.useEffect(() => {
         console.log(iconEl);
         console.log(buttonEl);
     }, []);
@@ -58,7 +58,7 @@ const App: FC = () => {
                         name="setting"/>23434</Button>
                     <Button variant="contained" color="secondary" onClick={ () => setVariant('outlined') }>世界，你好<Icon
                         name="setting"/></Button>
-                    <Button disabled variant="contained" color="secondary" onClick={ () => setVariant('outlined') }>世界，你好<Icon
+                    <Button disabled variant="contained" color="secondary" onClick={ () => setVariant('outlined') }>disabled世界，你好<Icon
                         name="setting"/></Button>
                     <Button variant="contained" color="secondary"><Icon name="setting"/>世界，你好<Icon
                         name="setting"/></Button>
