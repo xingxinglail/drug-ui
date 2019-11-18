@@ -16,15 +16,23 @@
         "react-dom": ">= 16.8.0"
     },
     "devDependencies": {
+        "@types/classnames": "^2.2.9",
         "@types/prop-types": "^15.7.1",
         "@types/react": "^16.8.19",
         "@types/react-dom": "^16.8.4"
+    },
+    "dependencies": {
+        "classnames": "^2.2.6",
+        "jss": "^10.0.0",
+        "jss-plugin-camel-case": "^10.0.0",
+        "jss-plugin-default-unit": "^10.0.0",
+        "jss-plugin-expand": "^10.0.0",
+        "jss-plugin-nested": "^10.0.0"
     },
     "main": "build/index.js",
     "module": "build/es/index.js",
     "typings": "build/index.d.ts",
     "publishConfig": {
         "access": "public"
-    },
-    "gitHead": "9e5295afc4c1e893c77328400aaf097e88adf1c0"
+    }
 }

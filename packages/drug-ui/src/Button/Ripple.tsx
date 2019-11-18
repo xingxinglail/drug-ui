@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { scopedClassMaker } from '../utils';
-import './style/ripple.scss';
+// import './style/ripple.scss';
 
 const scopedClass = scopedClassMaker('drug-ripple');
 

@@ -7,3 +7,7 @@ export const scopedClassMaker = (prefix: string) => {
         return [prefix, name].filter(Boolean).join('-');
     };
 };
+
+export const capitalize = (str: string): string => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+};

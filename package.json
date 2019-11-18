@@ -2,12 +2,14 @@
     "name": "root",
     "private": true,
     "workspaces": [
-        "packages/*"
+        "packages/*",
+        "docs"
     ],
     "scripts": {
         "bootstrap": "lerna bootstrap",
         "test": "cross-env NODE_ENV=test JEST_JUNIT_OUTPUT_DIR=./test-results/jest/ JEST_JUNIT_OUTPUT_NAME=results.xml jest --config=jest.config.js --runInBand",
-        "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js",
+        "docs:start": "yarn workspace docs start",
+        "docs:build": "yarn workspace docs build",
         "ci": "cross-env NODE_ENV=test JEST_JUNIT_OUTPUT_DIR=./test-results/jest/ JEST_JUNIT_OUTPUT_NAME=results.xml jest --config=jest.config.ci.js",
         "commit": "npx git-cz",
         "build": "lerna run build",
