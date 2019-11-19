@@ -9,7 +9,7 @@ interface ThemeProviderProps {
 }
 
 const generateId = (rule: Rule, sheet?: StyleSheet<string>) => {
-    return `Dui${ sheet!.options.classNamePrefix }-${ rule.key }`;
+    return `Dui${ sheet!.options.classNamePrefix }${ rule.key }`;
 };
 
 const ThemeProvider: React.FC<ThemeProviderProps> = (props): React.ReactElement => {

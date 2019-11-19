@@ -101,7 +101,7 @@ const App: React.FC = () => {
                 <br/>
                 <br/>
                 <div>
-                    <Button loading>世界，你好</Button>
+                    <Button component='div' loading>世界，你好</Button>
                     <Button color="primary">世界，你好</Button>
                     <Button color="secondary" loading>世界，你好</Button>
                     <Button disabled color="secondary">世界，你好</Button>
@@ -126,6 +126,7 @@ const App: React.FC = () => {
                 </div>
                 <br/>
                 <div>
+                    <h1>Size</h1>
                     <Button variant="outlined" color="primary" size="small" round>世界，你好</Button>
                     <Button variant="outlined" color="primary" size="medium">世界，你好</Button>
                     <Button variant="outlined" color="primary" size="large">
@@ -140,20 +141,20 @@ const App: React.FC = () => {
                     <Button variant="contained" color="primary" size="large" loading>世界，你好</Button>
                 </div>
                 <br/>
-                <div>
-                    <Button variant="fab" color="primary" size="small"><Icon name="setting" style={ { fontSize: 20 } }/></Button>
-                    <Button variant="fab" color="secondary" size="medium"><Icon name="setting"
-                                                                                style={ { fontSize: 24 } }/></Button>
-                    <Button variant="fab" color="primary" size="large"><Icon name="setting" style={ { fontSize: 28 } }/></Button>
-                    <Button variant="fab" color="primary" disabled size="large"><Icon name="setting"
-                                                                                      style={ { fontSize: 28 } }/></Button>
-                </div>
-                <br/>
-                <div>
-                    <Button ref={ buttonEl } onClick={ click } color="primary" icon><Icon name="setting"
-                                                                                          style={ { fontSize: 20 } }/></Button>
-                    <Button color="secondary" icon><Icon name="setting" style={ { fontSize: 20 } }/></Button>
-                </div>
+                {/*<div>*/}
+                {/*    <Button variant="fab" color="primary" size="small"><Icon name="setting" style={ { fontSize: 20 } }/></Button>*/}
+                {/*    <Button variant="fab" color="secondary" size="medium"><Icon name="setting"*/}
+                {/*                                                                style={ { fontSize: 24 } }/></Button>*/}
+                {/*    <Button variant="fab" color="primary" size="large"><Icon name="setting" style={ { fontSize: 28 } }/></Button>*/}
+                {/*    <Button variant="fab" color="primary" disabled size="large"><Icon name="setting"*/}
+                {/*                                                                      style={ { fontSize: 28 } }/></Button>*/}
+                {/*</div>*/}
+                {/*<br/>*/}
+                {/*<div>*/}
+                {/*    <Button ref={ buttonEl } onClick={ click } color="primary" icon><Icon name="setting"*/}
+                {/*                                                                          style={ { fontSize: 20 } }/></Button>*/}
+                {/*    <Button color="secondary" icon><Icon name="setting" style={ { fontSize: 20 } }/></Button>*/}
+                {/*</div>*/}
             </div>
         </ThemeProvider>
     );

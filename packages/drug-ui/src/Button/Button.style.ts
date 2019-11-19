@@ -1,40 +1,25 @@
 import { Style, Styles } from 'jss';
 import { Theme } from '../styles';
 
-const root: Style = {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'relative',
+const root: Style = (theme: Theme) => ({
     color: 'rgba(0, 0, 0, 0.87)',
     padding: [6, 16],
-    fontSize: 14,
+    fontSize: theme.typography.fontSize.medium,
     minWidth: 64,
     boxSizing: 'border-box',
     transition: 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-    fontFamily: `"Roboto", "Helvetica", "Arial", sans-serif`,
     fontWeight: 500,
     lineHeight: 1.75,
     borderRadius: 4,
     letterSpacing: 0.4,
-    verticalAlign: 'middle',
-    border: 0,
-    outline: 0,
-    cursor: 'pointer',
-    textDecoration: 'none',
-    userSelect: 'none',
-    '-webkit-appearance': 'none',
-    '-webkit-tap-highlight-color': 'transparent',
     '&:hover': {
         textDecoration: 'none',
         backgroundColor: 'rgba(0, 0, 0, 0.08)'
     },
     '&$disabled': {
-        cursor: 'default',
-        pointerEvents: 'none',
         color: 'rgba(0, 0, 0, 0.26)'
     }
-};
+});
 
 const contained: Style = () => ({
     boxShadow: '0 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)',
@@ -65,6 +50,16 @@ const containedSecondary: Style = (theme: Theme) => ({
     }
 });
 
+const containedSizeSmall: Style = (theme: Theme) => ({
+    padding: [4, 10],
+    fontSize: theme.typography.fontSize.small
+});
+
+const containedSizeLarge: Style = (theme: Theme) => ({
+    padding: [8, 22],
+    fontSize: theme.typography.fontSize.large
+});
+
 const text: Style = {
     padding: [6, 8]
 };
@@ -82,6 +77,16 @@ const textSecondary: Style = {
         backgroundColor: 'rgba(220, 0, 78, 0.08)'
     }
 };
+
+const textSizeSmall: Style = (theme: Theme) => ({
+    padding: [4, 5],
+    fontSize: theme.typography.fontSize.small
+});
+
+const textSizeLarge: Style = (theme: Theme) => ({
+    padding: [8, 11],
+    fontSize: theme.typography.fontSize.large
+});
 
 const outlined: Style = {
     border: '1px solid rgba(0, 0, 0, 0.23)',
@@ -111,6 +116,16 @@ const outlinedSecondary: Style = {
         backgroundColor: 'rgba(220, 0, 78, 0.08)'
     }
 };
+
+const outlinedSizeSmall: Style = (theme: Theme) => ({
+    padding: [3, 9],
+    fontSize: theme.typography.fontSize.small
+});
+
+const outlinedSizeLarge: Style = (theme: Theme) => ({
+    padding: [7, 21],
+    fontSize: theme.typography.fontSize.large
+});
 
 const colorInherit: Style = {
     color: 'inherit',
@@ -148,21 +163,32 @@ const icon: Style = {
     '&:hover': null
 };
 
+const round: Style = {
+    borderRadius: 24
+};
+
 export const styles = (theme: Theme): Styles => ({
-    root: root,
+    root: root(theme),
     contained: contained(),
     containedPrimary: containedPrimary(theme),
     containedSecondary: containedSecondary(theme),
+    containedSizeSmall: containedSizeSmall(theme),
+    containedSizeLarge: containedSizeLarge(theme),
     text: text,
     textPrimary: textPrimary,
     textSecondary: textSecondary,
+    textSizeSmall: textSizeSmall(theme),
+    textSizeLarge: textSizeLarge(theme),
     outlined: outlined,
     outlinedPrimary: outlinedPrimary,
     outlinedSecondary: outlinedSecondary,
+    outlinedSizeSmall: outlinedSizeSmall(theme),
+    outlinedSizeLarge: outlinedSizeLarge(theme),
     colorInherit: colorInherit,
     fab: fab,
     fabPrimary: containedPrimary(theme),
     fabSecondary: containedSecondary(theme),
+    round,
     icon,
     fullWidth,
     disabled
