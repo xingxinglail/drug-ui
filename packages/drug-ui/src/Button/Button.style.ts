@@ -1,7 +1,7 @@
 import { Style, Styles } from 'jss';
+import { Theme } from '../styles';
 
-
-const root = (): Style => ({
+const root: Style = {
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -23,8 +23,8 @@ const root = (): Style => ({
     cursor: 'pointer',
     textDecoration: 'none',
     userSelect: 'none',
-    webkitAppearance: 'none',
-    webkitTapHighlightColor: 'transparent',
+    '-webkit-appearance': 'none',
+    '-webkit-tap-highlight-color': 'transparent',
     '&:hover': {
         textDecoration: 'none',
         backgroundColor: 'rgba(0, 0, 0, 0.08)'
@@ -34,9 +34,9 @@ const root = (): Style => ({
         pointerEvents: 'none',
         color: 'rgba(0, 0, 0, 0.26)'
     }
-});
+};
 
-const contained = (): Style => ({
+const contained: Style = () => ({
     boxShadow: '0 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)',
     backgroundColor: '#e0e0e0',
     '&:hover': {
@@ -49,41 +49,41 @@ const contained = (): Style => ({
     }
 });
 
-const containedPrimary = (): Style => ({
-    color: '#fff',
-    backgroundColor: '#1976d2',
+const containedPrimary: Style = (theme: Theme) => ({
+    color: theme.palette.primary.contrastText,
+    backgroundColor: theme.palette.primary.main,
     '&:hover': {
         backgroundColor: '#115293'
     }
 });
 
-const containedSecondary = (): Style => ({
-    color: '#fff',
-    backgroundColor: '#dc004e',
+const containedSecondary: Style = (theme: Theme) => ({
+    color: theme.palette.secondary.contrastText,
+    backgroundColor: theme.palette.secondary.main,
     '&:hover': {
         backgroundColor: '#9a0036'
     }
 });
 
-const text = (): Style => ({
+const text: Style = {
     padding: [6, 8]
-});
+};
 
-const textPrimary = (): Style => ({
+const textPrimary: Style = {
     color: '#1976d2',
     '&:hover': {
         backgroundColor: 'rgba(25, 118, 210, 0.08)'
     }
-});
+};
 
-const textSecondary = (): Style => ({
+const textSecondary: Style = {
     color: '#dc004e',
     '&:hover': {
         backgroundColor: 'rgba(220, 0, 78, 0.08)'
     }
-});
+};
 
-const outlined = (): Style => ({
+const outlined: Style = {
     border: '1px solid rgba(0, 0, 0, 0.23)',
     padding: [5, 15],
     '&:hover': {
@@ -92,30 +92,48 @@ const outlined = (): Style => ({
     '&$disabled': {
         border: '1px solid rgba(0, 0, 0, 0.26)'
     }
-});
+};
 
-const outlinedPrimary = (): Style => ({
+const outlinedPrimary: Style = {
     color: '#1976d2',
     border: '1px solid rgba(25, 118, 210, 0.5)',
     '&:hover': {
         border: '1px solid 1976d2',
         backgroundColor: 'rgba(25, 118, 210, 0.08)'
     }
-});
+};
 
-const outlinedSecondary = (): Style => ({
+const outlinedSecondary: Style = {
     color: '#dc004e',
     border: '1px solid rgba(220, 0, 78, 0.5)',
     '&:hover': {
         border: '1px solid rgb(220, 0, 78)',
         backgroundColor: 'rgba(220, 0, 78, 0.08)'
     }
-});
+};
 
-const colorInherit = (): Style => ({
+const colorInherit: Style = {
     color: 'inherit',
     borderColor: 'currentColor'
-});
+};
+
+const fab: Style = {
+    minWidth: 'unset',
+    width: 48,
+    height: 48,
+    borderRadius: '50%',
+    padding: 0,
+    boxShadow: '0 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)',
+    backgroundColor: '#e0e0e0',
+    '&:hover': {
+        boxShadow: '0 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)',
+        backgroundColor: '#d5d5d5'
+    },
+    '&$disabled': {
+        boxShadow: 'none',
+        backgroundColor: 'rgba(0, 0, 0, 0.12)'
+    }
+};
 
 const fullWidth: Style = {
     width: '100%'
@@ -123,18 +141,29 @@ const fullWidth: Style = {
 
 const disabled: Style = {};
 
-export const styles = (): Styles => ({
-    root: root(),
+const icon: Style = {
+    ...fab,
+    boxShadow: 'none',
+    backgroundColor: null,
+    '&:hover': null
+};
+
+export const styles = (theme: Theme): Styles => ({
+    root: root,
     contained: contained(),
-    containedPrimary: containedPrimary(),
-    containedSecondary: containedSecondary(),
-    text: text(),
-    textPrimary: textPrimary(),
-    textSecondary: textSecondary(),
-    outlined: outlined(),
-    outlinedPrimary: outlinedPrimary(),
-    outlinedSecondary: outlinedSecondary(),
-    colorInherit: colorInherit(),
+    containedPrimary: containedPrimary(theme),
+    containedSecondary: containedSecondary(theme),
+    text: text,
+    textPrimary: textPrimary,
+    textSecondary: textSecondary,
+    outlined: outlined,
+    outlinedPrimary: outlinedPrimary,
+    outlinedSecondary: outlinedSecondary,
+    colorInherit: colorInherit,
+    fab: fab,
+    fabPrimary: containedPrimary(theme),
+    fabSecondary: containedSecondary(theme),
+    icon,
     fullWidth,
     disabled
 });

@@ -1,8 +1,11 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { Rule, StyleSheet } from 'jss';
 import { Variant } from '../../packages/drug-ui/src/Button';
 import Icon from '../../packages/drug-ui/src/Icon';
 import Button from '../../packages/drug-ui/src/Button';
+import createTheme, { Theme } from '../../packages/drug-ui/src/styles/createTheme';
+import ThemeProvider from '../../packages/drug-ui/src/themeProvider';
 
 const Test: React.FC = ((props) => {
     const { children, ...rest } = props;
@@ -20,6 +23,9 @@ const App: React.FC = () => {
         console.log(e);
         setA(true);
     };
+    const generateId = (rule: Rule, sheet?: StyleSheet<string>) => {
+        return `Dui${ sheet!.options.classNamePrefix }-${ rule.key }`;
+    };
 
     const enter: React.MouseEventHandler = (e) => {
         console.log('enter');
@@ -29,13 +35,42 @@ const App: React.FC = () => {
     const level: React.MouseEventHandler = (e) => {
         console.log(e.target);
     };
-    React.useEffect(() => {
-        console.log(iconEl);
-        console.log(buttonEl);
-    }, []);
+    // React.useEffect(() => {
+    //     console.log(iconEl);
+    //     console.log(buttonEl);
+    // }, []);
+    // const customTheme = createTheme({});
+    // setTimeout(() => {
+    //     customTheme.palette.primary.main = 'red';
+    //     customTheme.palette.primary.contrastText = 'red';
+    //     console.log(customTheme);
+    // }, 1000);
+    const customTheme = createTheme({});
+    const [theme, setTheme] = React.useState<Theme>(customTheme);
+    // React.useEffect(() => {
+    //     setPalette({
+    //         primary: {
+    //
+    //         }
+    //     })
+    // }, []);
+    // setTimeout(() => {
+    //     setTheme((prev) => {
+    //         console.log(prev);
+    //         return {
+    //             palette: {
+    //                 primary: prev.palette.primary,
+    //                 secondary: {
+    //                     main: 'pink',
+    //                     contrastText: '#333'
+    //                 }
+    //             }
+    //         };
+    //     });
+    // }, 1500);
 
     return (
-        <div>
+        <ThemeProvider theme={ theme }>
             <Button fullWidth href="/">世界，你好</Button>
             11
             <Icon className="star" name="left" ref={ iconEl }/>
@@ -120,7 +155,7 @@ const App: React.FC = () => {
                     <Button color="secondary" icon><Icon name="setting" style={ { fontSize: 20 } }/></Button>
                 </div>
             </div>
-        </div>
+        </ThemeProvider>
     );
 };
 

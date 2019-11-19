@@ -1,8 +1,8 @@
 {
-    "name": "@drug-ui/core",
+    "name": "@drug-ui/styles",
     "version": "0.0.1",
     "private": false,
-    "description": "A UI Design Language and React UI library.",
+    "description": "Drug-UI React styles.",
     "author": "star <istarcoming@163.com>",
     "license": "MIT",
     "scripts": {
@@ -11,21 +11,8 @@
         "build:es": "cross-env tsc --emitDeclarationOnly --outDir ./build/es && NODE_ENV=production BABEL_ENV=es babel --config-file ../../babel.config.js ./src --out-dir ./build/es --ignore \"src/**/*.test.ts\",\"src/**/*.test.tsx\" --extensions '.ts','.tsx'",
         "build:cjs": "cross-env tsc --emitDeclarationOnly --outDir ./build && NODE_ENV=production BABEL_ENV=cjs babel --config-file ../../babel.config.js ./src --out-dir ./build --ignore \"src/**/*.test.ts\",\"src/**/*.test.tsx\" --extensions '.ts','.tsx'"
     },
-    "peerDependencies": {
-        "react": ">= 16.8.0",
-        "react-dom": ">= 16.8.0"
-    },
-    "devDependencies": {
-        "@drug-ui/styles": "^0.0.1",
-        "@types/classnames": "^2.2.9",
-        "@types/prop-types": "^15.7.1",
-        "@types/react": "^16.8.19",
-        "@types/react-dom": "^16.8.4"
-    },
     "dependencies": {
-        "@drug-ui/styles": "^0.0.1",
-        "classnames": "^2.2.6",
-        "jss": "^10.0.0"
+        "react-jss": "^10.0.0"
     },
     "main": "build/index.js",
     "module": "build/es/index.js",

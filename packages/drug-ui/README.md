@@ -1,6 +1,6 @@
 # @drug-ui/core
 
-React components that inspired by Microsoft's Fluent Design System.
+A UI Design Language and React UI library.
 
 ## Installation
 

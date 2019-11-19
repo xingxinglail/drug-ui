@@ -1,23 +1,13 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import classnames from 'classnames';
-// import './style/index.scss';
-import jss from 'jss';
-import nested from 'jss-plugin-nested';
-import camelCase from 'jss-plugin-camel-case';
-import expand from 'jss-plugin-expand';
-import defaultUnit from 'jss-plugin-default-unit';
+import { createUseStyles } from '@drug-ui/styles';
 import { capitalize } from '../utils';
 import Ripple from './Ripple';
 import Icons from '../Icon';
 import { styles } from './Button.style';
+import { Theme } from '../styles'
 
-jss.use(nested());
-jss.use(camelCase());
-jss.use(expand());
-jss.use(defaultUnit());
-
-console.log(styles());
 export type Variant = 'text' | 'outlined' | 'contained' | 'fab';
 export type Color = 'default' | 'primary' | 'secondary' | 'inherit';
 export type Size = 'small' | 'medium' | 'large';
@@ -39,7 +29,6 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
     ref?: React.Ref<HTMLButtonElement>
 }
 
-const name = 'Button';
 type ButtonClassProps =
     'root'
     | 'contained'
@@ -47,24 +36,27 @@ type ButtonClassProps =
     | 'containedSecondary'
     | 'text'
     | 'textPrimary'
-    | 'textSecondary' | 'outlined' | 'outlinedPrimary' | 'outlinedSecondary' | 'colorInherit' | 'fullWidth' | 'disabled';
-const sheet = jss.createStyleSheet<ButtonClassProps>(
-    styles(),
-    {
-        meta: `Dui${ name }`,
-        classNamePrefix: name,
-        generateId (rule, sheet) {
-            return `Dui${ sheet!.options.classNamePrefix }-${ rule.key }`;
-        }
-    }
-).attach();
+    | 'textSecondary'
+    | 'outlined'
+    | 'outlinedPrimary'
+    | 'outlinedSecondary'
+    | 'fab'
+    | 'fabPrimary'
+    | 'fabSecondary'
+    | 'icon'
+    | 'colorInherit'
+    | 'fullWidth'
+    | 'disabled';
 
+const name = 'Button';
+
+const useStyles = createUseStyles<Theme, ButtonClassProps>(styles, { name });
+
+// todo Fab 组件
 const Button: React.FC<ButtonProps> = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     const { className, variant = 'text', color = 'default', size, disabled, disableRipple, component, fullWidth: defaultFullWidth, href, round, fab, icon, loading, children, ...rest } = props;
     const Component = href ? 'a' : component === void 0 ? 'button' : component;
-
-    const { classes } = sheet;
-    console.log(classes);
+    const classes = useStyles();
     const classNames = classnames(
         classes.root,
         [classes[variant]],
@@ -72,22 +64,10 @@ const Button: React.FC<ButtonProps> = React.forwardRef<HTMLButtonElement, Button
             [classes[`${ variant }${ capitalize(color) }`]]: color !== 'inherit' && color !== 'default',
             [classes.colorInherit]: color === 'inherit',
             [classes.fullWidth]: defaultFullWidth,
+            [classes.icon]: icon,
             [classes.disabled]: disabled
         }
     );
-    // const classNames = classes(
-    //     root,
-    //     scopedClass(variant),
-    //     colorClassName,
-    //     round ? scopedClass('round') : '',
-    //     size !== 'medium' ? scopedClass(`${ variant }-${ size }`) : '',
-    //     fullWidth ? scopedClass('full-width') : '',
-    //     fab ? scopedClass('fab') : '',
-    //     icon ? scopedClass('icon') : '',
-    //     loading ? scopedClass('loading') : '',
-    //     disabled ? scopedClass(`${ variant }-disabled`) : '',
-    //     disabled ? scopedClass('disabled') : '',
-    //     className);
 
     const newChildren = React.Children.map(children, child => {
         const type = typeof child;
