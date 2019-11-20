@@ -18,6 +18,9 @@ const root: Style = (theme: Theme) => ({
     },
     '&$disabled': {
         color: 'rgba(0, 0, 0, 0.26)'
+    },
+    '& .drug-icon': {
+        fontSize: 18
     }
 });
 
@@ -167,6 +170,50 @@ const round: Style = {
     borderRadius: 24
 };
 
+const label: Style = {
+    width: '100%',
+    display: 'inherit',
+    alignItems: 'inherit',
+    justifyContent: 'inherit',
+    '& + .drug-icon': {
+        marginLeft: 6
+    },
+    '.drug-icon + &': {
+        marginLeft: 6
+    }
+};
+
+const loading: Style = {
+    cursor: 'default',
+    pointerEvents: 'none',
+    '&::after': {
+        content: `''`,
+        position: 'absolute',
+        top: '-1px',
+        right: '-1px',
+        bottom: '-1px',
+        left: '-1px',
+        zIndex: 1,
+        background: '#fff',
+        borderRadius: 'inherit',
+        opacity: 0.35,
+        transition: 'opacity .2s'
+    },
+    '@global': {
+        '@keyframes spin': {
+            '100%': { transform: 'rotate(360deg)' }
+        }
+    },
+    '& .drug-icon': {
+        display: 'none',
+
+        '&.loading': {
+            display: 'block',
+            'animation': '$spin 1s infinite linear'
+        }
+    }
+};
+
 export const styles = (theme: Theme): Styles => ({
     root: root(theme),
     contained: contained(),
@@ -189,7 +236,8 @@ export const styles = (theme: Theme): Styles => ({
     fabPrimary: containedPrimary(theme),
     fabSecondary: containedSecondary(theme),
     round,
-    icon,
     fullWidth,
-    disabled
+    disabled,
+    label,
+    loading
 });

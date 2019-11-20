@@ -95,7 +95,7 @@ const App: React.FC = () => {
                         name="setting"/></Button>
                     <Button disabled variant="contained" color="secondary" onClick={ () => setVariant('outlined') }>disabled世界，你好<Icon
                         name="setting"/></Button>
-                    <Button variant="contained" color="secondary"><Icon name="setting"/>世界，你好<Icon
+                    <Button variant="contained" color="secondary" loading={ loading }><Icon name="setting"/>世界，你好<Icon
                         name="setting"/></Button>
                 </div>
                 <br/>

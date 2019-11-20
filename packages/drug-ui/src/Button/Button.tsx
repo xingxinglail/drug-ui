@@ -50,7 +50,7 @@ type ButtonClassProps =
     | 'textSizeSmall'
     | 'textSizeLarge'
     | 'outlinedSizeSmall'
-    | 'outlinedSizeLarge' | 'round';
+    | 'outlinedSizeLarge' | 'round' | 'label' | 'loading';
 
 const name = 'Button';
 
@@ -68,6 +68,7 @@ const Button: React.FC<ButtonProps> = React.forwardRef<HTMLButtonElement, Button
             [classes.colorInherit]: color === 'inherit',
             [classes.fullWidth]: defaultFullWidth,
             [classes.round]: round,
+            [classes.loading]: loading,
             [classes.disabled]: disabled
         }
     );
@@ -75,7 +76,7 @@ const Button: React.FC<ButtonProps> = React.forwardRef<HTMLButtonElement, Button
     const newChildren = React.Children.map(children, child => {
         const type = typeof child;
         if (type === 'string' || type === 'number') {
-            return <span className='label'>{ child }</span>;
+            return <span className={ classes.label }>{ child }</span>;
         }
         return child;
     });
@@ -89,6 +90,7 @@ const Button: React.FC<ButtonProps> = React.forwardRef<HTMLButtonElement, Button
             disabled={ disabled }
             { ...rest }>
             { newChildren }
+            { loading ? <Icons name="loading" className="loading" /> : null }
             {/*{ !disableRipple ? <Ripple center={ icon }/> : null }*/}
         </ButtonBase>
     );
