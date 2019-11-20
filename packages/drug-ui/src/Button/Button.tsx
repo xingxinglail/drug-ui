@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import { PropTypes as ComponentPropTypes } from '..';
 import classnames from 'classnames';
 import { createUseStyles } from '@drug-ui/styles';
 import { capitalize } from '../utils';
@@ -9,20 +10,14 @@ import { Theme } from '../styles';
 import ButtonBase, { ButtonBaseProps } from '../ButtonBase';
 
 export type Variant = 'text' | 'outlined' | 'contained';
-export type Color = 'default' | 'primary' | 'secondary' | 'inherit';
-export type Size = 'small' | 'medium' | 'large';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, ButtonBaseProps {
     variant?: Variant;
-    color?: Color;
-    size?: Size;
-    disabled?: boolean;
+    color?: ComponentPropTypes.Color;
+    size?: ComponentPropTypes.Size;
     fullWidth?: boolean;
-    href?: string;
     round?: boolean;
     loading?: boolean;
-    children?: React.ReactNode,
-    component?: React.ElementType;
     ref?: React.Ref<HTMLButtonElement>
 }
 
@@ -99,28 +94,23 @@ const Button: React.FC<ButtonProps> = React.forwardRef<HTMLButtonElement, Button
 });
 
 Button.displayName = name;
+
 Button.defaultProps = {
     variant: 'text',
     color: 'default',
     size: 'medium',
-    disabled: false,
     fullWidth: false,
     loading: false,
-    href: undefined,
-    round: false,
-    component: 'button'
+    round: false
 };
 
 Button.propTypes = {
     variant: PropTypes.oneOf<Variant>(['text', 'outlined', 'contained']),
-    color: PropTypes.oneOf<Color>(['default', 'primary', 'secondary', 'inherit']),
-    size: PropTypes.oneOf<Size>(['small', 'medium', 'large']),
-    disabled: PropTypes.bool,
+    color: PropTypes.oneOf<ComponentPropTypes.Color>(['default', 'primary', 'secondary', 'inherit']),
+    size: PropTypes.oneOf<ComponentPropTypes.Size>(['small', 'medium', 'large']),
     loading: PropTypes.bool,
     fullWidth: PropTypes.bool,
-    href: PropTypes.string,
     round: PropTypes.bool
-    // component: PropTypes.elementType
 };
 
 export default Button;

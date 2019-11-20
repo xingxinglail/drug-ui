@@ -12,6 +12,7 @@ export interface ButtonBaseProps {
     disableRipple?: boolean;
     centerRipple?: boolean;
     href?: string;
+    children?: React.ReactNode,
     component?: React.ElementType;
 }
 
@@ -47,6 +48,7 @@ const ButtonBase: React.FC<ButtonBaseProps> = React.forwardRef<HTMLButtonElement
 
 ButtonBase.displayName = name;
 ButtonBase.defaultProps = {
+    className: undefined,
     disabled: false,
     disableRipple: false,
     centerRipple: false,
@@ -55,6 +57,7 @@ ButtonBase.defaultProps = {
 };
 
 ButtonBase.propTypes = {
+    className: PropTypes.string,
     disabled: PropTypes.bool,
     disableRipple: PropTypes.bool,
     centerRipple: PropTypes.bool,
