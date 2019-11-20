@@ -4,6 +4,7 @@ import { Rule, StyleSheet } from 'jss';
 import { Variant } from '../../packages/drug-ui/src/Button';
 import Icon from '../../packages/drug-ui/src/Icon';
 import Button from '../../packages/drug-ui/src/Button';
+import Fab from '../../packages/drug-ui/src/Fab';
 import createTheme, { Theme } from '../../packages/drug-ui/src/styles/createTheme';
 import ThemeProvider from '../../packages/drug-ui/src/themeProvider';
 
@@ -77,6 +78,18 @@ const App: React.FC = () => {
             <div onClick={ () => setTest(!test) }>{ test ? '点击隐藏' : '点击显示' }</div>
             { test ? (
                 <>
+                    <br/>
+                    <Fab><Icon className="star" name="left" ref={ iconEl }/></Fab>
+                    <Fab color="primary" centerRipple><Icon className="star" name="left" ref={ iconEl }/></Fab>
+                    <Fab color="secondary"><Icon className="star" name="left" ref={ iconEl }/></Fab>
+                    <Fab color="inherit"><Icon className="star" name="left" ref={ iconEl }/></Fab>
+                    <Fab color="secondary" disabled><Icon className="star" name="left" ref={ iconEl }/></Fab>
+                    <div>
+                        <Fab size="small"><Icon className="star" name="left" ref={ iconEl }/></Fab>
+                        <Fab size="medium" color="primary" centerRipple><Icon className="star" name="left" ref={ iconEl }/></Fab>
+                        <Fab color="secondary"><Icon className="star" name="left" ref={ iconEl }/></Fab>
+                    </div>
+                    <br/>
                     <br/>
                     <Button fullWidth variant="contained" color="secondary" onClick={ toggleTheme }>点击切换主题</Button>
                     <Button fullWidth href="/">世界，你好</Button>
