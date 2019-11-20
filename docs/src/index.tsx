@@ -5,6 +5,7 @@ import { Variant } from '../../packages/drug-ui/src/Button';
 import Icon from '../../packages/drug-ui/src/Icon';
 import Button from '../../packages/drug-ui/src/Button';
 import Fab from '../../packages/drug-ui/src/Fab';
+import IconButton from '../../packages/drug-ui/src/IconButton';
 import createTheme, { Theme } from '../../packages/drug-ui/src/styles/createTheme';
 import ThemeProvider from '../../packages/drug-ui/src/themeProvider';
 
@@ -12,15 +13,6 @@ const Test: React.FC = ((props) => {
     const { children, ...rest } = props;
     return <a href="https://baidu.com" { ...rest }>{ children }</a>;
 });
-
-const ThemeContext = React.createContext(createTheme({
-    palette: {
-        primary: {
-            main: 'red',
-            contrastText: '#000'
-        }
-    }
-}));
 
 const App: React.FC = () => {
     const [test, setTest] = React.useState(true);
@@ -79,15 +71,40 @@ const App: React.FC = () => {
             { test ? (
                 <>
                     <br/>
+                    <IconButton>我</IconButton>
+                    <IconButton>H</IconButton>
+                    <IconButton color="primary">我</IconButton>
+                    <IconButton color="secondary">H</IconButton>
+                    <IconButton><Icon className="star" name="left" ref={ iconEl }/></IconButton>
+                    <IconButton color="primary" centerRipple><Icon className="star" name="left"
+                                                                   ref={ iconEl }/></IconButton>
+                    <IconButton color="secondary"><Icon className="star" name="left" ref={ iconEl }/></IconButton>
+                    <IconButton color="inherit"><Icon className="star" name="left" ref={ iconEl }/></IconButton>
+                    <IconButton color="secondary" disabled><Icon className="star" name="left"
+                                                                 ref={ iconEl }/></IconButton>
+                    <div>
+                        <IconButton size="small" color="primary"><Icon className="star" name="left"
+                                                                       ref={ iconEl }/></IconButton>
+                        <IconButton size="medium" color="primary" centerRipple><Icon className="star" name="left"
+                                                                                     ref={ iconEl }/></IconButton>
+                        <IconButton color="primary"><Icon className="star" name="left" ref={ iconEl }/></IconButton>
+                    </div>
+                    <br/>
+                    <br/>
+                    <Fab>我</Fab>
+                    <Fab>H</Fab>
+                    <Fab color="primary">我</Fab>
+                    <Fab color="secondary">H</Fab>
                     <Fab><Icon className="star" name="left" ref={ iconEl }/></Fab>
                     <Fab color="primary" centerRipple><Icon className="star" name="left" ref={ iconEl }/></Fab>
                     <Fab color="secondary"><Icon className="star" name="left" ref={ iconEl }/></Fab>
                     <Fab color="inherit"><Icon className="star" name="left" ref={ iconEl }/></Fab>
                     <Fab color="secondary" disabled><Icon className="star" name="left" ref={ iconEl }/></Fab>
                     <div>
-                        <Fab size="small"><Icon className="star" name="left" ref={ iconEl }/></Fab>
-                        <Fab size="medium" color="primary" centerRipple><Icon className="star" name="left" ref={ iconEl }/></Fab>
-                        <Fab color="secondary"><Icon className="star" name="left" ref={ iconEl }/></Fab>
+                        <Fab size="small" color="primary"><Icon className="star" name="left" ref={ iconEl }/></Fab>
+                        <Fab size="medium" color="primary" centerRipple><Icon className="star" name="left"
+                                                                              ref={ iconEl }/></Fab>
+                        <Fab color="primary"><Icon className="star" name="left" ref={ iconEl }/></Fab>
                     </div>
                     <br/>
                     <br/>
@@ -165,20 +182,6 @@ const App: React.FC = () => {
                             <Button variant="contained" color="primary" size="large" loading>世界，你好</Button>
                         </div>
                         <br/>
-                        {/*<div>*/ }
-                        {/*    <Button variant="fab" color="primary" size="small"><Icon name="setting" style={ { fontSize: 20 } }/></Button>*/ }
-                        {/*    <Button variant="fab" color="secondary" size="medium"><Icon name="setting"*/ }
-                        {/*                                                                style={ { fontSize: 24 } }/></Button>*/ }
-                        {/*    <Button variant="fab" color="primary" size="large"><Icon name="setting" style={ { fontSize: 28 } }/></Button>*/ }
-                        {/*    <Button variant="fab" color="primary" disabled size="large"><Icon name="setting"*/ }
-                        {/*                                                                      style={ { fontSize: 28 } }/></Button>*/ }
-                        {/*</div>*/ }
-                        {/*<br/>*/ }
-                        {/*<div>*/ }
-                        {/*    <Button ref={ buttonEl } onClick={ click } color="primary" icon><Icon name="setting"*/ }
-                        {/*                                                                          style={ { fontSize: 20 } }/></Button>*/ }
-                        {/*    <Button color="secondary" icon><Icon name="setting" style={ { fontSize: 20 } }/></Button>*/ }
-                        {/*</div>*/ }
                     </div>
                 </>
             ) : null }
