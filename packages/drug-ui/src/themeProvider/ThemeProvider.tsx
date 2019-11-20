@@ -11,10 +11,11 @@ interface ThemeProviderProps {
 const generateId = (rule: Rule, sheet?: StyleSheet<string>) => {
     return `Dui${ sheet!.options.classNamePrefix }${ rule.key }`;
 };
+const defaultTheme = createTheme({});
 
 const ThemeProvider: React.FC<ThemeProviderProps> = (props): React.ReactElement => {
-    const { theme = {}, children, ...rest } = props;
-    const customTheme = createTheme(theme);
+    const { theme, children, ...rest } = props;
+    const customTheme = theme ? theme : defaultTheme;
     return (
         <JssProvider generateId={ generateId } { ...rest }>
             <BaseProvider theme={ customTheme }>{ children }</BaseProvider>
