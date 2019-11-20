@@ -4,10 +4,14 @@ import classnames from 'classnames';
 import { createUseStyles } from '@drug-ui/styles';
 import { styles } from './ButtonBase.style';
 import { Theme } from '../styles';
+import Ripple from './Ripple';
+import { useEffect } from 'react';
 
-export interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
+export interface ButtonBaseProps {
+    className?: string;
     disabled?: boolean;
     disableRipple?: boolean;
+    centerRipple?: boolean;
     href?: string;
     component?: React.ElementType;
 }
@@ -17,12 +21,11 @@ type ButtonBaseClassProps = 'root' | 'disabled';
 const name = 'ButtonBase';
 const useStyles = createUseStyles<Theme, ButtonBaseClassProps>(styles, { name });
 
-
-const ButtonBase: React.FC<ButtonProps> = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-    const { className, component, disabled, href, disableRipple, children, ...rest } = props;
+const ButtonBase: React.FC<ButtonBaseProps> = React.forwardRef<HTMLButtonElement, ButtonBaseProps>((props, ref) => {
+    const { className, component, disabled, centerRipple, href, disableRipple, children, ...rest } = props;
     const Component = href ? 'a' : component === void 0 ? 'button' : component;
-    const classes = useStyles();
-
+    // const memoizedCallback = React.useCallback(useStyles, []);
+    const classes = useStyles(props);
     const classNames = classnames(
         classes.root,
         {
@@ -31,14 +34,20 @@ const ButtonBase: React.FC<ButtonProps> = React.forwardRef<HTMLButtonElement, Bu
         className
     );
 
+    const test = () => {
+        console.log(useStyles());
+    }
+
     return (
         <Component
+            onClick={test}
             className={ classNames }
             ref={ ref }
             href={ href }
             disabled={ disabled }
             { ...rest }>
             { children }
+            { !disableRipple ? <Ripple center={ centerRipple }/> : null }
         </Component>
     );
 });
@@ -47,6 +56,7 @@ ButtonBase.displayName = name;
 ButtonBase.defaultProps = {
     disabled: false,
     disableRipple: false,
+    centerRipple: false,
     href: undefined,
     component: 'button'
 };
@@ -54,6 +64,7 @@ ButtonBase.defaultProps = {
 ButtonBase.propTypes = {
     disabled: PropTypes.bool,
     disableRipple: PropTypes.bool,
+    centerRipple: PropTypes.bool,
     href: PropTypes.string
 };
 

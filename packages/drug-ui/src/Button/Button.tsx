@@ -3,17 +3,16 @@ import * as PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { createUseStyles } from '@drug-ui/styles';
 import { capitalize } from '../utils';
-import Ripple from './Ripple';
 import Icons from '../Icon';
 import { styles } from './Button.style';
 import { Theme } from '../styles';
-import ButtonBase from '../ButtonBase';
+import ButtonBase, { ButtonBaseProps } from '../ButtonBase';
 
 export type Variant = 'text' | 'outlined' | 'contained';
 export type Color = 'default' | 'primary' | 'secondary' | 'inherit';
 export type Size = 'small' | 'medium' | 'large';
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, ButtonBaseProps {
     variant?: Variant;
     color?: Color;
     size?: Size;
@@ -50,7 +49,10 @@ type ButtonClassProps =
     | 'textSizeSmall'
     | 'textSizeLarge'
     | 'outlinedSizeSmall'
-    | 'outlinedSizeLarge' | 'round' | 'label' | 'loading';
+    | 'outlinedSizeLarge'
+    | 'round'
+    | 'label'
+    | 'loading';
 
 const name = 'Button';
 
@@ -59,6 +61,7 @@ const useStyles = createUseStyles<Theme, ButtonClassProps>(styles, { name });
 const Button: React.FC<ButtonProps> = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     const { className, variant = 'text', color = 'default', size = 'medium', disabled, component, fullWidth: defaultFullWidth, href, round, loading, children, ...rest } = props;
     const classes = useStyles();
+
     const classNames = classnames(
         classes.root,
         [classes[variant]],
@@ -90,8 +93,7 @@ const Button: React.FC<ButtonProps> = React.forwardRef<HTMLButtonElement, Button
             disabled={ disabled }
             { ...rest }>
             { newChildren }
-            { loading ? <Icons name="loading" className="loading" /> : null }
-            {/*{ !disableRipple ? <Ripple center={ icon }/> : null }*/}
+            { loading ? <Icons name="loading" className="loading"/> : null }
         </ButtonBase>
     );
 });
@@ -117,7 +119,7 @@ Button.propTypes = {
     loading: PropTypes.bool,
     fullWidth: PropTypes.bool,
     href: PropTypes.string,
-    round: PropTypes.bool,
+    round: PropTypes.bool
     // component: PropTypes.elementType
 };
 
