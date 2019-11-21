@@ -1,9 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { createUseStyles } from '@drug-ui/styles';
 import { styles } from './ButtonBase.style';
-import { Theme } from '../styles';
+import { createUseStyles } from '../styles';
 import Ripple from './Ripple';
 
 export interface ButtonBaseProps {
@@ -17,14 +16,13 @@ export interface ButtonBaseProps {
 }
 
 type ButtonBaseClassProps = 'root' | 'disabled';
-
 const name = 'ButtonBase';
-const useStyles = createUseStyles<Theme, ButtonBaseClassProps>(styles, { name });
+const useStyles = createUseStyles<ButtonBaseClassProps>(styles, name);
 
 const ButtonBase: React.FC<ButtonBaseProps> = React.forwardRef<HTMLButtonElement, ButtonBaseProps>((props, ref) => {
     const { className, component, disabled, centerRipple, href, disableRipple, children, ...rest } = props;
     const Component = href ? 'a' : component === void 0 ? 'button' : component;
-    const classes = useStyles(props);
+    const classes = useStyles();
     const classNames = classnames(
         classes.root,
         {

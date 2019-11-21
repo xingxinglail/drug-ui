@@ -2,10 +2,9 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { PropTypes as ComponentPropTypes } from '..';
 import classnames from 'classnames';
-import { createUseStyles } from '@drug-ui/styles';
 import { capitalize } from '../utils';
 import { styles } from './Fab.style';
-import { Theme } from '../styles';
+import { createUseStyles } from '../styles';
 import ButtonBase, { ButtonBaseProps } from '../ButtonBase';
 
 export interface FabProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, ButtonBaseProps {
@@ -19,7 +18,7 @@ type FabClassProps = 'root' | 'primary' | 'secondary' | 'colorInherit' | 'small'
 
 const name = 'Fab';
 
-const useStyles = createUseStyles<Theme, FabClassProps>(styles, { name });
+const useStyles = createUseStyles<FabClassProps>(styles, name);
 
 const Fab: React.FC<FabProps> = React.forwardRef<HTMLButtonElement, FabProps>((props, ref) => {
     const { className, color = 'default', size = 'large', disabled, component, href, children, ...rest } = props;

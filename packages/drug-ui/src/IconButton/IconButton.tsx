@@ -2,10 +2,9 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { PropTypes as ComponentPropTypes } from '..';
 import classnames from 'classnames';
-import { createUseStyles } from '@drug-ui/styles';
 import { capitalize } from '../utils';
 import { styles } from './IconButton.style';
-import { Theme } from '../styles';
+import { createUseStyles } from '../styles';
 import ButtonBase, { ButtonBaseProps } from '../ButtonBase';
 
 export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, ButtonBaseProps {
@@ -19,8 +18,7 @@ type IconButtonPropsClassProps = 'root' | 'primary' | 'secondary' | 'colorInheri
 
 const name = 'IconButton';
 
-const useStyles = createUseStyles<Theme, IconButtonPropsClassProps>(styles, { name });
-
+const useStyles = createUseStyles<IconButtonPropsClassProps>(styles, name);
 const IconButton: React.FC<IconButtonProps> = React.forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) => {
     const { className, color = 'default', size = 'large', disabled, component, href, children, ...rest } = props;
     const classes = useStyles();

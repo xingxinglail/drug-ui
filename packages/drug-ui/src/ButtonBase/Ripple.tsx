@@ -1,8 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { createUseStyles } from '@drug-ui/styles';
 import { styles } from './Ripple.style';
-import { Theme } from '../styles';
+import { createUseStyles } from '../styles';
 
 interface RippleProps {
     center?: boolean;
@@ -11,7 +10,7 @@ interface RippleProps {
 type RippleClassProps = 'root' | 'visible' | 'child' | 'childLeaving';
 
 const name = 'Ripple';
-const useStyles = createUseStyles<Theme, RippleClassProps>(styles, { name });
+const useStyles = createUseStyles<RippleClassProps>(styles, name);
 
 const getRippleSize = (width: number, height: number, positionX: number, positionY: number) => {
     // 得到点击位置距离最远的点，计算出这两点之间的距离

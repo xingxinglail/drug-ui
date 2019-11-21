@@ -2,11 +2,10 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { PropTypes as ComponentPropTypes } from '..';
 import classnames from 'classnames';
-import { createUseStyles } from '@drug-ui/styles';
 import { Loading } from '@drug-ui/icons';
 import { capitalize } from '../utils';
 import { styles } from './Button.style';
-import { Theme } from '../styles';
+import { createUseStyles } from '../styles';
 import ButtonBase, { ButtonBaseProps } from '../ButtonBase';
 
 export type Variant = 'text' | 'outlined' | 'contained';
@@ -51,7 +50,7 @@ type ButtonClassProps =
 
 const name = 'Button';
 
-const useStyles = createUseStyles<Theme, ButtonClassProps>(styles, { name });
+const useStyles = createUseStyles<ButtonClassProps>(styles, name);
 
 const Button: React.FC<ButtonProps> = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     const { className, variant = 'text', color = 'default', size = 'medium', disabled, component, fullWidth: defaultFullWidth, href, round, loading, children, ...rest } = props;

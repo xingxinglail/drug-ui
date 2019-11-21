@@ -35,7 +35,6 @@ function createIcon (
             return createElement(jsx, { style, ref, ...props });
         }
     );
-    console.log(Icon);
     Icon.displayName = `RemixIcon${ componentName }`;
     return Icon;
 }
