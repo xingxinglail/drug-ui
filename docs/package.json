@@ -1,11 +1,12 @@
 {
     "name": "docs",
+    "private": true,
     "version": "1.0.0",
     "main": "index.js",
     "license": "MIT",
     "scripts": {
         "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js",
-        "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js"
+        "build:docs": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js"
     },
     "dependencies": {
         "@drug-ui/core": "^0.0.1"
