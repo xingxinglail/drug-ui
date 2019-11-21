@@ -12,6 +12,7 @@
         }
     },
     "ignoreChanges": [
-        "**/*.md"
+        "**/*.md",
+        "docs"
     ]
 }
