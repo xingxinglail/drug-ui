@@ -2,8 +2,7 @@
     "name": "root",
     "private": true,
     "workspaces": [
-        "packages/*",
-        "docs"
+        "packages/*"
     ],
     "scripts": {
         "init": "yarn run bootstrap && lerna run --stream --sort build",
