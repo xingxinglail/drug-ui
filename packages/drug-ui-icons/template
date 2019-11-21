@@ -1,0 +1,5 @@
+import createIcon, { JSX } from './utils/createIcon'
+
+export const jsx: JSX = {{jsx}}
+
+export default createIcon(jsx, '{{componentName}}')

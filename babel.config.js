@@ -1,7 +1,7 @@
 const defaultPresets =
     process.env.BABEL_ENV === 'es'
-        ? ['@babel/typescript', '@babel/preset-react']
-        : ['@babel/preset-env', '@babel/typescript', '@babel/preset-react'];
+        ? [['@babel/typescript', { allowNamespaces: true }], '@babel/preset-react']
+        : ['@babel/preset-env', ['@babel/typescript', { allowNamespaces: true }], '@babel/preset-react'];
 
 module.exports = {
     presets: defaultPresets
