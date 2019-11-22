@@ -8,6 +8,10 @@ module.exports = {
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx', 'svg'],
+        alias: {
+            '@drug-ui/core': path.resolve(__dirname, '../packages/drug-ui/src'),
+            '@drug-ui/icons': path.resolve(__dirname, '../packages/drug-ui-icons/src')
+        }
     },
     module: {
         rules: [

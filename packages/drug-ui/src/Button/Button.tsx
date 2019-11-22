@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { PropTypes as ComponentPropTypes } from '..';
 import classnames from 'classnames';
-import { Loading } from '@drug-ui/icons';
+// import { Loading} from '@drug-ui/icons';
 import { capitalize } from '../utils';
 import { styles } from './Button.style';
 import { createUseStyles } from '../styles';
@@ -86,7 +86,6 @@ const Button: React.FC<ButtonProps> = React.forwardRef<HTMLButtonElement, Button
             href={ href }
             disabled={ disabled }
             { ...rest }>
-            <Loading/>
             { newChildren }
             {/*{ loading ? <Icons name="loading" className="loading"/> : null }*/ }
         </ButtonBase>

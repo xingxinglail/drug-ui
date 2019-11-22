@@ -25,5 +25,8 @@
     "devDependencies": {
         "htm": "^2.2.1",
         "prettier": "^1.19.1"
+    },
+    "dependencies": {
+        "@drug-ui/core": "^0.0.2"
     }
 }

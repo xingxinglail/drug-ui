@@ -48,31 +48,27 @@ const worker = async () => {
         const template = await readFileAsync(resolve(__dirname, './template'), { encoding: 'utf8' });
         for (const svg of allSvg) {
             let data = await readFileAsync(resolve(__dirname, './remix', svg), { encoding: 'utf8' });
-            data = ' ' + data;
-            data = data
-                .replace(/ ([\s\S]*?).dtd">/gi, '')
-                .replace(/<defs>([\s\S]*?)<\/defs>/gi, '')
-                .replace(/t="([\s\S]*?)"/gi, '')
-                .replace(/class="([\s\S]*?)"/gi, '')
-                .replace(/p-id="([\s\S]*?)"/gi, '')
-                .replace(/xmlns:xlink="([\s\S]*?)"/gi, '')
-                .replace(/width="([\s\S]*?)"/gi, '')
-                .replace('heigh', '')
-                .replace(/height="([\s\S]*?)"/gi, '')
-                .replace(/version="([\s\S]*?)"/gi, '')
-                .trim();
-            const jsx = html([data]);
-            const componentName = toHump(getComponentName(svg, false));
-            const jsxReplace = template
-                .replace('{{jsx}}', toJson(jsx))
-                .replace('{{componentName}}', componentName);
-            await writeFileAsync(
-                resolve(__dirname, `src/${ componentName }.ts`),
-                prettier.format(jsxReplace, { singleQuote: true, tabWidth: 4, parser: 'typescript' }),
-                { flag: 'w+' }
-            );
+            if (data) {
+                const paths = data.match(/ d="([\s\S]*?)"/gi);
+                if (paths) {
+                    let jsx = '<>';
+                    paths.forEach(path => {
+                        path = path.trim()
+                        jsx += `<path ${path} />`;
+                    });
+                    jsx += '</>';
+                    const componentName = toHump(getComponentName(svg, false));
+                    const jsxReplace = template
+                        .replace('{{path}}', jsx)
+                        .replace('{{componentName}}', componentName);
+                    await writeFileAsync(
+                        resolve(__dirname, `src/${ componentName }.tsx`),
+                        prettier.format(jsxReplace, { singleQuote: true, tabWidth: 4, parser: 'typescript' }),
+                        { flag: 'w+' }
+                    );
+                }
+            }
         }
-
         const index = allSvg.reduce((acc, cur): string => {
             const componentName = toHump(getComponentName(cur, false));
             return acc + `export { default as ${ componentName } } from './${ componentName }'\n`;

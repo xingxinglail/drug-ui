@@ -22,7 +22,6 @@
         "@types/react-dom": "^16.8.4"
     },
     "dependencies": {
-        "@drug-ui/icons": "^0.0.1",
         "@drug-ui/styles": "^0.0.1",
         "classnames": "^2.2.6",
         "jss": "^10.0.0"

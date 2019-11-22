@@ -2,8 +2,9 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Rule, StyleSheet } from 'jss';
 import { Variant } from '../../packages/drug-ui/src/Button';
-import { Button, IconButton, ThemeProvider } from '../../packages/drug-ui/src';
-import { Setting, Down, Left, CloseCircleFill } from '../../packages/drug-ui-icons';
+import { Button, IconButton, SvgIcon, ThemeProvider } from '../../packages/drug-ui/src';
+// import { Setting, Down, Left, CloseCircleFill } from '../../packages/drug-ui-icons/src';
+import { Setting, Down, Left, CloseCircleFill } from '@drug-ui/icons';
 import Fab from '../../packages/drug-ui/src/Fab';
 import createTheme, { Theme } from '../../packages/drug-ui/src/styles/createTheme';
 
@@ -46,6 +47,7 @@ const App: React.FC = () => {
     const [theme, setTheme] = React.useState<Theme>(customTheme);
 
     const toggleTheme = () => {
+        console.log(iconEl);
         setTheme((prev) => {
             if (prev.palette.secondary.main === 'pink') {
                 return customTheme;
@@ -66,16 +68,17 @@ const App: React.FC = () => {
     return (
         <ThemeProvider theme={ theme }>
             <Fab>阿</Fab>
-            <Setting/>
-            <CloseCircleFill/>
-            <Down/>
-            <IconButton><Down/></IconButton>
+            <SvgIcon htmlColor="red">1</SvgIcon>
+            <Setting ref={ iconEl } />
+            <CloseCircleFill />
+            <Down />
+            <IconButton><Down htmlColor="red" /></IconButton>
             <Left/>
             <CloseCircleFill/>
             <div onClick={ () => setTest(!test) }>{ test ? '点击隐藏' : '点击显示' }</div>
             <br/>
             <Button>你好，世界</Button>
-            <Button color="primary">你好，世界</Button>
+            <Button color="primary" size="small">你好，世界</Button>
             <Button color="secondary">你好，世界</Button>
             <br/>
             <Button variant="contained">你好，世界</Button>
@@ -135,9 +138,12 @@ const App: React.FC = () => {
                             <Button className="asd" variant={ variant } loading={ loading }>嘻嘻哈哈</Button>
                             <Button variant="contained" color="primary"
                                     onClick={ () => setLoading(true) }>世界，你好</Button>
-                            <Button variant="contained" color="secondary" onClick={ () => setLoading(false) }>23434</Button>
-                            <Button variant="contained" color="secondary" onClick={ () => setVariant('outlined') }>世界，你好</Button>
-                            <Button variant="contained" color="secondary" onClick={ () => setVariant('contained') }>disabled世界，你好</Button>
+                            <Button variant="contained" color="secondary"
+                                    onClick={ () => setLoading(false) }>23434</Button>
+                            <Button variant="contained" color="secondary"
+                                    onClick={ () => setVariant('outlined') }>世界，你好</Button>
+                            <Button variant="contained" color="secondary"
+                                    onClick={ () => setVariant('contained') }>disabled世界，你好</Button>
                             <Button disabled variant="contained" color="secondary" loading={ loading }>世界，你好</Button>
                         </div>
                         <br/>
@@ -173,7 +179,7 @@ const App: React.FC = () => {
                             <Button variant="outlined" color="primary" size="medium">世界，你好</Button>
                             <Button variant="outlined" color="primary" size="large">
                                 <div>66</div>
-                                <Setting />
+                                <Setting/>
                             </Button>
                             <Button variant="outlined" color="primary" size="large">{ a }</Button>
                         </div>

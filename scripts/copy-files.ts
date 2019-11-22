@@ -22,7 +22,7 @@ async function createPackageFile (): Promise<void> {
     const targetPath = resolve(buildPath, './package.json');
 
     await writeFileAsync(targetPath, JSON.stringify(newPackageData, null, '\t'), 'utf8');
-    console.log(`Created package.json in ${ targetPath }`);
+    // console.log(`Created package.json in ${ targetPath }`);
 
     return newPackageData;
 }
@@ -31,7 +31,7 @@ async function includeFileInBuild (file: string): Promise<void> {
     const sourcePath = resolve(packagePath, file);
     const targetPath = resolve(buildPath, basename(file));
     await copyFileAsync(sourcePath, targetPath);
-    console.log(`Copied ${ sourcePath } to ${ targetPath }`);
+    // console.log(`Copied ${ sourcePath } to ${ targetPath }`);
 }
 
 async function worker (): Promise<void> {

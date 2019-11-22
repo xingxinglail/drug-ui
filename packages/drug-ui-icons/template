@@ -1,5 +1,4 @@
-import createIcon, { JSX } from './utils/createIcon'
+import * as React from 'react';
+import createSvgIcon from './utils/createSvgIcon';
 
-export const jsx: JSX = {{jsx}}
-
-export default createIcon(jsx, '{{componentName}}')
+export default createSvgIcon({{path}}, '{{componentName}}')

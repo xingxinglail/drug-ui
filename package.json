@@ -6,8 +6,6 @@
         "docs"
     ],
     "scripts": {
-        "init": "yarn run bootstrap && lerna run --stream --sort build",
-        "build:init": "lerna run --stream --sort build",
         "bootstrap": "lerna bootstrap",
         "test": "cross-env NODE_ENV=test JEST_JUNIT_OUTPUT_DIR=./test-results/jest/ JEST_JUNIT_OUTPUT_NAME=results.xml jest --config=jest.config.js --runInBand",
         "docs:start": "yarn workspace docs start",
@@ -30,6 +28,7 @@
         "@types/react-test-renderer": "^16.8.1",
         "awesome-typescript-loader": "^5.2.1",
         "babel-jest": "^24.3.1",
+        "babel-plugin-module-resolver": "^3.2.0",
         "babel-preset-react-app": "^9.0.2",
         "commitizen": "^4.0.3",
         "cross-env": "^6.0.3",
