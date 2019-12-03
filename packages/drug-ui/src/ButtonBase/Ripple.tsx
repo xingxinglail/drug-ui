@@ -34,9 +34,12 @@ const Ripple: React.FC<RippleProps> = (props) => {
         const root = ref.current;
         if (root) {
             const { left: _left, top: _top, width, height } = root.getBoundingClientRect();
-            const spanDom = document.createElement('span');
+            const _document = document;
+            const spanDom = _document.createElement('span');
             spanDom.className = classes.visible;
-            let { size, left, top } = getRippleSize(width, height, e.pageX - _left, e.pageY - _top);
+            const scrollTop = _document.scrollingElement?.scrollTop || 0;
+            const scrollLeft = _document.scrollingElement?.scrollLeft || 0;
+            let { size, left, top } = getRippleSize(width, height, e.pageX - (_left + scrollLeft), e.pageY - (_top + scrollTop));
             if (props.center) {
                 size = Math.max(width, height);
                 left = (width - size) / 2;
@@ -46,7 +49,7 @@ const Ripple: React.FC<RippleProps> = (props) => {
             spanDom.style.height = `${ size }px`;
             spanDom.style.top = `${ top }px`;
             spanDom.style.left = `${ left }px`;
-            childDom = document.createElement('span');
+            childDom = _document.createElement('span');
             childDom.className = classes.child;
             spanDom.appendChild(childDom);
             root.appendChild(spanDom);
