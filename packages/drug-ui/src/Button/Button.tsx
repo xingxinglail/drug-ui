@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { PropTypes as ComponentPropTypes } from '..';
 import classnames from 'classnames';
-// import { Loading} from '@drug-ui/icons';
 import { capitalize } from '../utils';
 import { styles } from './Button.style';
 import { createUseStyles } from '../styles';
@@ -16,7 +15,6 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
     size?: ComponentPropTypes.Size;
     fullWidth?: boolean;
     round?: boolean;
-    loading?: boolean;
     ref?: React.Ref<HTMLButtonElement>
 }
 
@@ -45,15 +43,14 @@ type ButtonClassProps =
     | 'outlinedSizeSmall'
     | 'outlinedSizeLarge'
     | 'round'
-    | 'label'
-    | 'loading';
+    | 'label';
 
 const name = 'Button';
 
 const useStyles = createUseStyles<ButtonClassProps>(styles, name);
 
 const Button: React.FC<ButtonProps> = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-    const { className, variant = 'text', color = 'default', size = 'medium', disabled, component, fullWidth: defaultFullWidth, href, round, loading, children, ...rest } = props;
+    const { className, variant = 'text', color = 'default', size = 'medium', disabled, component, fullWidth: defaultFullWidth, href, round, children, ...rest } = props;
     const classes = useStyles();
 
     const classNames = classnames(
@@ -65,9 +62,9 @@ const Button: React.FC<ButtonProps> = React.forwardRef<HTMLButtonElement, Button
             [classes.colorInherit]: color === 'inherit',
             [classes.fullWidth]: defaultFullWidth,
             [classes.round]: round,
-            [classes.loading]: loading,
             [classes.disabled]: disabled
-        }
+        },
+        className
     );
 
     const newChildren = React.Children.map(children, child => {
@@ -87,7 +84,6 @@ const Button: React.FC<ButtonProps> = React.forwardRef<HTMLButtonElement, Button
             disabled={ disabled }
             { ...rest }>
             { newChildren }
-            {/*{ loading ? <Icons name="loading" className="loading"/> : null }*/ }
         </ButtonBase>
     );
 });
@@ -99,7 +95,6 @@ Button.defaultProps = {
     color: 'default',
     size: 'medium',
     fullWidth: false,
-    loading: false,
     round: false
 };
 
@@ -107,7 +102,6 @@ Button.propTypes = {
     variant: PropTypes.oneOf<Variant>(['text', 'outlined', 'contained']),
     color: PropTypes.oneOf<ComponentPropTypes.Color>(['default', 'primary', 'secondary', 'inherit']),
     size: PropTypes.oneOf<ComponentPropTypes.Size>(['small', 'medium', 'large']),
-    loading: PropTypes.bool,
     fullWidth: PropTypes.bool,
     round: PropTypes.bool
 };

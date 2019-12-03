@@ -67,17 +67,17 @@ const App: React.FC = () => {
 
     return (
         <ThemeProvider theme={ theme }>
-            <Fab>阿</Fab>
-            <SvgIcon htmlColor="red">1</SvgIcon>
-            <Setting ref={ iconEl } />
-            <CloseCircleFill />
+            <Fab className="aaa">阿</Fab>
+            <SvgIcon className="bbb" htmlColor="red">1</SvgIcon>
+            <Setting ref={ iconEl } className="ccc" />
+            <CloseCircleFill className="ccc" />
             <Down />
-            <IconButton><Down htmlColor="red" /></IconButton>
+            <IconButton className="bbb"><Down htmlColor="red" /></IconButton>
             <Left/>
             <CloseCircleFill/>
             <div onClick={ () => setTest(!test) }>{ test ? '点击隐藏' : '点击显示' }</div>
             <br/>
-            <Button>你好，世界</Button>
+            <Button className="aaaa">你好，世界</Button>
             <Button color="primary" size="small">你好，世界</Button>
             <Button color="secondary">你好，世界</Button>
             <br/>
@@ -135,7 +135,7 @@ const App: React.FC = () => {
                         <br/>
                         <br/>
                         <div>
-                            <Button className="asd" variant={ variant } loading={ loading }>嘻嘻哈哈</Button>
+                            <Button className="asd" variant={ variant }>嘻嘻哈哈</Button>
                             <Button variant="contained" color="primary"
                                     onClick={ () => setLoading(true) }>世界，你好</Button>
                             <Button variant="contained" color="secondary"
@@ -144,14 +144,14 @@ const App: React.FC = () => {
                                     onClick={ () => setVariant('outlined') }>世界，你好</Button>
                             <Button variant="contained" color="secondary"
                                     onClick={ () => setVariant('contained') }>disabled世界，你好</Button>
-                            <Button disabled variant="contained" color="secondary" loading={ loading }>世界，你好</Button>
+                            <Button disabled variant="contained" color="secondary">世界，你好</Button>
                         </div>
                         <br/>
                         <br/>
                         <div>
-                            <Button component='div' loading>世界，你好</Button>
+                            <Button component='div'>世界，你好</Button>
                             <Button color="primary" centerRipple>世界，center你好</Button>
-                            <Button color="secondary" loading>世界，你好</Button>
+                            <Button color="secondary">世界，你好</Button>
                             <Button disabled color="secondary">世界，你好</Button>
                             <Button color="secondary">世界，你好</Button>
                         </div>
@@ -159,7 +159,7 @@ const App: React.FC = () => {
                         <br/>
                         <div>
                             <Button variant="outlined">世界，你好</Button>
-                            <Button variant="outlined" loading color="primary">世界，你好</Button>
+                            <Button variant="outlined" color="primary">世界，你好</Button>
                             <Button variant="outlined" color="secondary">世界，你好</Button>
                             <Button variant="outlined" disabled color="secondary">世界，你好</Button>
                             <Button variant="outlined" color="secondary">世界，你好</Button>
@@ -186,7 +186,7 @@ const App: React.FC = () => {
                         <div>
                             <Button variant="contained" color="primary" size="small" round>世界，你好</Button>
                             <Button variant="contained" color="primary" size="medium">世界，你好</Button>
-                            <Button variant="contained" color="primary" size="large" loading>世界，你好</Button>
+                            <Button variant="contained" color="primary" size="large">世界，你好</Button>
                         </div>
                         <br/>
                     </div>

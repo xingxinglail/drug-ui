@@ -30,7 +30,8 @@ const IconButton: React.FC<IconButtonProps> = React.forwardRef<HTMLButtonElement
             [classes[`size${ capitalize(size) }`]]: size !== 'large',
             [classes.colorInherit]: color === 'inherit',
             [classes.disabled]: disabled
-        }
+        },
+        className
     );
 
     return (

@@ -38,7 +38,8 @@ const SvgIcon: React.FC<SvgIconProps> = React.forwardRef<SVGSVGElement, SvgIconP
         {
             [classes[`color${ capitalize(color) }`]]: color !== 'inherit',
             [classes[`fontSize${ capitalize(fontSize) }`]]: fontSize !== 'default'
-        }
+        },
+        className
     );
 
     return (
