@@ -39,7 +39,7 @@ const ButtonBase: React.FC<ButtonBaseProps> = React.forwardRef<HTMLButtonElement
             disabled={ disabled }
             { ...rest }>
             { children }
-            { !disableRipple ? <Ripple center={ centerRipple }/> : null }
+            { !disableRipple ? <Ripple center={ centerRipple } /> : null }
         </Component>
     );
 });
