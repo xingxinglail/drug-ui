@@ -14,6 +14,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
     color?: ComponentPropTypes.Color;
     size?: ComponentPropTypes.Size;
     fullWidth?: boolean;
+    href?: string;
     round?: boolean;
     ref?: React.Ref<HTMLButtonElement>
 }
@@ -50,9 +51,8 @@ const name = 'Button';
 const useStyles = createUseStyles<ButtonClassProps>(styles, name);
 
 const Button: React.FC<ButtonProps> = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-    const { className, variant = 'text', color = 'default', size = 'medium', disabled, component, fullWidth: defaultFullWidth, href, round, children, ...rest } = props;
+    const { className, variant = 'text', color = 'default', size = 'medium', disabled, component, fullWidth: defaultFullWidth, round, children, ...rest } = props;
     const classes = useStyles();
-
     const classNames = classnames(
         classes.root,
         [classes[variant]],
@@ -80,7 +80,6 @@ const Button: React.FC<ButtonProps> = React.forwardRef<HTMLButtonElement, Button
             className={ classNames }
             component={ component }
             ref={ ref }
-            href={ href }
             disabled={ disabled }
             { ...rest }>
             { newChildren }
@@ -103,7 +102,8 @@ Button.propTypes = {
     color: PropTypes.oneOf<ComponentPropTypes.Color>(['default', 'primary', 'secondary', 'inherit']),
     size: PropTypes.oneOf<ComponentPropTypes.Size>(['small', 'medium', 'large']),
     fullWidth: PropTypes.bool,
-    round: PropTypes.bool
+    round: PropTypes.bool,
+    href: PropTypes.string
 };
 
 export default Button;

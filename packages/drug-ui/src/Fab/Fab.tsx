@@ -10,6 +10,7 @@ import ButtonBase, { ButtonBaseProps } from '../ButtonBase';
 export interface FabProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, ButtonBaseProps {
     color?: ComponentPropTypes.Color;
     size?: ComponentPropTypes.Size;
+    href?: string;
     disabled?: boolean;
     ref?: React.Ref<HTMLButtonElement>
 }
@@ -21,7 +22,7 @@ const name = 'Fab';
 const useStyles = createUseStyles<FabClassProps>(styles, name);
 
 const Fab: React.FC<FabProps> = React.forwardRef<HTMLButtonElement, FabProps>((props, ref) => {
-    const { className, color = 'default', size = 'large', disabled, component, href, children, ...rest } = props;
+    const { className, color = 'default', size = 'large', disabled, component, children, ...rest } = props;
     const classes = useStyles();
 
     const classNames = classnames(
@@ -39,7 +40,6 @@ const Fab: React.FC<FabProps> = React.forwardRef<HTMLButtonElement, FabProps>((p
             className={ classNames }
             component={ component }
             ref={ ref }
-            href={ href }
             disabled={ disabled }
             { ...rest }>
             { children }
@@ -56,7 +56,8 @@ Fab.defaultProps = {
 
 Fab.propTypes = {
     color: PropTypes.oneOf<ComponentPropTypes.Color>(['default', 'primary', 'secondary', 'inherit']),
-    size: PropTypes.oneOf<ComponentPropTypes.Size>(['small', 'medium', 'large'])
+    size: PropTypes.oneOf<ComponentPropTypes.Size>(['small', 'medium', 'large']),
+    href: PropTypes.string
 };
 
 export default Fab;

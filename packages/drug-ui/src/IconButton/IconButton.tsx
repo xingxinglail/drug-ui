@@ -10,6 +10,7 @@ import ButtonBase, { ButtonBaseProps } from '../ButtonBase';
 export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, ButtonBaseProps {
     color?: ComponentPropTypes.Color;
     size?: ComponentPropTypes.Size;
+    href?: string;
     disabled?: boolean;
     ref?: React.Ref<HTMLButtonElement>
 }
@@ -20,7 +21,7 @@ const name = 'IconButton';
 
 const useStyles = createUseStyles<IconButtonPropsClassProps>(styles, name);
 const IconButton: React.FC<IconButtonProps> = React.forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) => {
-    const { className, color = 'default', size = 'large', disabled, component, href, children, ...rest } = props;
+    const { className, color = 'default', size = 'large', disabled, component, children, ...rest } = props;
     const classes = useStyles();
 
     const classNames = classnames(
@@ -39,7 +40,6 @@ const IconButton: React.FC<IconButtonProps> = React.forwardRef<HTMLButtonElement
             className={ classNames }
             component={ component }
             ref={ ref }
-            href={ href }
             disabled={ disabled }
             { ...rest }>
             { children }
@@ -57,7 +57,8 @@ IconButton.defaultProps = {
 
 IconButton.propTypes = {
     color: PropTypes.oneOf<ComponentPropTypes.Color>(['default', 'primary', 'secondary', 'inherit']),
-    size: PropTypes.oneOf<ComponentPropTypes.Size>(['small', 'medium', 'large'])
+    size: PropTypes.oneOf<ComponentPropTypes.Size>(['small', 'medium', 'large']),
+    href: PropTypes.string
 };
 
 export default IconButton;
