@@ -6,12 +6,22 @@ import { Button, IconButton, SvgIcon, ThemeProvider } from '../../packages/drug-
 // import { Setting, Down, Left, CloseCircleFill } from '../../packages/drug-ui-icons/src';
 import { Setting, Down, Left, CloseCircleFill } from '@drug-ui/icons';
 import Fab from '../../packages/drug-ui/src/Fab';
+import Ripple from '../../packages/drug-ui/src/ButtonBase/Ripple';
 import createTheme, { Theme } from '../../packages/drug-ui/src/styles/createTheme';
 
-const Test: React.FC = ((props) => {
+interface Props extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+    cc?: string;
+}
+
+const Test: React.FC<Props> = React.forwardRef<HTMLAnchorElement, Props>((props, ref) => {
     const { children, ...rest } = props;
-    return <a href="https://baidu.com" { ...rest }>{ children }</a>;
+    return <a ref={ ref } cc="66" href="https://baidu.com" { ...rest }>{ children }</a>;
 });
+
+// const Test: React.FC = ((props) => {
+//     const { children, ...rest } = props;
+//     return <a href="https://baidu.com" { ...rest }>{ children }</a>;
+// });
 
 const App: React.FC = () => {
     const [test, setTest] = React.useState(false);
@@ -67,6 +77,9 @@ const App: React.FC = () => {
 
     return (
         <ThemeProvider theme={ theme }>
+            <Button component={ Test }>你好，Test世界</Button>
+            <Button href="https://google.com">你好，link世界</Button>
+            <Button component="div" href="https://google.com">你好，link世界</Button>
             <Fab className="aaa">阿</Fab>
             <SvgIcon className="bbb" htmlColor="red">1</SvgIcon>
             <Setting ref={ iconEl } className="ccc" />
@@ -127,7 +140,7 @@ const App: React.FC = () => {
                     <br/>
                     <div style={ { padding: 40 } }>
                         {
-                            a ? <Button component={ Test }>你好，世界</Button> : '6777'
+                            a ? <Button component={ Test }>你好，Test世界</Button> : '6777'
                         }
                         <Button fullWidth href="/">世界，你好</Button>
                         <Button fullWidth onClick={ (e) => click(e) }>世界，你好</Button>

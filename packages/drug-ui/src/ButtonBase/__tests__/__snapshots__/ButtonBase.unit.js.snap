@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ButtonBase /> render successful 1`] = `
+<button
+  className="ButtonBase-root-0-2-1"
+  disabled={false}
+>
+  <span
+    className="Ripple-root-0-2-3"
+    onDragLeave={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+  />
+</button>
+`;

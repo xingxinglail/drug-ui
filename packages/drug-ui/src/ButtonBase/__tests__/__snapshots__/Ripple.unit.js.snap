@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Ripple /> render successful 1`] = `
+<span
+  className="Ripple-root-0-2-1"
+  onDragLeave={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+/>
+`;
