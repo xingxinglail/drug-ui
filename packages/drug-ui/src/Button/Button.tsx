@@ -30,10 +30,6 @@ type ButtonClassProps =
     | 'outlined'
     | 'outlinedPrimary'
     | 'outlinedSecondary'
-    | 'fab'
-    | 'fabPrimary'
-    | 'fabSecondary'
-    | 'icon'
     | 'colorInherit'
     | 'fullWidth'
     | 'disabled'
@@ -53,12 +49,14 @@ const useStyles = createUseStyles<ButtonClassProps>(styles, name);
 const Button: React.FC<ButtonProps> = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     const { className, variant = 'text', color = 'default', size = 'medium', disabled, component, fullWidth: defaultFullWidth, round, children, ...rest } = props;
     const classes = useStyles();
+    const colorClass = classes[`${ variant }${ capitalize(color) }`];
+    const sizeClass = classes[`${ variant }Size${ capitalize(size) }`];
     const classNames = classnames(
         classes.root,
         [classes[variant]],
         {
-            [classes[`${ variant }${ capitalize(color) }`]]: color !== 'inherit' && color !== 'default',
-            [classes[`${ variant }Size${ capitalize(size) }`]]: size !== 'medium',
+            [colorClass]: color !== colorClass && 'inherit' && color !== 'default',
+            [sizeClass]: sizeClass && size !== 'medium',
             [classes.colorInherit]: color === 'inherit',
             [classes.fullWidth]: defaultFullWidth,
             [classes.round]: round,
