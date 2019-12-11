@@ -135,36 +135,11 @@ const colorInherit: Style = {
     borderColor: 'currentColor'
 };
 
-const fab: Style = {
-    minWidth: 'unset',
-    width: 48,
-    height: 48,
-    borderRadius: '50%',
-    padding: 0,
-    boxShadow: '0 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)',
-    backgroundColor: '#e0e0e0',
-    '&:hover': {
-        boxShadow: '0 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)',
-        backgroundColor: '#d5d5d5'
-    },
-    '&$disabled': {
-        boxShadow: 'none',
-        backgroundColor: 'rgba(0, 0, 0, 0.12)'
-    }
-};
-
 const fullWidth: Style = {
     width: '100%'
 };
 
 const disabled: Style = {};
-
-const icon: Style = {
-    ...fab,
-    boxShadow: 'none',
-    backgroundColor: null,
-    '&:hover': null
-};
 
 const round: Style = {
     borderRadius: 24
@@ -232,9 +207,6 @@ export const styles = (theme: Theme): Styles => ({
     outlinedSizeSmall: outlinedSizeSmall(theme),
     outlinedSizeLarge: outlinedSizeLarge(theme),
     colorInherit: colorInherit,
-    fab: fab,
-    fabPrimary: containedPrimary(theme),
-    fabSecondary: containedSecondary(theme),
     round,
     fullWidth,
     disabled,
