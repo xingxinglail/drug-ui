@@ -26,6 +26,18 @@
             ],
             "@drug-ui/core/*": [
                 "./drug-ui/src/*"
+            ],
+            "@drug-ui/styles": [
+                "./drug-ui-styles/src"
+            ],
+            "@drug-ui/styles/*": [
+                "./drug-ui-styles/src/*"
+            ],
+            "@drug-ui/icons": [
+                "./drug-ui-icons/src"
+            ],
+            "@drug-ui/icons/*": [
+                "./drug-ui-icons/src/*"
             ]
         }
     },

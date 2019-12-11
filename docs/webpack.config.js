@@ -10,6 +10,7 @@ module.exports = {
         extensions: ['.ts', '.tsx', '.js', '.jsx', 'svg'],
         alias: {
             '@drug-ui/core': path.resolve(__dirname, '../packages/drug-ui/src'),
+            '@drug-ui/styles': path.resolve(__dirname, '../packages/drug-ui-styles/src'),
             '@drug-ui/icons': path.resolve(__dirname, '../packages/drug-ui-icons/src')
         }
     },
