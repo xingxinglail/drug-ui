@@ -3,6 +3,7 @@
 <div align="center">
 
 [![npm package](https://img.shields.io/npm/v/drug-ui?color=blue)](https://www.npmjs.com/package/@drug-ui/core)
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/xingxinglail/drug-ui/blob/master/LICENSE)
 [![Build Status](https://www.travis-ci.org/xingxinglail/drug-ui.svg?branch=master)](https://www.travis-ci.org/xingxinglail/drug-ui)
 [![codecov](https://codecov.io/gh/xingxinglail/drug-ui/branch/master/graph/badge.svg)](https://codecov.io/gh/xingxinglail/drug-ui)
 
