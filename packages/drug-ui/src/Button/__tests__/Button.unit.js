@@ -91,7 +91,6 @@ describe('<Button />', () => {
     it('设置 color = xxx', () => {
         const wrapper = mount(<Wrapper><Button color="xxx" /></Wrapper>);
         const classList = wrapper.getDOMNode().classList;
-        console.log(classList);
         expect(classList.contains('DuiButtonBase-root')).toBeTruthy();
         expect(classList.contains('DuiButton-root')).toBeTruthy();
         expect(classList.contains('DuiButton-text')).toBeTruthy();

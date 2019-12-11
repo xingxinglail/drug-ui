@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Fab /> render successful 1`] = `
+<button
+  className="DuiButtonBase-root DuiFab-root"
+  disabled={false}
+>
+  <span
+    className="DuiRipple-root"
+    onDragLeave={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+  />
+</button>
+`;
