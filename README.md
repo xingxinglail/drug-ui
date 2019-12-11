@@ -1,17 +1,28 @@
-# drug-ui
+<h1 align="center">Drug-ui</h1>
 
-[![CircleCI](https://circleci.com/gh/xingxinglail/drug-ui.svg?style=svg)](https://circleci.com/gh/xingxinglail/drug-ui)
-[![NPM downloads](https://img.shields.io/npm/v/drug-ui)](https://www.npmjs.com/package/drug-ui)
+<div align="center">
+
+[![npm package](https://img.shields.io/npm/v/drug-ui?color=blue)](https://www.npmjs.com/package/@drug-ui/core)
+[![Build Status](https://www.travis-ci.org/xingxinglail/drug-ui.svg?branch=master)](https://www.travis-ci.org/xingxinglail/drug-ui)
+[![codecov](https://codecov.io/gh/xingxinglail/drug-ui/branch/master/graph/badge.svg)](https://codecov.io/gh/xingxinglail/drug-ui)
+
+</div>
+
+## 📦 安装
+
+```bash
+// with npm
+npm install @drug-ui/core
+
+// with yarn
+yarn add @drug-ui/core
 ```
-// 安装
-yarn install
 
-// 运行
-yarn start
+## ⌨️ 本地开发
 
-// 构建
-yarn build
-
-// 测试
-yarn test
+```bash
+$ git clone git@github.com:xingxinglail/drug-ui.git
+$ cd drug-ui
+$ yarn bootstrap
+$ yarn run docs:start
 ```
