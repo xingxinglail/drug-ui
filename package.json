@@ -6,8 +6,8 @@
         "docs"
     ],
     "scripts": {
-        "bootstrap": "lerna bootstrap",
-        "test": "cross-env NODE_ENV=test JEST_JUNIT_OUTPUT_DIR=./test-results/jest/ JEST_JUNIT_OUTPUT_NAME=results.xml jest --config=jest.config.js --runInBand --watchAll",
+        "postinstall": "lerna bootstrap",
+        "test": "cross-env NODE_ENV=test JEST_JUNIT_OUTPUT_DIR=./test-results/jest/ JEST_JUNIT_OUTPUT_NAME=results.xml jest --config=jest.config.ci.js --runInBand",
         "docs:start": "yarn workspace docs start",
         "docs:build": "yarn workspace docs build:docs",
         "ci": "cross-env NODE_ENV=test JEST_JUNIT_OUTPUT_DIR=./test-results/jest/ JEST_JUNIT_OUTPUT_NAME=results.xml jest --config=jest.config.ci.js",
