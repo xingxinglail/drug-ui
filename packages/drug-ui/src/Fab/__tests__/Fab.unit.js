@@ -13,7 +13,7 @@ describe('<Fab />', () => {
         expect(json).toMatchSnapshot();
     });
 
-    it('可以设置 className', () => {
+    it('设置 className', () => {
         const wrapper = mount(<Wrapper><Fab className="Fab Fab2">Hello World</Fab></Wrapper>);
         const classList = wrapper.getDOMNode().classList;
         expect(classList.contains('Fab')).toBeTruthy();
@@ -93,5 +93,15 @@ describe('<Fab />', () => {
         expect(classList.contains('DuiFab-sizeMedium')).toBeFalsy();
         expect(classList.contains('DuiFab-sizeLarge')).toBeFalsy();
         expect(classList.length).toBe(2);
+    });
+
+    it('设置 disabled', () => {
+        const wrapper = mount(<Wrapper><Fab disabled /></Wrapper>);
+        const classList = wrapper.getDOMNode().classList;
+        expect(classList.contains('DuiButtonBase-root')).toBeTruthy();
+        expect(classList.contains('DuiFab-root')).toBeTruthy();
+        expect(classList.contains('DuiButtonBase-disabled')).toBeTruthy();
+        expect(classList.contains('DuiFab-disabled')).toBeTruthy();
+        expect(classList.length).toBe(4);
     });
 });

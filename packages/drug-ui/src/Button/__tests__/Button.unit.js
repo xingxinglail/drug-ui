@@ -3,6 +3,7 @@ import * as React from 'react';
 import * as enzyme from 'enzyme';
 import Button from '..';
 import { Wrapper } from '@drug-ui/core/test-utils';
+import Fab from '@drug-ui/core/Fab';
 
 const mount = enzyme.mount;
 
@@ -13,7 +14,7 @@ describe('<Button />', () => {
         expect(json).toMatchSnapshot();
     });
 
-    it('可以设置 className', () => {
+    it('设置 className', () => {
         const wrapper = mount(<Wrapper><Button className="button button2">Hello World</Button></Wrapper>);
         const classList = wrapper.getDOMNode().classList;
         expect(classList.contains('button')).toBeTruthy();
@@ -149,5 +150,16 @@ describe('<Button />', () => {
         expect(classList.contains('DuiButton-text')).toBeTruthy();
         expect(classList.contains('DuiButton-round')).toBeTruthy();
         expect(classList.length).toBe(4);
+    });
+
+    it('设置 disabled', () => {
+        const wrapper = mount(<Wrapper><Button disabled /></Wrapper>);
+        const classList = wrapper.getDOMNode().classList;
+        expect(classList.contains('DuiButtonBase-root')).toBeTruthy();
+        expect(classList.contains('DuiButton-root')).toBeTruthy();
+        expect(classList.contains('DuiButton-text')).toBeTruthy();
+        expect(classList.contains('DuiButtonBase-disabled')).toBeTruthy();
+        expect(classList.contains('DuiButton-disabled')).toBeTruthy();
+        expect(classList.length).toBe(5);
     });
 });
