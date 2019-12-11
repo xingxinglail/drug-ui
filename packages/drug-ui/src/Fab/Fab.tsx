@@ -25,14 +25,18 @@ const Fab: React.FC<FabProps> = React.forwardRef<HTMLButtonElement, FabProps>((p
     const { className, color = 'default', size = 'large', disabled, component, children, ...rest } = props;
     const classes = useStyles();
 
+    const colorClass = classes[color];
+    const sizeClass = classes[`size${ capitalize(size) }`];
+
     const classNames = classnames(
         classes.root,
         {
-            [classes[color]]: color !== 'inherit' && color !== 'default',
-            [classes[`size${ capitalize(size) }`]]: size !== 'large',
+            [colorClass]: colorClass && color !== 'inherit' && color !== 'default',
+            [sizeClass]: sizeClass && size !== 'large',
             [classes.colorInherit]: color === 'inherit',
             [classes.disabled]: disabled
-        }
+        },
+        className
     );
 
     return (
