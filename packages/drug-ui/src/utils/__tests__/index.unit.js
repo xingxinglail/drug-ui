@@ -1,27 +1,45 @@
-import { classes } from '../index';
+import { capitalize, isNumeric } from '../index';
 
 describe('util', () => {
 
-    describe('classes', () => {
+    describe('capitalize', () => {
 
-        it('接收一个字符串', () => {
-            const result = classes('drug-ui');
-            expect(result).toBe('drug-ui');
+        it('接受一个字符串', () => {
+            expect(capitalize('hello world')).toBe('Hello world');
+            expect(capitalize('Hello world')).toBe('Hello world');
         });
 
-        it('接收 undefined', () => {
-            const result = classes('drug-ui', undefined);
-            expect(result).toBe('drug-ui');
+        it('接受非字符串', () => {
+            expect(capitalize(0)).toBe(0);
+            expect(capitalize(true)).toBe(true);
+        });
+    });
+
+    describe('isNumeric', () => {
+
+        it('接受一个数字', () => {
+            expect(isNumeric(0)).toBeTruthy();
         });
 
-        it('接收各种奇怪参数', () => {
-            const result = classes('drug-ui', undefined, null, true, 3);
-            expect(result).toBe('drug-ui true 3');
+        it('接受一个字符串数字', () => {
+            expect(isNumeric('120')).toBeTruthy();
         });
 
-        it('不传参数', () => {
-            const result = classes();
-            expect(result).toBe('');
+        it('接受一个非数字字符串', () => {
+            expect(isNumeric('asd')).toBeFalsy();
+            expect(isNumeric('120px')).toBeFalsy();
+        });
+
+        it('接受 Infinity', () => {
+            expect(isNumeric(Infinity)).toBeFalsy();
+        });
+
+        it('接受 NaN', () => {
+            expect(isNumeric(NaN)).toBeFalsy();
+        });
+
+        it('接受负数', () => {
+            expect(isNumeric(-99999)).toBeTruthy();
         });
     });
 });
