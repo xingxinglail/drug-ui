@@ -2,11 +2,13 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Rule, StyleSheet } from 'jss';
 import { Variant } from '@drug-ui/core/Button';
-import { Fab, Button, IconButton, SvgIcon, ThemeProvider } from '@drug-ui/core';
+import { Fab, Button, IconButton, SvgIcon, ThemeProvider, Layout } from '@drug-ui/core';
 // import { Setting, Down, Left, CloseCircleFill } from '../../packages/drug-ui-icons/src';
 import { Setting, Down, Left, CloseCircleFill } from '@drug-ui/icons';
 import Ripple from '../../packages/drug-ui/src/ButtonBase/Ripple';
 import createTheme, { Theme } from '../../packages/drug-ui/src/styles/createTheme';
+
+const { Header, Content, Aside, Footer } = Layout;
 
 interface Props extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
     cc?: string;
@@ -80,6 +82,31 @@ const App: React.FC = () => {
 
     return (
         <ThemeProvider theme={ theme }>
+            <Layout>333</Layout>
+            <Layout>
+                <Header>Header</Header>
+                <Layout>
+                    <Aside>Aside</Aside>
+                    <Content>Content</Content>
+                </Layout>
+                <Footer>Footer</Footer>
+            </Layout>
+            <Layout className="asd">
+                <Header className="asd">Header</Header>
+                <Layout className="asd">
+                    <Content className="asd">Content</Content>
+                    <Aside className="asd">Aside</Aside>
+                </Layout>
+                <Footer className="asd">Footer</Footer>
+            </Layout>
+            <Layout>
+                <Aside width={ 400 }>Aside</Aside>
+                <Layout>
+                    <Header>Header</Header>
+                    <Content>Content</Content>
+                    <Footer>Footer</Footer>
+                </Layout>
+            </Layout>
             <Button component={ Test }>你好，Test世界<Button component="div" href="https://google.com">你好，link世界</Button></Button>
             <Button onMouseDown={ onMouseDown }>你好，link世界</Button>
             <Button component="div" href="https://google.com">你好，link世界</Button>
@@ -100,7 +127,7 @@ const App: React.FC = () => {
             <Button color="primary" size="small">你好，世界</Button>
             <Button color="secondary">你好，世界</Button>
             <br />
-            <Button variant="contained">你好，世界</Button>
+            <Button variant="contained" style={{ opacity: 0.8 }}>你好，世界</Button>
             <Button variant="contained" color="primary">你好，世界</Button>
             <Button variant="contained" color="secondary">你好，世界</Button>
             { test ? (
