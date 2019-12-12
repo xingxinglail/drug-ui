@@ -8,7 +8,7 @@
     "scripts": {
         "bootstrap": "lerna bootstrap",
         "test": "cross-env NODE_ENV=test JEST_JUNIT_OUTPUT_DIR=./test-results/jest/ JEST_JUNIT_OUTPUT_NAME=results.xml jest --config=jest.config.ci.js",
-        "test:dev": "cross-env NODE_ENV=test JEST_JUNIT_OUTPUT_DIR=./test-results/jest/ JEST_JUNIT_OUTPUT_NAME=results.xml jest --config=jest.config.js --runInBand",
+        "test:dev": "cross-env NODE_ENV=test JEST_JUNIT_OUTPUT_DIR=./test-results/jest/ JEST_JUNIT_OUTPUT_NAME=results.xml jest --config=jest.config.js --runInBand --watchAll",
         "docs:start": "yarn workspace docs start",
         "docs:build": "yarn workspace docs build:docs",
         "commit": "npx git-cz",

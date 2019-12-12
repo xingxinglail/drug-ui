@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Layout /> render successful 1`] = `
+<section
+  className="Layout-root-0-2-1"
+>
+  <header
+    className="LayoutHeader-root-0-2-3"
+  >
+    Header
+  </header>
+  <section
+    className="Layout-root-0-2-1 Layout-hasAside-0-2-2"
+  >
+    <aside
+      className="LayoutAside-root-0-2-4"
+      style={
+        Object {
+          "flex": "0 0 200px",
+          "width": "200px",
+        }
+      }
+    >
+      Aside
+    </aside>
+    <main
+      className="LayoutContent-root-0-2-5"
+    >
+      Content
+    </main>
+  </section>
+  <footer
+    className="LayoutFooter-root-0-2-6"
+  >
+    Footer
+  </footer>
+</section>
+`;
