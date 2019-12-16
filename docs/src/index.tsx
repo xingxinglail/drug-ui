@@ -31,6 +31,7 @@ const App: React.FC = () => {
     const [variant, setVariant] = React.useState<Variant>('contained');
     const buttonEl = React.useRef(null);
     const iconEl = React.useRef(null);
+    const layout = React.useRef(null);
     // setInterval(() => {
     //     setTest(!test)
     // }, 2000)
@@ -51,8 +52,7 @@ const App: React.FC = () => {
         console.log(e.target);
     };
     // React.useEffect(() => {
-    //     console.log(iconEl);
-    //     console.log(buttonEl);
+    //     console.log(layout);
     // }, []);
     const customTheme = createTheme({});
     const [theme, setTheme] = React.useState<Theme>(customTheme);
@@ -82,7 +82,7 @@ const App: React.FC = () => {
 
     return (
         <ThemeProvider theme={ theme }>
-            <Layout>333</Layout>
+            <Layout ref={ layout }>333</Layout>
             <Layout>
                 <Header>Header</Header>
                 <Layout>
