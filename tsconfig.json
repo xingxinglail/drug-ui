@@ -38,6 +38,12 @@
             ],
             "@drug-ui/icons/*": [
                 "./drug-ui-icons/src/*"
+            ],
+            "@drug-ui/hooks": [
+                "./drug-ui-hooks/src"
+            ],
+            "@drug-ui/hooks/*": [
+                "./drug-ui-hooks/src/*"
             ]
         }
     },

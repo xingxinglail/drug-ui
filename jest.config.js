@@ -14,7 +14,8 @@ module.exports = {
         '\\.(css|scss|sass)$': '<rootDir>/test/__mocks__/object-mock.js',
         '^@drug-ui/core(.*)$': '<rootDir>/packages/drug-ui/src/$1',
         '^@drug-ui/styles(.*)$': '<rootDir>/packages/drug-ui-styles/src/$1',
-        '^@drug-ui/icons(.*)$': '<rootDir>/packages/drug-ui-icons/src/$1'
+        '^@drug-ui/icons(.*)$': '<rootDir>/packages/drug-ui-icons/src/$1',
+        '^@drug-ui/hooks(.*)$': '<rootDir>/packages/drug-ui-hooks/src/$1'
     },
     testMatch: ['<rootDir>/**/__tests__/**/*.unit.(js|jsx|ts|tsx)'],
     transform: {

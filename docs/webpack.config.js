@@ -11,7 +11,8 @@ module.exports = {
         alias: {
             '@drug-ui/core': path.resolve(__dirname, '../packages/drug-ui/src'),
             '@drug-ui/styles': path.resolve(__dirname, '../packages/drug-ui-styles/src'),
-            '@drug-ui/icons': path.resolve(__dirname, '../packages/drug-ui-icons/src')
+            '@drug-ui/icons': path.resolve(__dirname, '../packages/drug-ui-icons/src'),
+            '@drug-ui/hooks': path.resolve(__dirname, '../packages/drug-ui-hooks/src')
         }
     },
     module: {
