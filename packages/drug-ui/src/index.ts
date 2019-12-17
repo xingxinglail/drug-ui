@@ -4,6 +4,8 @@ export namespace PropTypes {
     export type Size = 'small' | 'medium' | 'large';
 }
 
+export type SimpleSpread<L, R> = R & Pick<L, Exclude<keyof L, keyof R>>;
+
 export { default as ThemeProvider } from './ThemeProvider';
 export { default as ButtonBase } from './ButtonBase';
 export { default as Button } from './Button';

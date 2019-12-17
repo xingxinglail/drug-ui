@@ -11,7 +11,10 @@ const fixed = {
 
 const root: Style = fixed;
 
-const container: Style = fixed;
+const container: Style = {
+    ...fixed,
+    overflow: 'auto'
+};
 
 const paper: Style = {
     position: 'relative',
@@ -59,7 +62,7 @@ const footer: Style = {
 const mask: Style = {
     ...fixed,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    zIndex: -1,
+    zIndex: -1
 };
 
 export const styles = (_: Theme): Styles => ({
