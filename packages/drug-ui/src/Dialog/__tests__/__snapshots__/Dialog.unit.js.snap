@@ -1,0 +1,521 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Dialog /> render successful 1`] = `
+<Wrapper>
+  <ThemeProvider>
+    <JssProvider
+      generateId={[Function]}
+    >
+      <ThemeProvider
+        theme={
+          Object {
+            "palette": Object {
+              "primary": Object {
+                "contrastText": "#fff",
+                "main": "#1976d2",
+              },
+              "secondary": Object {
+                "contrastText": "#fff",
+                "main": "#dc004e",
+              },
+            },
+            "typography": Object {
+              "fontSize": Object {
+                "large": 15,
+                "medium": 14,
+                "small": 13,
+              },
+            },
+          }
+        }
+      >
+        <Dialog
+          closable={true}
+          keepMounted={false}
+          mask={true}
+          maskClosable={true}
+          title="title"
+          top="15vh"
+          visible={true}
+          width="50%"
+          zIndex={1000}
+        >
+          <Portal>
+            <Portal
+              containerInfo={
+                <body
+                  style="overflow: hidden;"
+                >
+                  <div
+                    class="DuiDialog-root"
+                    style="z-index: 1000; visibility: visible;"
+                  >
+                    <div>
+                      <div
+                        class="DuiDialog-mask"
+                        style="transition: opacity 300ms; opacity: 1;"
+                      />
+                      <div
+                        class="DuiDialog-container"
+                      >
+                        <div
+                          class="DuiDialog-paper"
+                          style="width: 50%; margin-top: 15vh; transition: transform 300ms, opacity 300ms; opacity: 1; transform: translate3d(0, 0, 0);"
+                        >
+                          <div
+                            class="DuiDialog-close"
+                          >
+                            <button
+                              class="DuiButtonBase-root DuiIconButton-root DuiIconButton-sizeSmall"
+                            >
+                              <svg
+                                class="DuiSvgIcon-root"
+                                viewBox="0 0 1024 1024"
+                              >
+                                <path
+                                  d="M588.29605827 512l386.63543046-460.8694331c6.48074626-7.65906378 1.03102783-19.2949491-8.98467096-19.29494909h-117.53717085c-6.92261532 0-13.55065127 3.09308345-18.11663159 8.3955122L511.41084125 420.38581419 192.52866718 40.23113001c-4.41869063-5.30242877-11.04672658-8.3955122-18.1166316-8.3955122H56.87486474c-10.01569877 0-15.46541722 11.63588534-8.98467098 19.29494909L434.52562421 512 47.89019376 972.8694331c-6.48074626 7.65906378-1.03102783 19.2949491 8.98467098 19.29494909h117.53717084c6.92261532 0 13.55065127-3.09308345 18.1166316-8.3955122l318.88217407-380.15468418 318.88217408 380.15468418c4.41869063 5.30242877 11.04672658 8.3955122 18.11663159 8.3955122h117.53717085c10.01569877 0 15.46541722-11.63588534 8.98467096-19.29494909L588.29605827 512z"
+                                />
+                              </svg>
+                              <span
+                                class="DuiRipple-root"
+                              />
+                            </button>
+                          </div>
+                          <div
+                            class="DuiDialog-header"
+                          >
+                            <h2>
+                              title
+                            </h2>
+                          </div>
+                          <div
+                            class="DuiDialog-body"
+                          >
+                            Dialog
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="DuiDialog-root"
+                    style="z-index: 1000; visibility: visible;"
+                  >
+                    <div>
+                      <div
+                        class="DuiDialog-mask"
+                        style="transition: opacity 300ms; opacity: 1;"
+                      />
+                      <div
+                        class="DuiDialog-container"
+                      >
+                        <div
+                          class="DuiDialog-paper"
+                          style="width: 50%; margin-top: 15vh; transition: transform 300ms, opacity 300ms; opacity: 1; transform: translate3d(0, 0, 0);"
+                        >
+                          <div
+                            class="DuiDialog-close"
+                          >
+                            <button
+                              class="DuiButtonBase-root DuiIconButton-root DuiIconButton-sizeSmall"
+                            >
+                              <svg
+                                class="DuiSvgIcon-root"
+                                viewBox="0 0 1024 1024"
+                              >
+                                <path
+                                  d="M588.29605827 512l386.63543046-460.8694331c6.48074626-7.65906378 1.03102783-19.2949491-8.98467096-19.29494909h-117.53717085c-6.92261532 0-13.55065127 3.09308345-18.11663159 8.3955122L511.41084125 420.38581419 192.52866718 40.23113001c-4.41869063-5.30242877-11.04672658-8.3955122-18.1166316-8.3955122H56.87486474c-10.01569877 0-15.46541722 11.63588534-8.98467098 19.29494909L434.52562421 512 47.89019376 972.8694331c-6.48074626 7.65906378-1.03102783 19.2949491 8.98467098 19.29494909h117.53717084c6.92261532 0 13.55065127-3.09308345 18.1166316-8.3955122l318.88217407-380.15468418 318.88217408 380.15468418c4.41869063 5.30242877 11.04672658 8.3955122 18.11663159 8.3955122h117.53717085c10.01569877 0 15.46541722-11.63588534 8.98467096-19.29494909L588.29605827 512z"
+                                />
+                              </svg>
+                              <span
+                                class="DuiRipple-root"
+                              />
+                            </button>
+                          </div>
+                          <div
+                            class="DuiDialog-header"
+                          >
+                            <h2>
+                              title
+                            </h2>
+                          </div>
+                          <div
+                            class="DuiDialog-body"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </body>
+              }
+            >
+              <div
+                className="DuiDialog-root"
+                style={
+                  Object {
+                    "visibility": "visible",
+                    "zIndex": 1000,
+                  }
+                }
+              >
+                <Transition
+                  appear={true}
+                  enter={true}
+                  exit={true}
+                  in={true}
+                  mountOnEnter={false}
+                  onEnter={[Function]}
+                  onEntered={[Function]}
+                  onEntering={[Function]}
+                  onExit={[Function]}
+                  onExited={[Function]}
+                  onExiting={[Function]}
+                  timeout={300}
+                  unmountOnExit={false}
+                >
+                  <div>
+                    <div
+                      className="DuiDialog-mask"
+                      style={
+                        Object {
+                          "opacity": 1,
+                          "transition": "opacity 300ms",
+                        }
+                      }
+                    />
+                    <div
+                      className="DuiDialog-container"
+                      onClick={[Function]}
+                    >
+                      <div
+                        className="DuiDialog-paper"
+                        onClick={[Function]}
+                        style={
+                          Object {
+                            "marginTop": "15vh",
+                            "opacity": 1,
+                            "transform": "translate3d(0, 0, 0)",
+                            "transition": "transform 300ms, opacity 300ms",
+                            "width": "50%",
+                          }
+                        }
+                      >
+                        <div
+                          className="DuiDialog-close"
+                          onClick={[Function]}
+                        >
+                          <IconButton
+                            centerRipple={true}
+                            color="default"
+                            size="small"
+                          >
+                            <ButtonBase
+                              centerRipple={true}
+                              className="DuiIconButton-root DuiIconButton-sizeSmall"
+                              component="button"
+                              disableRipple={false}
+                              disabled={false}
+                            >
+                              <button
+                                className="DuiButtonBase-root DuiIconButton-root DuiIconButton-sizeSmall"
+                                disabled={false}
+                              >
+                                <CloseIcon>
+                                  <SvgIcon
+                                    color="inherit"
+                                    fontSize="default"
+                                    titleAccess=""
+                                    viewBox="0 0 1024 1024"
+                                  >
+                                    <svg
+                                      className="DuiSvgIcon-root"
+                                      viewBox="0 0 1024 1024"
+                                    >
+                                      <path
+                                        d="M588.29605827 512l386.63543046-460.8694331c6.48074626-7.65906378 1.03102783-19.2949491-8.98467096-19.29494909h-117.53717085c-6.92261532 0-13.55065127 3.09308345-18.11663159 8.3955122L511.41084125 420.38581419 192.52866718 40.23113001c-4.41869063-5.30242877-11.04672658-8.3955122-18.1166316-8.3955122H56.87486474c-10.01569877 0-15.46541722 11.63588534-8.98467098 19.29494909L434.52562421 512 47.89019376 972.8694331c-6.48074626 7.65906378-1.03102783 19.2949491 8.98467098 19.29494909h117.53717084c6.92261532 0 13.55065127-3.09308345 18.1166316-8.3955122l318.88217407-380.15468418 318.88217408 380.15468418c4.41869063 5.30242877 11.04672658 8.3955122 18.11663159 8.3955122h117.53717085c10.01569877 0 15.46541722-11.63588534 8.98467096-19.29494909L588.29605827 512z"
+                                      />
+                                    </svg>
+                                  </SvgIcon>
+                                </CloseIcon>
+                                <Ripple
+                                  center={true}
+                                >
+                                  <span
+                                    className="DuiRipple-root"
+                                    onDragLeave={[Function]}
+                                    onMouseDown={[Function]}
+                                    onMouseLeave={[Function]}
+                                    onMouseUp={[Function]}
+                                  />
+                                </Ripple>
+                              </button>
+                            </ButtonBase>
+                          </IconButton>
+                        </div>
+                        <div
+                          className="DuiDialog-header"
+                        >
+                          <h2>
+                            title
+                          </h2>
+                        </div>
+                        <div
+                          className="DuiDialog-body"
+                        >
+                          <Dialog
+                            closable={true}
+                            keepMounted={false}
+                            mask={true}
+                            maskClosable={true}
+                            title="title"
+                            top="15vh"
+                            visible={true}
+                            width="50%"
+                            zIndex={1000}
+                          >
+                            <Portal>
+                              <Portal
+                                containerInfo={
+                                  <body
+                                    style="overflow: hidden;"
+                                  >
+                                    <div
+                                      class="DuiDialog-root"
+                                      style="z-index: 1000; visibility: visible;"
+                                    >
+                                      <div>
+                                        <div
+                                          class="DuiDialog-mask"
+                                          style="transition: opacity 300ms; opacity: 1;"
+                                        />
+                                        <div
+                                          class="DuiDialog-container"
+                                        >
+                                          <div
+                                            class="DuiDialog-paper"
+                                            style="width: 50%; margin-top: 15vh; transition: transform 300ms, opacity 300ms; opacity: 1; transform: translate3d(0, 0, 0);"
+                                          >
+                                            <div
+                                              class="DuiDialog-close"
+                                            >
+                                              <button
+                                                class="DuiButtonBase-root DuiIconButton-root DuiIconButton-sizeSmall"
+                                              >
+                                                <svg
+                                                  class="DuiSvgIcon-root"
+                                                  viewBox="0 0 1024 1024"
+                                                >
+                                                  <path
+                                                    d="M588.29605827 512l386.63543046-460.8694331c6.48074626-7.65906378 1.03102783-19.2949491-8.98467096-19.29494909h-117.53717085c-6.92261532 0-13.55065127 3.09308345-18.11663159 8.3955122L511.41084125 420.38581419 192.52866718 40.23113001c-4.41869063-5.30242877-11.04672658-8.3955122-18.1166316-8.3955122H56.87486474c-10.01569877 0-15.46541722 11.63588534-8.98467098 19.29494909L434.52562421 512 47.89019376 972.8694331c-6.48074626 7.65906378-1.03102783 19.2949491 8.98467098 19.29494909h117.53717084c6.92261532 0 13.55065127-3.09308345 18.1166316-8.3955122l318.88217407-380.15468418 318.88217408 380.15468418c4.41869063 5.30242877 11.04672658 8.3955122 18.11663159 8.3955122h117.53717085c10.01569877 0 15.46541722-11.63588534 8.98467096-19.29494909L588.29605827 512z"
+                                                  />
+                                                </svg>
+                                                <span
+                                                  class="DuiRipple-root"
+                                                />
+                                              </button>
+                                            </div>
+                                            <div
+                                              class="DuiDialog-header"
+                                            >
+                                              <h2>
+                                                title
+                                              </h2>
+                                            </div>
+                                            <div
+                                              class="DuiDialog-body"
+                                            >
+                                              Dialog
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div
+                                      class="DuiDialog-root"
+                                      style="z-index: 1000; visibility: visible;"
+                                    >
+                                      <div>
+                                        <div
+                                          class="DuiDialog-mask"
+                                          style="transition: opacity 300ms; opacity: 1;"
+                                        />
+                                        <div
+                                          class="DuiDialog-container"
+                                        >
+                                          <div
+                                            class="DuiDialog-paper"
+                                            style="width: 50%; margin-top: 15vh; transition: transform 300ms, opacity 300ms; opacity: 1; transform: translate3d(0, 0, 0);"
+                                          >
+                                            <div
+                                              class="DuiDialog-close"
+                                            >
+                                              <button
+                                                class="DuiButtonBase-root DuiIconButton-root DuiIconButton-sizeSmall"
+                                              >
+                                                <svg
+                                                  class="DuiSvgIcon-root"
+                                                  viewBox="0 0 1024 1024"
+                                                >
+                                                  <path
+                                                    d="M588.29605827 512l386.63543046-460.8694331c6.48074626-7.65906378 1.03102783-19.2949491-8.98467096-19.29494909h-117.53717085c-6.92261532 0-13.55065127 3.09308345-18.11663159 8.3955122L511.41084125 420.38581419 192.52866718 40.23113001c-4.41869063-5.30242877-11.04672658-8.3955122-18.1166316-8.3955122H56.87486474c-10.01569877 0-15.46541722 11.63588534-8.98467098 19.29494909L434.52562421 512 47.89019376 972.8694331c-6.48074626 7.65906378-1.03102783 19.2949491 8.98467098 19.29494909h117.53717084c6.92261532 0 13.55065127-3.09308345 18.1166316-8.3955122l318.88217407-380.15468418 318.88217408 380.15468418c4.41869063 5.30242877 11.04672658 8.3955122 18.11663159 8.3955122h117.53717085c10.01569877 0 15.46541722-11.63588534 8.98467096-19.29494909L588.29605827 512z"
+                                                  />
+                                                </svg>
+                                                <span
+                                                  class="DuiRipple-root"
+                                                />
+                                              </button>
+                                            </div>
+                                            <div
+                                              class="DuiDialog-header"
+                                            >
+                                              <h2>
+                                                title
+                                              </h2>
+                                            </div>
+                                            <div
+                                              class="DuiDialog-body"
+                                            />
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </body>
+                                }
+                              >
+                                <div
+                                  className="DuiDialog-root"
+                                  style={
+                                    Object {
+                                      "visibility": "visible",
+                                      "zIndex": 1000,
+                                    }
+                                  }
+                                >
+                                  <Transition
+                                    appear={true}
+                                    enter={true}
+                                    exit={true}
+                                    in={true}
+                                    mountOnEnter={false}
+                                    onEnter={[Function]}
+                                    onEntered={[Function]}
+                                    onEntering={[Function]}
+                                    onExit={[Function]}
+                                    onExited={[Function]}
+                                    onExiting={[Function]}
+                                    timeout={300}
+                                    unmountOnExit={false}
+                                  >
+                                    <div>
+                                      <div
+                                        className="DuiDialog-mask"
+                                        style={
+                                          Object {
+                                            "opacity": 1,
+                                            "transition": "opacity 300ms",
+                                          }
+                                        }
+                                      />
+                                      <div
+                                        className="DuiDialog-container"
+                                        onClick={[Function]}
+                                      >
+                                        <div
+                                          className="DuiDialog-paper"
+                                          onClick={[Function]}
+                                          style={
+                                            Object {
+                                              "marginTop": "15vh",
+                                              "opacity": 1,
+                                              "transform": "translate3d(0, 0, 0)",
+                                              "transition": "transform 300ms, opacity 300ms",
+                                              "width": "50%",
+                                            }
+                                          }
+                                        >
+                                          <div
+                                            className="DuiDialog-close"
+                                            onClick={[Function]}
+                                          >
+                                            <IconButton
+                                              centerRipple={true}
+                                              color="default"
+                                              size="small"
+                                            >
+                                              <ButtonBase
+                                                centerRipple={true}
+                                                className="DuiIconButton-root DuiIconButton-sizeSmall"
+                                                component="button"
+                                                disableRipple={false}
+                                                disabled={false}
+                                              >
+                                                <button
+                                                  className="DuiButtonBase-root DuiIconButton-root DuiIconButton-sizeSmall"
+                                                  disabled={false}
+                                                >
+                                                  <CloseIcon>
+                                                    <SvgIcon
+                                                      color="inherit"
+                                                      fontSize="default"
+                                                      titleAccess=""
+                                                      viewBox="0 0 1024 1024"
+                                                    >
+                                                      <svg
+                                                        className="DuiSvgIcon-root"
+                                                        viewBox="0 0 1024 1024"
+                                                      >
+                                                        <path
+                                                          d="M588.29605827 512l386.63543046-460.8694331c6.48074626-7.65906378 1.03102783-19.2949491-8.98467096-19.29494909h-117.53717085c-6.92261532 0-13.55065127 3.09308345-18.11663159 8.3955122L511.41084125 420.38581419 192.52866718 40.23113001c-4.41869063-5.30242877-11.04672658-8.3955122-18.1166316-8.3955122H56.87486474c-10.01569877 0-15.46541722 11.63588534-8.98467098 19.29494909L434.52562421 512 47.89019376 972.8694331c-6.48074626 7.65906378-1.03102783 19.2949491 8.98467098 19.29494909h117.53717084c6.92261532 0 13.55065127-3.09308345 18.1166316-8.3955122l318.88217407-380.15468418 318.88217408 380.15468418c4.41869063 5.30242877 11.04672658 8.3955122 18.11663159 8.3955122h117.53717085c10.01569877 0 15.46541722-11.63588534 8.98467096-19.29494909L588.29605827 512z"
+                                                        />
+                                                      </svg>
+                                                    </SvgIcon>
+                                                  </CloseIcon>
+                                                  <Ripple
+                                                    center={true}
+                                                  >
+                                                    <span
+                                                      className="DuiRipple-root"
+                                                      onDragLeave={[Function]}
+                                                      onMouseDown={[Function]}
+                                                      onMouseLeave={[Function]}
+                                                      onMouseUp={[Function]}
+                                                    />
+                                                  </Ripple>
+                                                </button>
+                                              </ButtonBase>
+                                            </IconButton>
+                                          </div>
+                                          <div
+                                            className="DuiDialog-header"
+                                          >
+                                            <h2>
+                                              title
+                                            </h2>
+                                          </div>
+                                          <div
+                                            className="DuiDialog-body"
+                                          >
+                                            Dialog
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </Transition>
+                                </div>
+                              </Portal>
+                            </Portal>
+                          </Dialog>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Transition>
+              </div>
+            </Portal>
+          </Portal>
+        </Dialog>
+      </ThemeProvider>
+    </JssProvider>
+  </ThemeProvider>
+</Wrapper>
+`;
