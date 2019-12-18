@@ -23,6 +23,7 @@ export interface IProps extends SimpleSpread<React.HTMLAttributes<HTMLDivElement
     maskClosable?: boolean;
     closable?: boolean;
     keepMounted?: boolean;
+    transitionDuration?: number | { enter?: number, exit?: number };
     ref?: React.Ref<HTMLDivElement>;
     onClose?: (e: React.MouseEvent) => void;
     onEnter?: (e: HTMLElement) => void;
@@ -39,16 +40,16 @@ const name = 'Dialog';
 
 const useStyles = createUseStyles<LayoutClassProps>(styles, name);
 
-const maskDefaultStyle = {
-    transition: 'opacity 300ms',
-    opacity: 0
-};
-
 const maskTransitionStyles = {
     entering: { opacity: 1 },
     entered: { opacity: 1 },
     exiting: { opacity: 0 },
     exited: { opacity: 0 },
+};
+
+const maskDefaultStyle = {
+    transition: 'opacity 300ms',
+    opacity: 0
 };
 
 const paperDefaultStyle = {
@@ -72,7 +73,7 @@ const Portal: React.FC = props => {
 };
 
 const Dialog: React.FC<IProps> = React.forwardRef<HTMLDivElement, IProps>((props, ref) => {
-    const { visible, className, keepMounted, title, footer, width, zIndex, top, children, mask, maskClosable, closable, onClose, ...rest } = props;
+    const { visible, className, keepMounted, title, footer, width, zIndex, top, children, mask, maskClosable, closable, onClose, transitionDuration = 300, ...rest } = props;
     const [exited, setExited] = React.useState(true);
     const classes = useStyles();
     const innerRef = React.useRef<HTMLDivElement>(null);
@@ -98,8 +99,20 @@ const Dialog: React.FC<IProps> = React.forwardRef<HTMLDivElement, IProps>((props
 
     if (!keepMounted && !visible && exited) return null;
 
+    const handleExitTransitionDuration = (node: HTMLElement, type: string) => {
+        const paper: HTMLDivElement | null = node.querySelector(`.${ classes.paper }`);
+        const mask: HTMLDivElement | null = node.querySelector(`.${ classes.mask }`);
+        const duration = `${ typeof transitionDuration === 'number' ? transitionDuration : transitionDuration[type] }ms`;
+        if (mask) mask.style.transitionDuration = duration;
+        if (paper) paper.style.transitionDuration = duration;
+    };
+
     const handleTransitionEvent = (event: string, e: HTMLElement) => {
-        if (event === 'onEnter') setExited(false);
+        if (event === 'onEnter') {
+            setExited(false);
+            handleExitTransitionDuration(e, 'enter');
+        }
+        if (event === 'onExit') handleExitTransitionDuration(e, 'exit');
         if (event === 'onExited') setExited(true);
         rest[event] && rest[event](e);
     };
@@ -113,7 +126,7 @@ const Dialog: React.FC<IProps> = React.forwardRef<HTMLDivElement, IProps>((props
                 <Transition
                     appear
                     in={ visible }
-                    timeout={ 300 }
+                    timeout={ transitionDuration }
                     onEnter={ e => handleTransitionEvent('onEnter', e) }
                     onEntering={ e => handleTransitionEvent('onEntering', e) }
                     onEntered={ e => handleTransitionEvent('onEntered', e) }
@@ -176,6 +189,7 @@ Dialog.defaultProps = {
     maskClosable: true,
     closable: true,
     keepMounted: false,
+    transitionDuration: 300,
     onClose: undefined,
     onEnter: undefined,
     onEntering: undefined,
@@ -205,6 +219,10 @@ Dialog.propTypes = {
     maskClosable: PropTypes.bool,
     closable: PropTypes.bool,
     keepMounted: PropTypes.bool,
+    transitionDuration: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.object
+    ]),
     onClose: PropTypes.func,
     onEnter: PropTypes.func,
     onEntering: PropTypes.func,
