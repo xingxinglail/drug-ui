@@ -112,6 +112,52 @@ describe('<Dialog />', () => {
         wrapper.setProps({ visible: false });
     });
 
+    it('设置 transitionDuration', done => {
+        let wrapper = null;
+        let n = 1;
+        let n2 = 1;
+        const onEnter = node => {
+            const paper = node.querySelector('.DuiDialog-mask');
+            const mask = node.querySelector('.DuiDialog-paper');
+            if (n === 1) {
+                expect(getComputedStyle(paper).transitionDuration).toBe('100ms');
+                expect(getComputedStyle(mask).transitionDuration).toBe('100ms');
+                n++
+            } else {
+                expect(getComputedStyle(paper).transitionDuration).toBe('111ms');
+                expect(getComputedStyle(mask).transitionDuration).toBe('111ms');
+            }
+            wrapper.setProps({ visible: false });
+        }
+
+        const onExited = node => {
+            const paper = node.querySelector('.DuiDialog-mask');
+            const mask = node.querySelector('.DuiDialog-paper');
+            if (n2 === 1) {
+                expect(getComputedStyle(paper).transitionDuration).toBe('100ms');
+                expect(getComputedStyle(mask).transitionDuration).toBe('100ms');
+                n2++;
+                wrapper.setProps({ transitionDuration: { enter: 111, exit: 222 } });
+                wrapper.setProps({ visible: true });
+            } else {
+                expect(getComputedStyle(paper).transitionDuration).toBe('222ms');
+                expect(getComputedStyle(mask).transitionDuration).toBe('222ms');
+                done();
+            }
+        };
+        wrapper = mount(
+            <Wrapper>
+                <Dialog
+                    transitionDuration={ 100 }
+                    onEnter={ onEnter }
+                    onExited={ onExited }>
+                    Dialog
+                </Dialog>
+            </Wrapper>
+        );
+        wrapper.setProps({ visible: true });
+    });
+
     it('Transition 事件触发', done => {
         const fn = jest.fn();
         const wrapper = mount(

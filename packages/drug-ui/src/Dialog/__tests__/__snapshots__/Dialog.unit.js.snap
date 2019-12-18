@@ -36,6 +36,7 @@ exports[`<Dialog /> render successful 1`] = `
           maskClosable={true}
           title="title"
           top="15vh"
+          transitionDuration={300}
           visible={true}
           width="50%"
           zIndex={1000}
@@ -53,14 +54,14 @@ exports[`<Dialog /> render successful 1`] = `
                     <div>
                       <div
                         class="DuiDialog-mask"
-                        style="transition: opacity 300ms; opacity: 1;"
+                        style="transition: opacity 300ms; opacity: 1; transition-duration: 300ms;"
                       />
                       <div
                         class="DuiDialog-container"
                       >
                         <div
                           class="DuiDialog-paper"
-                          style="width: 50%; margin-top: 15vh; transition: transform 300ms, opacity 300ms; opacity: 1; transform: translate3d(0, 0, 0);"
+                          style="width: 50%; margin-top: 15vh; transition: transform 300ms, opacity 300ms; opacity: 1; transform: translate3d(0, 0, 0); transition-duration: 300ms;"
                         >
                           <div
                             class="DuiDialog-close"
@@ -104,14 +105,14 @@ exports[`<Dialog /> render successful 1`] = `
                     <div>
                       <div
                         class="DuiDialog-mask"
-                        style="transition: opacity 300ms; opacity: 1;"
+                        style="transition: opacity 300ms; opacity: 1; transition-duration: 300ms;"
                       />
                       <div
                         class="DuiDialog-container"
                       >
                         <div
                           class="DuiDialog-paper"
-                          style="width: 50%; margin-top: 15vh; transition: transform 300ms, opacity 300ms; opacity: 1; transform: translate3d(0, 0, 0);"
+                          style="width: 50%; margin-top: 15vh; transition: transform 300ms, opacity 300ms; opacity: 1; transform: translate3d(0, 0, 0); transition-duration: 300ms;"
                         >
                           <div
                             class="DuiDialog-close"
@@ -269,6 +270,7 @@ exports[`<Dialog /> render successful 1`] = `
                             maskClosable={true}
                             title="title"
                             top="15vh"
+                            transitionDuration={300}
                             visible={true}
                             width="50%"
                             zIndex={1000}
@@ -286,14 +288,14 @@ exports[`<Dialog /> render successful 1`] = `
                                       <div>
                                         <div
                                           class="DuiDialog-mask"
-                                          style="transition: opacity 300ms; opacity: 1;"
+                                          style="transition: opacity 300ms; opacity: 1; transition-duration: 300ms;"
                                         />
                                         <div
                                           class="DuiDialog-container"
                                         >
                                           <div
                                             class="DuiDialog-paper"
-                                            style="width: 50%; margin-top: 15vh; transition: transform 300ms, opacity 300ms; opacity: 1; transform: translate3d(0, 0, 0);"
+                                            style="width: 50%; margin-top: 15vh; transition: transform 300ms, opacity 300ms; opacity: 1; transform: translate3d(0, 0, 0); transition-duration: 300ms;"
                                           >
                                             <div
                                               class="DuiDialog-close"
@@ -337,14 +339,14 @@ exports[`<Dialog /> render successful 1`] = `
                                       <div>
                                         <div
                                           class="DuiDialog-mask"
-                                          style="transition: opacity 300ms; opacity: 1;"
+                                          style="transition: opacity 300ms; opacity: 1; transition-duration: 300ms;"
                                         />
                                         <div
                                           class="DuiDialog-container"
                                         >
                                           <div
                                             class="DuiDialog-paper"
-                                            style="width: 50%; margin-top: 15vh; transition: transform 300ms, opacity 300ms; opacity: 1; transform: translate3d(0, 0, 0);"
+                                            style="width: 50%; margin-top: 15vh; transition: transform 300ms, opacity 300ms; opacity: 1; transform: translate3d(0, 0, 0); transition-duration: 300ms;"
                                           >
                                             <div
                                               class="DuiDialog-close"

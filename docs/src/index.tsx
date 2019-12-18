@@ -157,9 +157,8 @@ const App: React.FC = () => {
                             <Button color="primary" onClick={ () => setDialogVisible(false) }>确定</Button>
                         </>
                     }
-                    onClose={ maskClick }
-                    onEnter={ onEnter }
-                    onEntered={ onEntered }>
+                    transitionDuration={ { enter: 300, exit: 3000 } }
+                    onClose={ maskClick }>
                     <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in,
                         egestas
                         eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
