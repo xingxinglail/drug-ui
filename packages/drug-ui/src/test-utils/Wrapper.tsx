@@ -3,12 +3,13 @@ import { ThemeProvider } from '../index';
 
 interface Props {
     children?: any;
+    [key: string]: any;
 }
 
 const Wrapper: React.FC<Props> = (props) => {
     return (
         <ThemeProvider>
-            { props.children }
+            { React.cloneElement(props.children, props) }
         </ThemeProvider>
     );
 };

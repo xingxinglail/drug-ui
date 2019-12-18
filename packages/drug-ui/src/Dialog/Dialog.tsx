@@ -25,6 +25,12 @@ export interface IProps extends SimpleSpread<React.HTMLAttributes<HTMLDivElement
     keepMounted?: boolean;
     ref?: React.Ref<HTMLDivElement>;
     onClose?: (e: React.MouseEvent) => void;
+    onEnter?: (e: HTMLElement) => void;
+    onEntering?: (e: HTMLElement) => void;
+    onEntered?: (e: HTMLElement) => void;
+    onExit?: (e: HTMLElement) => void;
+    onExiting?: (e: HTMLElement) => void;
+    onExited?: (e: HTMLElement) => void;
 }
 
 type LayoutClassProps = 'root' | 'mask' | 'container' | 'paper' | 'header' | 'close' | 'body' | 'footer';
@@ -92,12 +98,10 @@ const Dialog: React.FC<IProps> = React.forwardRef<HTMLDivElement, IProps>((props
 
     if (!keepMounted && !visible && exited) return null;
 
-    const handleEnter = () => {
-        setExited(false);
-    };
-
-    const handleExit = () => {
-        setExited(true);
+    const handleTransitionEvent = (event: string, e: HTMLElement) => {
+        if (event === 'onEnter') setExited(false);
+        if (event === 'onExited') setExited(true);
+        rest[event] && rest[event](e);
     };
 
     return (
@@ -110,10 +114,14 @@ const Dialog: React.FC<IProps> = React.forwardRef<HTMLDivElement, IProps>((props
                     appear
                     in={ visible }
                     timeout={ 300 }
-                    onEnter={ handleEnter }
-                    onExited={ handleExit }>
+                    onEnter={ e => handleTransitionEvent('onEnter', e) }
+                    onEntering={ e => handleTransitionEvent('onEntering', e) }
+                    onEntered={ e => handleTransitionEvent('onEntered', e) }
+                    onExit={ e => handleTransitionEvent('onExit', e) }
+                    onExiting={ e => handleTransitionEvent('onExiting', e) }
+                    onExited={ e => handleTransitionEvent('onExited', e) }>
                     { state => (
-                        <>
+                        <div>
                             { !mask ? null :
                                 <div
                                     className={ classes.mask }
@@ -149,7 +157,7 @@ const Dialog: React.FC<IProps> = React.forwardRef<HTMLDivElement, IProps>((props
                                     { footer ? <div className={ classes.footer }>{ footer }</div> : null }
                                 </div>
                             </div>
-                        </>
+                        </div>
                     ) }
                 </Transition>
             </div>
@@ -168,7 +176,13 @@ Dialog.defaultProps = {
     maskClosable: true,
     closable: true,
     keepMounted: false,
-    onClose: undefined
+    onClose: undefined,
+    onEnter: undefined,
+    onEntering: undefined,
+    onEntered: undefined,
+    onExit: undefined,
+    onExiting: undefined,
+    onExited: undefined
 };
 
 Dialog.propTypes = {
@@ -191,7 +205,13 @@ Dialog.propTypes = {
     maskClosable: PropTypes.bool,
     closable: PropTypes.bool,
     keepMounted: PropTypes.bool,
-    onClose: PropTypes.func
+    onClose: PropTypes.func,
+    onEnter: PropTypes.func,
+    onEntering: PropTypes.func,
+    onEntered: PropTypes.func,
+    onExit: PropTypes.func,
+    onExiting: PropTypes.func,
+    onExited: PropTypes.func
 };
 
 export default Dialog;

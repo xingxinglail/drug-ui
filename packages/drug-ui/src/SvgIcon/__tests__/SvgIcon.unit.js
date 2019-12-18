@@ -111,7 +111,7 @@ describe('<SvgIcon />', () => {
     it('设置 titleAccess = svg', () => {
         const wrapper = mount(<Wrapper><SvgIcon titleAccess="svg" /></Wrapper>);
         const dom = wrapper.getDOMNode();
-        const titleDom = dom.children[0];
+        const titleDom = dom.querySelector('title');
         expect(titleDom.tagName).toBe('title');
         expect(titleDom.innerHTML).toBe('svg');
     });

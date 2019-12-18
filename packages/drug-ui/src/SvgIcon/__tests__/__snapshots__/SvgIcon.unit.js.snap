@@ -4,5 +4,10 @@ exports[`<SvgIcon /> render successful 1`] = `
 <svg
   className="DuiSvgIcon-root"
   viewBox="0 0 1024 1024"
-/>
+>
+  <svg
+    className="DuiSvgIcon-root"
+    viewBox="0 0 1024 1024"
+  />
+</svg>
 `;
