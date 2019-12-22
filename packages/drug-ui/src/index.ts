@@ -14,3 +14,4 @@ export { default as IconButton } from './IconButton';
 export { default as SvgIcon, SvgIconProps } from './SvgIcon';
 export { default as Layout } from './Layout';
 export { default as Dialog } from './Dialog';
+export { default as Form } from './Form';

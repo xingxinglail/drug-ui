@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Rule, StyleSheet } from 'jss';
 import { Variant } from '@drug-ui/core/Button';
-import { Fab, Button, IconButton, SvgIcon, ThemeProvider, Layout, Dialog } from '@drug-ui/core';
+import { Fab, Button, IconButton, SvgIcon, ThemeProvider, Layout, Dialog, Form } from '@drug-ui/core';
 // import { Setting, Down, Left, CloseCircleFill } from '../../packages/drug-ui-icons/src';
 import { Setting, Down, Left, CloseCircleFill } from '@drug-ui/icons';
 import Ripple from '../../packages/drug-ui/src/ButtonBase/Ripple';
@@ -50,9 +50,9 @@ const App: React.FC = () => {
     const level: React.MouseEventHandler = (e) => {
         console.log(e.target);
     };
-    React.useEffect(() => {
-        console.log(layout);
-    }, [dialogVisible]);
+    // React.useEffect(() => {
+    //     console.log(layout);
+    // }, [dialogVisible]);
     const customTheme = createTheme({});
     const [theme, setTheme] = React.useState<Theme>(customTheme);
 
@@ -92,62 +92,79 @@ const App: React.FC = () => {
         console.log(e);
     };
 
+    const onSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        console.log(e);
+    };
+
     const title = <div>Title</div>;
 
     return (
         <ThemeProvider theme={ theme }>
+            <div style={ { padding: 60 } }>
+                <Form onSubmit={ onSubmit }>
+                    <div>
+                        <input type="text" defaultValue="xxll" />
+                    </div>
+                    <br />
+                    <div>
+                        <input type="text" defaultValue="123456" />
+                    </div>
+                    <br />
+                    <Button variant="contained" color="primary">提交</Button>
+                </Form>
+            </div>
             <Button variant="contained" color="secondary" onClick={ () => setDialogVisible(true) }>打开 Dialog</Button>
             <Button variant="contained" color="secondary" onClick={ () => setTest(!test) }>卸载 Dialog</Button>
-            <Dialog
-                ref={ layout }
-                title="confirm"
-                maskClosable={ false }
-                closable={ false }
-                footer={
-                    <>
-                        <Button color="secondary" onClick={ () => setDialogVisible(false) }>删除</Button>
-                        <Button color="primary" onClick={ () => setDialogVisible(false) }>确定</Button>
-                    </>
-                }
-                onClose={ maskClick }>
-                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas
-                    eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas
-                    eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue
-                    laoreet rutrum faucibus dolor auctor.</p>
-                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
-                    consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas
-                    eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue
-                    laoreet rutrum faucibus dolor auctor.</p>
-                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
-                    consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas
-                    eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue
-                    laoreet rutrum faucibus dolor auctor.</p>
-                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
-                    consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas
-                    eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue
-                    laoreet rutrum faucibus dolor auctor.</p>
-                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
-                    consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas
-                    eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue
-                    laoreet rutrum faucibus dolor auctor.</p>
-                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
-                    consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas
-                    eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-            </Dialog>
+            {/*<Dialog*/ }
+            {/*    ref={ layout }*/ }
+            {/*    title="confirm"*/ }
+            {/*    maskClosable={ false }*/ }
+            {/*    closable={ false }*/ }
+            {/*    footer={*/ }
+            {/*        <>*/ }
+            {/*            <Button color="secondary" onClick={ () => setDialogVisible(false) }>删除</Button>*/ }
+            {/*            <Button color="primary" onClick={ () => setDialogVisible(false) }>确定</Button>*/ }
+            {/*        </>*/ }
+            {/*    }*/ }
+            {/*    onClose={ maskClick }>*/ }
+            {/*    <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas*/ }
+            {/*        eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>*/ }
+            {/*    <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas*/ }
+            {/*        eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>*/ }
+            {/*    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue*/ }
+            {/*        laoreet rutrum faucibus dolor auctor.</p>*/ }
+            {/*    <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl*/ }
+            {/*        consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>*/ }
+            {/*    <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas*/ }
+            {/*        eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>*/ }
+            {/*    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue*/ }
+            {/*        laoreet rutrum faucibus dolor auctor.</p>*/ }
+            {/*    <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl*/ }
+            {/*        consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>*/ }
+            {/*    <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas*/ }
+            {/*        eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>*/ }
+            {/*    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue*/ }
+            {/*        laoreet rutrum faucibus dolor auctor.</p>*/ }
+            {/*    <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl*/ }
+            {/*        consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>*/ }
+            {/*    <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas*/ }
+            {/*        eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>*/ }
+            {/*    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue*/ }
+            {/*        laoreet rutrum faucibus dolor auctor.</p>*/ }
+            {/*    <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl*/ }
+            {/*        consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>*/ }
+            {/*    <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas*/ }
+            {/*        eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>*/ }
+            {/*    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue*/ }
+            {/*        laoreet rutrum faucibus dolor auctor.</p>*/ }
+            {/*    <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl*/ }
+            {/*        consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>*/ }
+            {/*    <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas*/ }
+            {/*        eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>*/ }
+            {/*</Dialog>*/ }
             { !test ? null :
                 <Dialog
-                    ref={ layout }
                     title={ title }
                     keepMounted
                     visible={ dialogVisible }
@@ -157,7 +174,7 @@ const App: React.FC = () => {
                             <Button color="primary" onClick={ () => setDialogVisible(false) }>确定</Button>
                         </>
                     }
-                    transitionDuration={ { enter: 300, exit: 3000 } }
+                    transitionDuration={ { enter: 300, exit: 300 } }
                     onClose={ maskClick }>
                     <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in,
                         egestas
@@ -171,7 +188,7 @@ const App: React.FC = () => {
                 </Dialog>
             }
 
-            <Layout ref={ layout }>333</Layout>
+            <Layout>333</Layout>
             <Layout>
                 <Header>Header</Header>
                 <Layout>
