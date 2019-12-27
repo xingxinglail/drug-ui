@@ -1,5 +1,4 @@
 import { Style, Styles } from 'jss';
-import { Theme } from '@drug-ui/core/styles';
 
 const root: Style = {
     display: 'flex',
@@ -12,7 +11,7 @@ const hasAside: Style = {
     flexDirection: 'row'
 };
 
-export const styles = (_: Theme): Styles => ({
+export const styles = (): Styles => ({
     root,
     hasAside
 });

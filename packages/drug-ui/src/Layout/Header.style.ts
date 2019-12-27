@@ -1,5 +1,4 @@
 import { Style, Styles } from 'jss';
-import { Theme } from '@drug-ui/core/styles';
 
 const root: Style = {
     height: 64,
@@ -8,6 +7,6 @@ const root: Style = {
     backgroundColor: '#001529'
 };
 
-export const styles = (_: Theme): Styles => ({
-    root,
+export const styles = (): Styles => ({
+    root
 });

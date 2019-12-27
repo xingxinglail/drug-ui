@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Rule, StyleSheet } from 'jss';
-import { Variant } from '@drug-ui/core/Button';
 import { Fab, Button, IconButton, SvgIcon, ThemeProvider, Layout, Dialog, Form } from '@drug-ui/core';
+import { Variant } from '@drug-ui/core/Button';
 // import { Setting, Down, Left, CloseCircleFill } from '../../packages/drug-ui-icons/src';
 import { Setting, Down, Left, CloseCircleFill } from '@drug-ui/icons';
 import Ripple from '../../packages/drug-ui/src/ButtonBase/Ripple';

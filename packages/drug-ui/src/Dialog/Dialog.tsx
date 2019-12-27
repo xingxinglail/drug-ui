@@ -3,10 +3,10 @@ import * as ReactDOM from 'react-dom';
 import classnames from 'classnames';
 import * as PropTypes from 'prop-types';
 import { Transition } from 'react-transition-group';
-import { IconButton, SimpleSpread } from '@drug-ui/core';
-import { createUseStyles } from '@drug-ui/core/styles';
+import { IconButton, SimpleSpread } from '..';
+import { createUseStyles } from '../styles';
 import { useCombinedRefs } from '@drug-ui/hooks';
-import { Close } from '@drug-ui/icons';
+// import { Close } from '@drug-ui/icons';
 import { styles } from './Dialog.style';
 
 interface PropsExtra {
@@ -156,7 +156,7 @@ const Dialog: React.FC<IProps> = React.forwardRef<HTMLDivElement, IProps>((props
                                                 className={ classes.close }
                                                 onClick={ closeHandle }>
                                                 <IconButton size="small">
-                                                    <Close />
+                                                    {/*<Close />*/}
                                                 </IconButton>
                                             </div>
                                     }

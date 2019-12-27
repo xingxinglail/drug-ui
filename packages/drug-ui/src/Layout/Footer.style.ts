@@ -1,5 +1,4 @@
 import { Style, Styles } from 'jss';
-import { Theme } from '@drug-ui/core/styles';
 
 const root: Style = {
     padding: [24, 50],
@@ -8,6 +7,6 @@ const root: Style = {
     backgroundColor: '#f0f2f5'
 };
 
-export const styles = (_: Theme): Styles => ({
-    root,
+export const styles = (): Styles => ({
+    root
 });
