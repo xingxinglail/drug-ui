@@ -4,6 +4,10 @@ interface Validate {
     [key: string]: Array<string | Promise<string | undefined>>;
 }
 
+interface Errors {
+    [key: string]: string[];
+}
+
 export interface Rule {
     required?: boolean;
     message?: string;
@@ -21,8 +25,9 @@ const isEmpty = (value: any): boolean => {
     return value === undefined || value === null || value === '';
 };
 
-export const validate = (formValue: FormValue, rules: Rules): Validate => {
+export const validate = (formValue: FormValue, rules: Rules, cb: (errors: Errors) => void): Validate => {
     const errors: Validate = {};
+    const promiseList: Promise<string>[] = [];
 
     const addError = (key: string, message: string | undefined | Promise<string | undefined>) => {
         if (errors[key] === undefined) errors[key] = [];
@@ -49,13 +54,28 @@ export const validate = (formValue: FormValue, rules: Rules): Validate => {
             }
 
             if (validator) {
-                addError(key, new Promise((resolve, reject) => {
+                const p = new Promise<string>((resolve, reject) => {
                     validator!(rule, value, msg => {
-                        msg ? reject(msg) : resolve();
+                        msg ? reject({ key, msg}) : resolve();
                     });
-                }));
+                });
+                // addError(key, p);
+                promiseList.push(p);
             }
         });
+    }
+    if (promiseList.length > 0) {
+        // @ts-ignore
+        Promise.allSettled(promiseList).then(
+            (res: { status: 'resolved' | 'rejected', reason: { key: string, msg: string } }[]) => {
+                res.forEach(c => {
+                    if (c.status === 'rejected') addError(c.reason.key, c.reason.msg);
+                });
+                cb(errors as Errors);
+            }
+        )
+    } else {
+        cb(errors as Errors);
     }
     return errors;
 };
