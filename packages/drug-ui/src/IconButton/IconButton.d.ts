@@ -4,6 +4,7 @@ import { ButtonBaseProps } from '../ButtonBase';
 export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, ButtonBaseProps {
     color?: ComponentPropTypes.Color;
     size?: ComponentPropTypes.Size;
+    href?: string;
     disabled?: boolean;
     ref?: React.Ref<HTMLButtonElement>;
 }

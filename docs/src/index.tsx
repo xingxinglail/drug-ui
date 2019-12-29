@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Rule, StyleSheet } from 'jss';
-import { Fab, Button, IconButton, SvgIcon, ThemeProvider, Layout, Dialog, Form } from '@drug-ui/core';
+import { Fab, Button, IconButton, SvgIcon, ThemeProvider, Layout, Dialog, Form, Input, FormField } from '@drug-ui/core';
 import { Variant } from '@drug-ui/core/Button';
 // import { Setting, Down, Left, CloseCircleFill } from '../../packages/drug-ui-icons/src';
 import { Setting, Down, Left, CloseCircleFill } from '@drug-ui/icons';
@@ -92,24 +92,55 @@ const App: React.FC = () => {
         console.log(e);
     };
 
+    const formInitialState = {
+        username: '12',
+        password: '34',
+    };
+
     const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         console.log(e);
+        console.log(formInitialState);
     };
 
     const title = <div>Title</div>;
 
     return (
         <ThemeProvider theme={ theme }>
+            <div style={ { padding: '16px' } }>
+                <Input label="姓名" defaultValue="" value="" placeholder="水电费水电费" />
+                <Input label="姓名" error placeholder="水电费水电费" />
+                <FormField>
+                    <Input label="姓名" defaultValue="" value="jhh" placeholder="水电费水电费" />
+                </FormField>
+            </div>
             <div style={ { padding: 60 } }>
-                <Form onSubmit={ onSubmit }>
-                    <div>
-                        <input type="text" defaultValue="xxll" />
-                    </div>
-                    <br />
-                    <div>
-                        <input type="text" defaultValue="123456" />
-                    </div>
+                <Form initialState={ formInitialState } onSubmit={ onSubmit }>
+                    <div>1</div>
+                    <span>2</span>
+
+                    &nbsp;
+                    1
+                    <FormField name="username" rules={ [
+                        {
+                            required: true, message: '请输入用户名！'
+                        },
+                        {
+                            min: 6, max: 10, message: '长度在6-10之间'
+                        }
+                    ] }>
+                        <Input label="用户名" placeholder="用户名" />
+                    </FormField>
+                    <FormField name="password" rules={ [
+                        {
+                            required: true, message: '请输入密码！'
+                        },
+                        {
+                            min: 6, max: 8, message: '长度在6-8之间'
+                        }
+                    ] }>
+                        <Input label="密码" placeholder="密码" />
+                    </FormField>
                     <br />
                     <Button variant="contained" color="primary">提交</Button>
                 </Form>

@@ -15,3 +15,5 @@ export { default as SvgIcon, SvgIconProps } from './SvgIcon';
 export { default as Layout } from './Layout';
 export { default as Dialog } from './Dialog';
 export { default as Form } from './Form';
+export { default as FormField } from './FormField';
+export { default as Input } from './Input';

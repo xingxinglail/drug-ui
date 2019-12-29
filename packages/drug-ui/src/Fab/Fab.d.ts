@@ -4,6 +4,7 @@ import { ButtonBaseProps } from '../ButtonBase';
 export interface FabProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, ButtonBaseProps {
     color?: ComponentPropTypes.Color;
     size?: ComponentPropTypes.Size;
+    href?: string;
     disabled?: boolean;
     ref?: React.Ref<HTMLButtonElement>;
 }

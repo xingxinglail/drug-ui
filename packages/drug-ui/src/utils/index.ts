@@ -6,3 +6,11 @@ export const capitalize = (str: string): string => {
 export const isNumeric = (value: any): boolean => {
     return !isNaN(parseFloat(value)) && isFinite(value);
 };
+
+export const isEmptyObject = (value: Object): boolean => {
+    if (typeof value !== 'object') return false;
+    for (let k in value) {
+        if (value.hasOwnProperty(k)) return false;
+    }
+    return true;
+}

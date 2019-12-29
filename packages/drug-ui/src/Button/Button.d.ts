@@ -7,8 +7,8 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
     color?: ComponentPropTypes.Color;
     size?: ComponentPropTypes.Size;
     fullWidth?: boolean;
+    href?: string;
     round?: boolean;
-    loading?: boolean;
     ref?: React.Ref<HTMLButtonElement>;
 }
 declare const Button: React.FC<ButtonProps>;
