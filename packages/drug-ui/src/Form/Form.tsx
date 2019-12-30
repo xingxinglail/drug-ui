@@ -27,6 +27,7 @@ export interface FormValue {
 const Form: React.FC<FormProps> = React.forwardRef<HTMLFormElement, FormProps>((props, ref) => {
     const { className, initialState, onSubmit, children, ...rest } = props;
     const [state, setState] = React.useState(initialState);
+    const [count, setCount] = React.useState(0);
     const classes = useStyles();
     const classNames = classnames(
         classes.root,
@@ -39,7 +40,6 @@ const Form: React.FC<FormProps> = React.forwardRef<HTMLFormElement, FormProps>((
     //     return prev;
     // }, {});
 
-
     const contextValue = {
         values: state,
         setValue (key: string, val: any) {
@@ -47,6 +47,13 @@ const Form: React.FC<FormProps> = React.forwardRef<HTMLFormElement, FormProps>((
                 ...state,
                 [key]: val
             });
+        },
+        count,
+        setError (key: string) {
+            console.log(key);
+            return () => {
+                console.log(`${key}done`);
+            }
         }
     };
     const newChildren = React.Children.map(children, (child :React.ReactNode) => {
@@ -55,7 +62,7 @@ const Form: React.FC<FormProps> = React.forwardRef<HTMLFormElement, FormProps>((
         }
         return child;
     });
-    console.log(newChildren);
+
     // console.log(contextValue);
     // const validator = (rule: Rule, value: any, callback: (str?: string) => void) => {
     //     if (value === '123') {
@@ -110,6 +117,7 @@ const Form: React.FC<FormProps> = React.forwardRef<HTMLFormElement, FormProps>((
 
     const handleSubmit = (e: React.FormEvent) => {
         // todo 如何触FormField组件验证
+        setCount(count + 1);
         onSubmit && onSubmit(e);
     };
 

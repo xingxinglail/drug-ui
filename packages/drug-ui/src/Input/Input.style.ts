@@ -20,9 +20,12 @@ const label: Style = () => ({
     transition: 'color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms'
 });
 
-const labelVisible: Style = (theme: Theme) => ({
-    color: theme.palette.primary.main,
+const labelVisible: Style = {
     transform: 'translate(0, 1.5px) scale(0.75)',
+};
+
+const labelFocus: Style = (theme: Theme) => ({
+    color: theme.palette.primary.main
 });
 
 const labelError: Style = {
@@ -63,14 +66,20 @@ const inputBase: Style = (theme: Theme) => ({
     }
 });
 
-const inputBaseVisible: Style = () => ({
+const inputBaseVisible: Style = {
+    '&:before': {
+        borderBottom: '2px solid rgba(0, 0, 0, 0.87)'
+    }
+};
+
+const inputBaseFocus: Style = {
     '&:before': {
         borderBottom: '2px solid rgba(0, 0, 0, 0.87)'
     },
     '&:after': {
         transform: 'scaleX(1)',
     }
-});
+};
 
 const inputBaseError: Style = {
     '&:after': {
@@ -102,10 +111,12 @@ const inputVisible: Style = {
 export const styles = (theme: Theme): Styles => ({
     root,
     label: label(),
-    labelVisible: labelVisible(theme),
+    labelVisible: labelVisible,
+    labelFocus: labelFocus(theme),
     labelError,
     inputBase: inputBase(theme),
-    inputBaseVisible: inputBaseVisible(),
+    inputBaseVisible,
+    inputBaseFocus,
     inputBaseError,
     input: input(),
     inputVisible

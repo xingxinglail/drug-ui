@@ -25,9 +25,11 @@ type InputClassProps =
     'root'
     | 'label'
     | 'labelVisible'
+    | 'labelFocus'
     | 'labelError'
     | 'inputBase'
     | 'inputBaseVisible'
+    | 'inputBaseFocus'
     | 'inputBaseError'
     | 'inputVisible'
     | 'input';
@@ -38,6 +40,7 @@ const useStyles = createUseStyles<InputClassProps>(styles, name);
 
 const Input: React.FC<InputProps> = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { className, defaultValue, value, size = 'medium', id, label = '', placeholder, error, onChange, children, ...rest } = props;
+    const [focus, setFocus] = React.useState<boolean>(false);
     const [visible, setVisible] = React.useState<boolean>(!!(defaultValue || value));
     const classes = useStyles();
     const classNames = classnames(
@@ -54,6 +57,11 @@ const Input: React.FC<InputProps> = React.forwardRef<HTMLInputElement, InputProp
     const handleBlur = (e: React.FocusEvent) => {
         const value: string = (e.currentTarget as HTMLInputElement).value;
         setVisible(!!value);
+        setFocus(false);
+    };
+
+    const handleFocus = () => {
+        setFocus(true);
     };
 
     const handleChange = (e: React.ChangeEvent) => {
@@ -65,6 +73,7 @@ const Input: React.FC<InputProps> = React.forwardRef<HTMLInputElement, InputProp
             <label
                 className={ classnames(classes.label, {
                     [classes.labelVisible]: visible,
+                    [classes.labelFocus]: focus,
                     [classes.labelError]: error
                 }) }
                 htmlFor={ id }>
@@ -73,6 +82,7 @@ const Input: React.FC<InputProps> = React.forwardRef<HTMLInputElement, InputProp
             <div
                 className={ classnames(classes.inputBase, {
                     [classes.inputBaseVisible]: visible,
+                    [classes.inputBaseFocus]: focus,
                     [classes.inputBaseError]: error
                 }) }
                 onMouseDown={ handleMouseDown }>
@@ -84,6 +94,7 @@ const Input: React.FC<InputProps> = React.forwardRef<HTMLInputElement, InputProp
                     placeholder={ placeholder }
                     defaultValue={ defaultValue }
                     onChange={ handleChange }
+                    onFocus={ handleFocus }
                     onBlur={ handleBlur } />
             </div>
         </div>

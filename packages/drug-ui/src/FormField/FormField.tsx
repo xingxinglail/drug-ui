@@ -6,6 +6,7 @@ import { createUseStyles } from '../styles';
 import { validate, Rule } from '../Form/validate';
 import { isEmptyObject } from '../utils/index';
 import { FormContext, FormContextType } from '../Form/Form.context';
+import { useEffect } from 'react';
 
 export interface FormFieldProps extends React.HTMLAttributes<HTMLDivElement> {
     name?: string;
@@ -43,6 +44,16 @@ const FormField: React.FC<FormFieldProps> = React.forwardRef<HTMLDivElement, For
             formContext.setValue(name, val);
         }
     };
+
+    useEffect(() => {
+        if (formContext && formContext.count > 0 && name && rules) {
+            const cb = formContext.setError(name);
+            validate({ [name]: formContext.values[name] }, { [name]: rules }, (errors) => {
+                setError(!isEmptyObject(errors));
+                cb();
+            });
+        }
+    }, [formContext && formContext.count]);
 
     return (
         !formContext ? null :

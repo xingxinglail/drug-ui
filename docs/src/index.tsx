@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Rule, StyleSheet } from 'jss';
 import { Fab, Button, IconButton, SvgIcon, ThemeProvider, Layout, Dialog, Form, Input, FormField } from '@drug-ui/core';
+import { Rule as ValidateRule } from '@drug-ui/core/Form/validate';
 import { Variant } from '@drug-ui/core/Button';
 // import { Setting, Down, Left, CloseCircleFill } from '../../packages/drug-ui-icons/src';
 import { Setting, Down, Left, CloseCircleFill } from '@drug-ui/icons';
@@ -33,6 +34,7 @@ const App: React.FC = () => {
     const buttonEl = React.useRef(null);
     const iconEl = React.useRef(null);
     const layout = React.useRef(null);
+    const input = React.useRef(null);
 
     const click: React.MouseEventHandler = (e) => {
         console.log(e);
@@ -100,10 +102,24 @@ const App: React.FC = () => {
     const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         console.log(e);
+        console.log('input');
+        console.log(input);
         console.log(formInitialState);
     };
 
     const title = <div>Title</div>;
+
+    const validator = (rule: ValidateRule, value: any, callback: (str?: string) => void) => {
+        if (value === 'dddddd') {
+            setTimeout(() => {
+                callback('密码错误');
+            }, 500);
+        } else {
+            setTimeout(() => {
+                callback();
+            }, 1500);
+        }
+    };
 
     return (
         <ThemeProvider theme={ theme }>
@@ -126,10 +142,13 @@ const App: React.FC = () => {
                             required: true, message: '请输入用户名！'
                         },
                         {
+                            validator: validator
+                        },
+                        {
                             min: 6, max: 10, message: '长度在6-10之间'
                         }
                     ] }>
-                        <Input label="用户名" placeholder="用户名" />
+                        <Input ref={ input } label="用户名" placeholder="用户名" />
                     </FormField>
                     <FormField name="password" rules={ [
                         {
