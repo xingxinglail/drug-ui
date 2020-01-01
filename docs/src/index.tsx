@@ -1,13 +1,26 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Rule, StyleSheet } from 'jss';
-import { Fab, Button, IconButton, SvgIcon, ThemeProvider, Layout, Dialog, Form, Input, FormField } from '@drug-ui/core';
+import {
+    Fab,
+    Button,
+    IconButton,
+    SvgIcon,
+    ThemeProvider,
+    Layout,
+    Dialog,
+    Form,
+    Input,
+    FormField,
+    ScrollBar
+} from '@drug-ui/core';
 import { Rule as ValidateRule } from '@drug-ui/core/Form/validate';
 import { Variant } from '@drug-ui/core/Button';
 // import { Setting, Down, Left, CloseCircleFill } from '../../packages/drug-ui-icons/src';
 import { Setting, Down, Left, CloseCircleFill } from '@drug-ui/icons';
 import Ripple from '../../packages/drug-ui/src/ButtonBase/Ripple';
 import createTheme, { Theme } from '../../packages/drug-ui/src/styles/createTheme';
+import { createUseStyles } from 'react-jss';
 
 const { Header, Content, Aside, Footer } = Layout;
 
@@ -25,6 +38,16 @@ const Test: React.FC<Props> = React.forwardRef<HTMLAnchorElement, Props>((props,
 //     return <a href="https://baidu.com" { ...rest }>{ children }</a>;
 // });
 
+const useStyles = createUseStyles({
+    desc: {
+        width: 500,
+        backgroundColor: 'rgba(0, 0, 0, 0.3)',
+        '&:hover': {
+            backgroundColor: 'red'
+        }
+    }
+});
+
 const App: React.FC = () => {
     const [dialogVisible, setDialogVisible] = React.useState(false);
     const [test, setTest] = React.useState(true);
@@ -35,7 +58,7 @@ const App: React.FC = () => {
     const iconEl = React.useRef(null);
     const layout = React.useRef(null);
     const input = React.useRef(null);
-
+    const classes = useStyles();
     const click: React.MouseEventHandler = (e) => {
         console.log(e);
         setA(true);
@@ -124,12 +147,59 @@ const App: React.FC = () => {
     return (
         <ThemeProvider theme={ theme }>
             <div style={ { padding: '16px' } }>
+                <ScrollBar
+                    style={ { width: '400px', height: '300px', border: '1px solid red', boxSizing: 'border-box' } }>
+                    <div>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p className={ classes.desc } style={ {
+                            lineHeight: '50px',
+                        } }>阿卡丽的接口拉时间段圣诞快乐个减肥克鲁赛德加工费拉克丝解放路可使肌肤的了跨世纪东方克鲁赛德</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '40px' } }>Last content</p>
+                    </div>
+                </ScrollBar>
+            </div>
+            <div style={ { padding: '16px' } }>
+                <div style={ {
+                    width: '400px',
+                    height: '300px',
+                    border: '1px solid red',
+                    boxSizing: 'border-box',
+                    overflow: 'scroll'
+                } }>
+                    <p style={ { lineHeight: '50px' } }>Some content</p>
+                    <p style={ { lineHeight: '50px' } }>Some content</p>
+                    <p style={ { lineHeight: '50px' } }>Some content</p>
+                    <p style={ { lineHeight: '50px' } }>Some content</p>
+                    <p style={ { lineHeight: '50px' } }>Some content</p>
+                    <p style={ { lineHeight: '50px' } }>Some content</p>
+                    <p style={ { lineHeight: '50px' } }>Some content</p>
+                    <p style={ { lineHeight: '50px' } }>Some content</p>
+                    <p style={ { lineHeight: '50px' } }>Some content</p>
+                    <p style={ { lineHeight: '50px' } }>Some content</p>
+                    <p style={ { lineHeight: '50px' } }>Some content</p>
+                    <p style={ { lineHeight: '50px' } }>Some content</p>
+                    <p style={ { lineHeight: '50px' } }>Some content</p>
+                </div>
+            </div>
+            <div style={ { padding: '16px' } }>
                 <Input label="姓名" defaultValue="" value="" placeholder="水电费水电费" />
                 <Input label="姓名" error placeholder="水电费水电费" />
                 <FormField>
                     <Input label="姓名" defaultValue="" value="jhh" placeholder="水电费水电费" />
                 </FormField>
             </div>
+            ;
             <div style={ { padding: 60 } }>
                 <Form initialState={ formInitialState } onSubmit={ onSubmit }>
                     <div>1</div>
@@ -163,9 +233,9 @@ const App: React.FC = () => {
                     <br />
                     <Button variant="contained" color="primary">提交</Button>
                 </Form>
-            </div>
-            <Button variant="contained" color="secondary" onClick={ () => setDialogVisible(true) }>打开 Dialog</Button>
-            <Button variant="contained" color="secondary" onClick={ () => setTest(!test) }>卸载 Dialog</Button>
+            </div>;
+            <Button variant="contained" color="secondary" onClick={ () => setDialogVisible(true) }>打开 Dialog</Button>;
+            <Button variant="contained" color="secondary" onClick={ () => setTest(!test) }>卸载 Dialog</Button>;
             {/*<Dialog*/ }
             {/*    ref={ layout }*/ }
             {/*    title="confirm"*/ }
@@ -238,7 +308,7 @@ const App: React.FC = () => {
                 </Dialog>
             }
 
-            <Layout>333</Layout>
+            <Layout>333</Layout>;
             <Layout>
                 <Header>Header</Header>
                 <Layout>
@@ -246,7 +316,7 @@ const App: React.FC = () => {
                     <Content>Content</Content>
                 </Layout>
                 <Footer>Footer</Footer>
-            </Layout>
+            </Layout>;
             <Layout className="asd">
                 <Header className="asd">Header</Header>
                 <Layout className="asd">
@@ -254,7 +324,7 @@ const App: React.FC = () => {
                     <Aside className="asd">Aside</Aside>
                 </Layout>
                 <Footer className="asd">Footer</Footer>
-            </Layout>
+            </Layout>;
             <Layout>
                 <Aside width={ 400 }>Aside</Aside>
                 <Layout>
@@ -262,32 +332,32 @@ const App: React.FC = () => {
                     <Content>Content</Content>
                     <Footer>Footer</Footer>
                 </Layout>
-            </Layout>
+            </Layout>;
             <Button component={ Test }>你好，Test世界<Button component="div"
-                                                        href="https://google.com">你好，link世界</Button></Button>
-            <Button onMouseDown={ onMouseDown }>你好，link世界</Button>
-            <Button component="div" href="https://google.com">你好，link世界</Button>
-            <Fab className="aaa">阿</Fab>
-            <SvgIcon className="bbb" htmlColor="red" titleAccess="svg">1</SvgIcon>
+                                                        href="https://google.com">你好，link世界</Button></Button>;
+            <Button onMouseDown={ onMouseDown }>你好，link世界</Button>;
+            <Button component="div" href="https://google.com">你好，link世界</Button>;
+            <Fab className="aaa">阿</Fab>;
+            <SvgIcon className="bbb" htmlColor="red" titleAccess="svg">1</SvgIcon>;
             <SvgIcon className="bbb" htmlColor="red">
                 <path
                     d="M588.29605827 512l386.63543046-460.8694331c6.48074626-7.65906378 1.03102783-19.2949491-8.98467096-19.29494909h-117.53717085c-6.92261532 0-13.55065127 3.09308345-18.11663159 8.3955122L511.41084125 420.38581419 192.52866718 40.23113001c-4.41869063-5.30242877-11.04672658-8.3955122-18.1166316-8.3955122H56.87486474c-10.01569877 0-15.46541722 11.63588534-8.98467098 19.29494909L434.52562421 512 47.89019376 972.8694331c-6.48074626 7.65906378-1.03102783 19.2949491 8.98467098 19.29494909h117.53717084c6.92261532 0 13.55065127-3.09308345 18.1166316-8.3955122l318.88217407-380.15468418 318.88217408 380.15468418c4.41869063 5.30242877 11.04672658 8.3955122 18.11663159 8.3955122h117.53717085c10.01569877 0 15.46541722-11.63588534 8.98467096-19.29494909L588.29605827 512z" />
-            </SvgIcon>
-            <Setting ref={ iconEl } className="ccc" />
-            <CloseCircleFill className="ccc" />
-            <Down />
-            <IconButton className="bbb"><Down htmlColor="red" /></IconButton>
-            <Left />
-            <CloseCircleFill />
-            <div onClick={ () => setTest(!test) }>{ test ? '点击隐藏' : '点击显示' }</div>
-            <br />
-            <Button className="aaaa">你好，世界</Button>
-            <Button color="primary" size="small">你好，世界</Button>
-            <Button color="secondary">你好，世界</Button>
-            <br />
-            <Button variant="contained" style={ { opacity: 0.8 } }>你好，世界</Button>
-            <Button variant="contained" color="primary">你好，世界</Button>
-            <Button variant="contained" color="secondary">你好，世界</Button>
+            </SvgIcon>;
+            <Setting ref={ iconEl } className="ccc" />;
+            <CloseCircleFill className="ccc" />;
+            <Down />;
+            <IconButton className="bbb"><Down htmlColor="red" /></IconButton>;
+            <Left />;
+            <CloseCircleFill />;
+            <div onClick={ () => setTest(!test) }>{ test ? '点击隐藏' : '点击显示' }</div>;
+            <br />;
+            <Button className="aaaa">你好，世界</Button>;
+            <Button color="primary" size="small">你好，世界</Button>;
+            <Button color="secondary">你好，世界</Button>;
+            <br />;
+            <Button variant="contained" style={ { opacity: 0.8 } }>你好，世界</Button>;
+            <Button variant="contained" color="primary">你好，世界</Button>;
+            <Button variant="contained" color="secondary">你好，世界</Button>;
             { test ? (
                 <>
                     <br />
@@ -397,7 +467,8 @@ const App: React.FC = () => {
                 </>
             ) : null }
         </ThemeProvider>
-    );
+    )
+        ;
 };
 
 ReactDOM.render(
