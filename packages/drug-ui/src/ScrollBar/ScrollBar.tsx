@@ -43,7 +43,7 @@ interface Axis {
 const name = 'ScrollBar';
 
 const useStyles = createUseStyles<ButtonClassProps>(styles, name);
-// todo 控制横向滚动条
+
 const ScrollBar: React.FC<ScrollBarProps> = React.forwardRef<HTMLDivElement, ScrollBarProps>((props, ref) => {
     const { className, children, ...rest } = props;
     const classes = useStyles();
@@ -54,6 +54,7 @@ const ScrollBar: React.FC<ScrollBarProps> = React.forwardRef<HTMLDivElement, Scr
     const wrapperRef = React.useRef<HTMLDivElement>(null);
     const moveXRef = React.useRef(0); // 点击位置，用于判断是否点到滚动条
     const moveYRef = React.useRef(0);
+    const draggedAxis = React.useRef('x'); // 当前点击的滚动条
     const axis = React.useRef<Axis>({
         x: {
             trackRef: React.useRef(null),
@@ -88,29 +89,47 @@ const ScrollBar: React.FC<ScrollBarProps> = React.forwardRef<HTMLDivElement, Scr
 
     const setScrollTop = (val: number) => {
         if (val < 0) val = 0;
-        const maxScrollTop = axis.current.y.trackSize - axis.current.y.barSize;
+        const { y: axisY } = axis.current;
+        const maxScrollTop = axisY.trackSize - axisY.barSize;
         if (val > maxScrollTop) val = maxScrollTop;
-        wrapperRef.current!.scrollTop = val / axis.current.y.trackSize * axis.current.y.maxHeight;
+        wrapperRef.current!.scrollTop = val / axisY.trackSize * axisY.maxHeight;
         _setScrollTop(val);
     };
 
+    const setScrollLeft = (val: number) => {
+        if (val < 0) val = 0;
+        const { x: axisX } = axis.current;
+        const maxScrollTop = axisX.trackSize - axisX.barSize;
+        if (val > maxScrollTop) val = maxScrollTop;
+        wrapperRef.current!.scrollLeft = val / axisX.trackSize * axisX.maxWidth;
+        _setScrollLeft(val);
+    };
+
     const onScroll: React.UIEventHandler = e => {
-        _setScrollTop(Math.floor(e.currentTarget.scrollTop / axis.current.y.maxHeight * axis.current.y.trackSize));
+        const { scrollTop, scrollLeft } = e.currentTarget;
+        const { x: axisX, y: axisY } = axis.current;
+        _setScrollTop(scrollTop / axisY.maxHeight * axisY.trackSize);
+        _setScrollLeft(scrollLeft / axisX.maxWidth * axisX.trackSize);
     };
     const onDrag = (e: MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
-        setScrollTop(scrollTop + (e.pageY - axis.current.y.startYRef));
+        if (draggedAxis.current === 'x') {
+            setScrollLeft(scrollLeft + (e.pageX - axis.current.x.startXRef))
+        } else {
+            setScrollTop(scrollTop + (e.pageY - axis.current.y.startYRef));
+        }
     };
 
     const onDragEnd = () => {
-        axis.current.y.trackRef.current!.classList.remove(classes.trackDragging);
+        axis.current[draggedAxis.current].trackRef.current!.classList.remove(classes.trackDragging);
         document.removeEventListener('mousemove', onDrag, true);
         document.removeEventListener('mouseup', onDragEnd, true);
     };
 
-    const onDragStart: React.MouseEventHandler = e => {
-        axis.current.y.trackRef.current!.classList.add(classes.trackDragging);
+    const onDragStart = (e: React.MouseEvent, axisType: string) => {
+        draggedAxis.current = axisType;
+        axis.current[axisType].trackRef.current!.classList.add(classes.trackDragging);
         document.addEventListener('mousemove', onDrag, true);
         document.addEventListener('mouseup', onDragEnd, true);
     };
@@ -118,14 +137,28 @@ const ScrollBar: React.FC<ScrollBarProps> = React.forwardRef<HTMLDivElement, Scr
     const onPointerEvent: React.MouseEventHandler = e => {
         moveXRef.current = e.clientX;
         moveYRef.current = e.clientY;
-        axis.current.y.startYRef = e.pageY
-        const isWithinTrackYBounds = isWithinBounds(axis.current.y.trackRef.current!.getBoundingClientRect());
-        if (isWithinTrackYBounds) {
-            if (isWithinBounds(axis.current.y.barRef.current!.getBoundingClientRect())) {
-                onDragStart(e);
-            } else {
-                //  todo 点击滚动一段距离
-                console.log('Track');
+        const { x: axisX, y: axisY } = axis.current;
+        axisX.startXRef = e.pageX;
+        axisY.startYRef = e.pageY;
+        const isWithinTrackXBounds = isWithinBounds(axisX.trackRef.current!.getBoundingClientRect());
+        const isWithinTrackYBounds = isWithinBounds(axisY.trackRef.current!.getBoundingClientRect());
+
+        if (isWithinTrackXBounds || isWithinTrackYBounds) {
+            if (isWithinTrackXBounds) {
+                if (isWithinBounds(axisX.barRef.current!.getBoundingClientRect())) {
+                    onDragStart(e, 'x');
+                } else {
+                    //  todo 点击滚动一段距离
+                    console.log('Track');
+                }
+            }
+            if (isWithinTrackYBounds) {
+                if (isWithinBounds(axisY.barRef.current!.getBoundingClientRect())) {
+                    onDragStart(e, 'y');
+                } else {
+                    //  todo 点击滚动一段距离
+                    console.log('Track');
+                }
             }
         }
     };
@@ -145,18 +178,21 @@ const ScrollBar: React.FC<ScrollBarProps> = React.forwardRef<HTMLDivElement, Scr
         const maxHeight = current!.scrollHeight;
         const trackWidth = current!.offsetWidth; // 可视区域宽度、轨道宽度
         const trackHeight = current!.offsetHeight; // 可视区域高度、轨道高度
+        const { x: axisX, y: axisY } = axis.current;
         if (maxHeight > trackHeight) {
             const h = Math.floor(trackHeight / maxHeight * trackHeight);
-            axis.current.y.barSize = h;
-            axis.current.y.barRef.current!.style.height = `${ h }px`;
+            axisY.barSize = h;
+            axisY.barRef.current!.style.height = `${ h }px`;
         }
         if (maxWidth > trackWidth) {
             const w = Math.floor(trackWidth / maxWidth * trackWidth);
-            axis.current.x.barSize = w;
-            axis.current.x.barRef.current!.style.width = `${ w }px`;
+            axisX.barSize = w;
+            axisX.barRef.current!.style.width = `${ w }px`;
         }
-        axis.current.y.maxHeight = maxHeight;
-        axis.current.y.trackSize = trackHeight;
+        axisX.maxWidth = maxWidth;
+        axisX.trackSize = trackWidth;
+        axisY.maxHeight = maxHeight;
+        axisY.trackSize = trackHeight;
     }, []);
 
     return (
