@@ -4,7 +4,7 @@ import ResizeObserver from 'resize-observer-polyfill';
 import classnames from 'classnames';
 import { styles } from './ScrollBar.style';
 import { createUseStyles } from '../styles';
-import { useCombinedRefs } from '@drug-ui/hooks';
+import { useCombinedRefs, useThrottle } from '@drug-ui/hooks';
 
 export interface ScrollBarProps extends React.HTMLAttributes<HTMLDivElement> {
     autoHide?: boolean;
@@ -128,12 +128,12 @@ const ScrollBar: React.FC<ScrollBarProps> = React.forwardRef<HTMLDivElement, Scr
     };
 
     const onScroll: React.UIEventHandler = React.useCallback(e => {
-        window.clearTimeout(autoHideTimerId.current);
         const { scrollTop, scrollLeft } = e.currentTarget;
         const { x: axisX, y: axisY } = axis.current;
         _setScrollTop(scrollTop / axisY.maxHeight * axisY.trackSize);
         _setScrollLeft(scrollLeft / axisX.maxWidth * axisX.trackSize);
         if ((axisX.enabled || axisY.enabled) && autoHide) {
+            window.clearTimeout(autoHideTimerId.current);
             if (axisX.enabled) axisX.barRef.current!.classList.remove(classes.scrollbarHide);
             if (axisY.enabled) axisY.barRef.current!.classList.remove(classes.scrollbarHide);
             autoHideTimerId.current = window.setTimeout(() => {
@@ -166,7 +166,7 @@ const ScrollBar: React.FC<ScrollBarProps> = React.forwardRef<HTMLDivElement, Scr
         document.addEventListener('mouseup', onDragEnd, true);
     };
 
-    const onTrackClick = (axisType: AxisType) => {
+    const onTrackClick = React.useCallback((axisType: AxisType) => {
         const currentAxis = axis.current[axisType];
         const scrollbarOffset = currentAxis.barRef.current!.getBoundingClientRect()[currentAxis.offsetAttr];
         const hostSize = innerRef.current![currentAxis.sizeAttr];
@@ -198,7 +198,7 @@ const ScrollBar: React.FC<ScrollBarProps> = React.forwardRef<HTMLDivElement, Scr
             }
         };
         scrollTo();
-    };
+    }, []);
 
     const onPointerEvent: React.MouseEventHandler = e => {
         moveXRef.current = e.clientX;
@@ -231,7 +231,7 @@ const ScrollBar: React.FC<ScrollBarProps> = React.forwardRef<HTMLDivElement, Scr
         }
     };
 
-    const recalculate = () => {
+    const recalculate = React.useCallback(useThrottle(() => {
         const { scrollWidth: maxWidth, scrollHeight: maxHeight, offsetWidth: trackWidth, offsetHeight: trackHeight, scrollLeft, scrollTop } = wrapperRef.current!;
         const { x: axisX, y: axisY } = axis.current;
         const setAxis = (maxSize: number, trackSize: number, axis: any, sizeType: string) => {
@@ -254,7 +254,7 @@ const ScrollBar: React.FC<ScrollBarProps> = React.forwardRef<HTMLDivElement, Scr
         axisY.trackSize = trackHeight;
         setScrollLeft(scrollLeft / maxWidth * trackWidth);
         setScrollTop(scrollTop / maxHeight * trackHeight);
-    };
+    }, 100), []);
 
     React.useEffect(() => {
         // @ts-ignore
