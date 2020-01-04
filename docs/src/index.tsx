@@ -40,7 +40,7 @@ const Test: React.FC<Props> = React.forwardRef<HTMLAnchorElement, Props>((props,
 
 const useStyles = createUseStyles({
     desc: {
-        width: 500,
+        width: 1000,
         backgroundColor: 'rgba(0, 0, 0, 0.3)',
         '&:hover': {
             backgroundColor: 'red'
@@ -144,31 +144,20 @@ const App: React.FC = () => {
         }
     };
 
+    const [list, setList] = React.useState<string[]>([]);
+    const addList = () => {
+        setList(prevState => {
+            return [...prevState, `Some ${ list.length } content`];
+        });
+    };
+    const removeList = () => {
+        setList(prevState => {
+            prevState.splice(prevState.length - 1, 1);
+            return [...prevState];
+        });
+    };
     return (
         <ThemeProvider theme={ theme }>
-            <div style={ { padding: '16px' } }>
-                <ScrollBar
-                    style={ { width: '400px', height: '300px', border: '1px solid red', boxSizing: 'border-box' } }>
-                    <div>
-                        <p style={ { lineHeight: '50px' } }>Some content</p>
-                        <p className={ classes.desc } style={ {
-                            lineHeight: '50px',
-                        } }>阿卡丽的接口拉时间段圣诞快乐个减肥克鲁赛德加工费拉克丝解放路可使肌肤的了跨世纪东方克鲁赛德</p>
-                        <p style={ { lineHeight: '50px' } }>Some content</p>
-                        <p style={ { lineHeight: '50px' } }>Some content</p>
-                        <p style={ { lineHeight: '50px' } }>Some content</p>
-                        <p style={ { lineHeight: '50px' } }>Some content</p>
-                        <p style={ { lineHeight: '50px' } }>Some content</p>
-                        <p style={ { lineHeight: '50px' } }>Some content</p>
-                        <p style={ { lineHeight: '50px' } }>Some content</p>
-                        <p style={ { lineHeight: '50px' } }>Some content</p>
-                        <p style={ { lineHeight: '50px' } }>Some content</p>
-                        <p style={ { lineHeight: '50px' } }>Some content</p>
-                        <p style={ { lineHeight: '50px' } }>Some content</p>
-                        <p style={ { lineHeight: '40px' } }>Last content</p>
-                    </div>
-                </ScrollBar>
-            </div>
             <div style={ { padding: '16px' } }>
                 <div style={ {
                     width: '400px',
@@ -193,13 +182,69 @@ const App: React.FC = () => {
                 </div>
             </div>
             <div style={ { padding: '16px' } }>
+                <ScrollBar
+                    autoHide={ false }
+                    style={ { width: '400px', height: '300px', border: '1px solid red', boxSizing: 'border-box' } }>
+                    <div id="test">
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p className={ classes.desc } style={ {
+                            lineHeight: '50px',
+                        } }>阿卡丽的接口拉时间段圣诞快乐个减肥克鲁赛德加工费拉克丝解放路可使肌肤的了跨世纪东方克鲁赛德</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        {
+                            list.map(c => <p key={c} style={ { lineHeight: '40px' } }>{ c }</p>)
+                        }
+                        <p style={ { lineHeight: '40px' } }>Last content</p>
+                    </div>
+                </ScrollBar>
+                <Button variant="contained" color="primary" onClick={ addList }>添加</Button>
+                <Button variant="contained" color="secondary" onClick={ removeList }>删除</Button>
+            </div>
+            <div style={ { padding: '16px' } }>
+                <ScrollBar
+                    style={ { width: '400px', height: '300px', border: '1px solid red', boxSizing: 'border-box' } }>
+                    <div id="test">
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p className={ classes.desc } style={ {
+                            lineHeight: '50px',
+                        } }>阿卡丽的接口拉时间段圣诞快乐个减肥克鲁赛德加工费拉克丝解放路可使肌肤的了跨世纪东方克鲁赛德</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        <p style={ { lineHeight: '50px' } }>Some content</p>
+                        {
+                            list.map(c => <p key={c} style={ { lineHeight: '40px' } }>{ c }</p>)
+                        }
+                        <p style={ { lineHeight: '40px' } }>Last content</p>
+                    </div>
+                </ScrollBar>
+                <Button variant="contained" color="primary" onClick={ addList }>添加</Button>
+                <Button variant="contained" color="secondary" onClick={ removeList }>删除</Button>
+            </div>
+            <div style={ { padding: '16px' } }>
                 <Input label="姓名" defaultValue="" value="" placeholder="水电费水电费" />
                 <Input label="姓名" error placeholder="水电费水电费" />
                 <FormField>
                     <Input label="姓名" defaultValue="" value="jhh" placeholder="水电费水电费" />
                 </FormField>
             </div>
-            ;
             <div style={ { padding: 60 } }>
                 <Form initialState={ formInitialState } onSubmit={ onSubmit }>
                     <div>1</div>
@@ -233,7 +278,8 @@ const App: React.FC = () => {
                     <br />
                     <Button variant="contained" color="primary">提交</Button>
                 </Form>
-            </div>;
+            </div>
+            ;
             <Button variant="contained" color="secondary" onClick={ () => setDialogVisible(true) }>打开 Dialog</Button>;
             <Button variant="contained" color="secondary" onClick={ () => setTest(!test) }>卸载 Dialog</Button>;
             {/*<Dialog*/ }

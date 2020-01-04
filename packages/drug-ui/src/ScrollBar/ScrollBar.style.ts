@@ -29,9 +29,8 @@ const trackVertical: Style = {
     }
 };
 
-const scrollbarVertical: Style = {
+const scrollbar: Style = {
     position: 'relative',
-    minHeight: 10,
     '&:before': {
         content: '" "',
         position: 'absolute',
@@ -41,6 +40,15 @@ const scrollbarVertical: Style = {
         right: 2,
         opacity: 0.5
     }
+};
+
+const scrollbarHide: Style = {
+    opacity: 0,
+    transition: 'opacity .3s ease'
+};
+
+const scrollbarVertical: Style = {
+    minHeight: 10
 };
 
 const trackHorizontal: Style = {
@@ -55,18 +63,8 @@ const trackHorizontal: Style = {
 };
 
 const scrollbarHorizontal: Style = {
-    position: 'relative',
     minWidth: 10,
-    height: '100%',
-    '&:before': {
-        content: '" "',
-        position: 'absolute',
-        backgroundColor: '#000',
-        borderRadius: 7,
-        left: 2,
-        right: 2,
-        opacity: 0.5
-    }
+    height: '100%'
 };
 
 const contentWrapper: Style = {
@@ -83,6 +81,8 @@ export const styles = (theme: Theme): Styles => ({
     track,
     trackDragging,
     trackVertical,
+    scrollbar,
+    scrollbarHide,
     scrollbarVertical,
     trackHorizontal,
     scrollbarHorizontal,
