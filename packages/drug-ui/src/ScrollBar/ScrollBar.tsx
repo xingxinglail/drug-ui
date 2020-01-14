@@ -2,9 +2,10 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import ResizeObserver from 'resize-observer-polyfill';
 import classnames from 'classnames';
+import { useCombinedRefs } from '@drug-ui/hooks';
+import { throttle } from '../utils/index';
 import { styles } from './ScrollBar.style';
 import { createUseStyles } from '../styles';
-import { useCombinedRefs, useThrottle } from '@drug-ui/hooks';
 
 export interface ScrollBarProps extends React.HTMLAttributes<HTMLDivElement> {
     autoHide?: boolean;
@@ -231,7 +232,7 @@ const ScrollBar: React.FC<ScrollBarProps> = React.forwardRef<HTMLDivElement, Scr
         }
     };
 
-    const recalculate = React.useCallback(useThrottle(() => {
+    const recalculate = React.useCallback(throttle(() => {
         const { scrollWidth: maxWidth, scrollHeight: maxHeight, offsetWidth: trackWidth, offsetHeight: trackHeight, scrollLeft, scrollTop } = wrapperRef.current!;
         const { x: axisX, y: axisY } = axis.current;
         const setAxis = (maxSize: number, trackSize: number, axis: any, sizeType: string) => {
