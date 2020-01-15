@@ -42,7 +42,7 @@ type ButtonClassProps =
     | 'round'
     | 'label';
 
-const name = 'Button';
+export const name = 'Button';
 
 const useStyles = createUseStyles<ButtonClassProps>(styles, name);
 
