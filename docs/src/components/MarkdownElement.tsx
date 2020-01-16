@@ -31,6 +31,18 @@ renderer.heading = (text, level) => {
     );
 };
 
+renderer.link = (href, title, text) => {
+    let more = '';
+
+    let finalHref = href;
+
+    if (finalHref.indexOf('/') === 0 && finalHref !== '/size-snapshot') {
+        finalHref = `/${ finalHref }`;
+    }
+
+    return `<a href="${ finalHref }"${ more }>${ text }</a>`;
+};
+
 const markedOptions = {
     gfm: true,
     tables: true,

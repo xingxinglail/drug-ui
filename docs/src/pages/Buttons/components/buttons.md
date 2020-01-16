@@ -57,3 +57,8 @@ title: 按钮
 想要更大或更小的按钮？ 你可以使用 ```size``` 属性。
 
 {{"demo": "pages/Buttons/components/ButtonSizes.js"}}
+
+## API
+
+- [&lt;Button /&gt;](/api/button/)
+- [&lt;ButtonBase /&gt;](/api/button-base/)
