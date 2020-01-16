@@ -6,6 +6,11 @@
     "license": "MIT",
     "scripts": {
         "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js",
+        "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev2.js",
         "build:docs": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js"
+    },
+    "dependencies": {
+        "@drug-ui/hooks": "^0.0.1",
+        "@drug-ui/styles": "^0.0.1"
     }
 }

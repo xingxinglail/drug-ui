@@ -10,6 +10,7 @@
         "test": "cross-env NODE_ENV=test JEST_JUNIT_OUTPUT_DIR=./test-results/jest/ JEST_JUNIT_OUTPUT_NAME=results.xml jest --config=jest.config.ci.js",
         "test:dev": "cross-env NODE_ENV=test JEST_JUNIT_OUTPUT_DIR=./test-results/jest/ JEST_JUNIT_OUTPUT_NAME=results.xml jest --config=jest.config.js --runInBand --watchAll",
         "docs:start": "yarn workspace docs start",
+        "docs:dev": "yarn workspace docs dev",
         "docs:build": "yarn workspace docs build:docs",
         "commit": "npx git-cz",
         "build": "lerna run build",
@@ -17,19 +18,23 @@
     },
     "devDependencies": {
         "@babel/cli": "^7.5.5",
-        "@babel/core": "^7.5.5",
+        "@babel/core": "^7.8.3",
         "@babel/plugin-proposal-optional-chaining": "^7.7.5",
         "@babel/preset-env": "^7.5.5",
         "@babel/preset-react": "^7.0.0",
         "@babel/preset-typescript": "^7.3.3",
         "@types/enzyme": "^3.10.4",
         "@types/jest": "^24.0.9",
+        "@types/marked": "^0.7.2",
+        "@types/prismjs": "^1.16.0",
         "@types/prop-types": "^15.7.3",
         "@types/react": "^16.9.4",
         "@types/react-dom": "^16.9.4",
         "@types/react-test-renderer": "^16.8.1",
+        "@types/webpack-env": "^1.15.0",
         "awesome-typescript-loader": "^5.2.1",
         "babel-jest": "^24.3.1",
+        "babel-loader": "^8.0.6",
         "babel-plugin-module-resolver": "^3.2.0",
         "babel-preset-react-app": "^9.0.2",
         "commitizen": "^4.0.3",
@@ -61,5 +66,9 @@
             "path": "./node_modules/cz-lerna-changelog"
         }
     },
-    "dependencies": {}
+    "dependencies": {
+        "marked": "^0.8.0",
+        "prismjs": "^1.19.0",
+        "raw-loader": "^4.0.0"
+    }
 }

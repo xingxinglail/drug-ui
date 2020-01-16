@@ -2,9 +2,7 @@ const path = require('path');
 
 module.exports = {
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        library: 'drug-ui',
-        libraryTarget: 'umd'
+        path: path.resolve(__dirname, 'dist')
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx', 'svg'],
@@ -22,8 +20,21 @@ module.exports = {
                 loader: 'awesome-typescript-loader'
             },
             {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader'
+            },
+            {
+                test: /\.md$/,
+                loader: 'raw-loader',
+            },
+            {
                 test: /\.svg$/,
                 loader: 'svg-sprite-loader'
+            },
+            {
+                test: /\.css$/,
+                loader: 'style-loader!css-loader',
             },
             {
                 test: /\.scss$/,

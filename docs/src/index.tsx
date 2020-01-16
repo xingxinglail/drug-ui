@@ -4,6 +4,7 @@ import { Rule, StyleSheet } from 'jss';
 import {
     Fab,
     Button,
+    ButtonGroup,
     IconButton,
     SvgIcon,
     ThemeProvider,
@@ -145,7 +146,8 @@ const App: React.FC = () => {
     };
 
     const [list, setList] = React.useState<string[]>([]);
-    const addList = () => {
+    const addList = (e: React.MouseEvent) => {
+        console.log(e);
         setList(prevState => {
             return [...prevState, `Some ${ list.length } content`];
         });
@@ -158,6 +160,72 @@ const App: React.FC = () => {
     };
     return (
         <ThemeProvider theme={ theme }>
+            <div style={ { padding: '16px' } }>
+                <ButtonGroup variant="contained" color="primary">
+                    <Button className="sdfsdf">添加</Button>
+                    <Button>删除</Button>
+                    <Button>删除</Button>
+                    <Button>添加</Button>
+                </ButtonGroup>
+                <br />
+                <br />
+                <ButtonGroup variant="contained" color="secondary">
+                    <Button>添加</Button>
+                    <Button>删除</Button>
+                    <Button>删除</Button>
+                    <Button>添加</Button>
+                </ButtonGroup>
+                <br />
+                <br />
+                <ButtonGroup variant="contained">
+                    <Button>添加</Button>
+                    <Button>删除</Button>
+                    <Button>删除</Button>
+                    <Button>添加</Button>
+                </ButtonGroup>
+                <br />
+                <br />
+                <ButtonGroup variant="outlined" color="primary">
+                    <Button>添加</Button>
+                    <Button>删除</Button>
+                    <Button>删除</Button>
+                </ButtonGroup>
+                <br />
+                <br />
+                <ButtonGroup variant="outlined" color="secondary">
+                    <Button>添加</Button>
+                    <Button>删除</Button>
+                    <Button>删除</Button>
+                </ButtonGroup>
+                <br />
+                <br />
+                <ButtonGroup variant="outlined">
+                    <Button>添加</Button>
+                    <Button>删除</Button>
+                    <Button>删除</Button>
+                </ButtonGroup>
+                <br />
+                <br />
+                <ButtonGroup color="primary">
+                    <Button>添加</Button>
+                    <Button>删除</Button>
+                    <Button>删除</Button>
+                </ButtonGroup>
+                <br />
+                <br />
+                <ButtonGroup color="secondary">
+                    <Button>添加</Button>
+                    <Button>删除</Button>
+                    <Button>删除</Button>
+                </ButtonGroup>
+                <br />
+                <br />
+                <ButtonGroup>
+                    <Button>添加</Button>
+                    <Button>删除</Button>
+                    <Button>删除</Button>
+                </ButtonGroup>
+            </div>
             <div style={ { padding: '16px' } }>
                 <div style={ {
                     width: '400px',
@@ -184,7 +252,7 @@ const App: React.FC = () => {
             <div style={ { padding: '16px' } }>
                 <ScrollBar
                     autoHide={ false }
-                    style={ { width: '400px', height: '300px', border: '1px solid red', boxSizing: 'border-box' } }>
+                    style={ { height: '300px', border: '1px solid red', boxSizing: 'border-box' } }>
                     <div id="test">
                         <p style={ { lineHeight: '50px' } }>Some content</p>
                         <p className={ classes.desc } style={ {
@@ -202,7 +270,7 @@ const App: React.FC = () => {
                         <p style={ { lineHeight: '50px' } }>Some content</p>
                         <p style={ { lineHeight: '50px' } }>Some content</p>
                         {
-                            list.map(c => <p key={c} style={ { lineHeight: '40px' } }>{ c }</p>)
+                            list.map(c => <p key={ c } style={ { lineHeight: '40px' } }>{ c }</p>)
                         }
                         <p style={ { lineHeight: '40px' } }>Last content</p>
                     </div>
@@ -212,7 +280,7 @@ const App: React.FC = () => {
             </div>
             <div style={ { padding: '16px' } }>
                 <ScrollBar
-                    style={ { width: '400px', height: '300px', border: '1px solid red', boxSizing: 'border-box' } }>
+                    style={ { height: '300px', border: '1px solid red', boxSizing: 'border-box' } }>
                     <div id="test">
                         <p style={ { lineHeight: '50px' } }>Some content</p>
                         <p className={ classes.desc } style={ {
@@ -230,7 +298,7 @@ const App: React.FC = () => {
                         <p style={ { lineHeight: '50px' } }>Some content</p>
                         <p style={ { lineHeight: '50px' } }>Some content</p>
                         {
-                            list.map(c => <p key={c} style={ { lineHeight: '40px' } }>{ c }</p>)
+                            list.map(c => <p key={ c } style={ { lineHeight: '40px' } }>{ c }</p>)
                         }
                         <p style={ { lineHeight: '40px' } }>Last content</p>
                     </div>
