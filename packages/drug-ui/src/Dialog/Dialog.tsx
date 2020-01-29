@@ -156,6 +156,7 @@ const Dialog: React.FC<IProps> = React.forwardRef<HTMLDivElement, IProps>((props
                                                 className={ classes.close }
                                                 onClick={ closeHandle }>
                                                 <IconButton size="small">
+                                                    ×
                                                     {/*<Close />*/}
                                                 </IconButton>
                                             </div>

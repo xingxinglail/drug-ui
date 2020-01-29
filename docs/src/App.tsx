@@ -23,6 +23,9 @@ import LayoutApi from './pages/api/Layout';
 import ScrollBars from './pages/components/ScrollBar';
 import ScrollBarApi from './pages/api/ScrollBar';
 
+import Dialogs from './pages/components/Dialogs';
+import DialogApi from './pages/api/Dialog';
+
 const App = () => {
 
     return (
@@ -66,6 +69,12 @@ const App = () => {
                         <li>
                             <Link to="/api/scroll-bar">ScrollBar API</Link>
                         </li>
+                        <li>
+                            <Link to="/components/dialogs">Dialog (对话框)</Link>
+                        </li>
+                        <li>
+                            <Link to="/api/dialog">Dialog API</Link>
+                        </li>
                     </ul>
                 </nav>
                 <Switch>
@@ -105,6 +114,12 @@ const App = () => {
                         </Route>
                         <Route path="/api/scroll-bar">
                             <ScrollBarApi />
+                        </Route>
+                        <Route path="/components/dialogs">
+                            <Dialogs />
+                        </Route>
+                        <Route path="/api/dialog">
+                            <DialogApi />
                         </Route>
                     </Switch>
                 </Switch>
