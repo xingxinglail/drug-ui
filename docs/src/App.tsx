@@ -16,6 +16,9 @@ import Install from './pages/components/install/Install';
 import GettingStarted from './pages/components/gettingStarted/GettingStarted';
 import { ThemeProvider } from '@drug-ui/core';
 
+import Layouts from './pages/components/Layouts';
+import LayoutApi from './pages/api/Layout';
+
 const App = () => {
 
     return (
@@ -44,6 +47,12 @@ const App = () => {
                         <li>
                             <Link to="/api/icon-button">IconButton API</Link>
                         </li>
+                        <li>
+                            <Link to="/components/layouts">Layout (布局)</Link>
+                        </li>
+                        <li>
+                            <Link to="/api/layout">Layout API</Link>
+                        </li>
                     </ul>
                 </nav>
                 <Switch>
@@ -68,6 +77,12 @@ const App = () => {
                         </Route>
                         <Route path="/api/icon-button">
                             <IconButtonApi />
+                        </Route>
+                        <Route path="/components/layouts">
+                            <Layouts />
+                        </Route>
+                        <Route path="/api/layout">
+                            <LayoutApi />
                         </Route>
                     </Switch>
                 </Switch>

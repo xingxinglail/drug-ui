@@ -109,7 +109,6 @@ const useStyles = createUseStyles({
             fontFamily: 'Consolas, "Liberation Mono", Menlo, Courier, monospace',
             WebkitFontSmoothing: 'subpixel-antialiased',
             padding: '2px 6px',
-            color: '#1976d2',
             backgroundColor: 'rgba(255,229,100,0.2)',
             fontSize: 14,
             borderRadius: 2,

@@ -17,11 +17,12 @@ const name = 'LayoutAside';
 const useStyles = createUseStyles<LayoutClassProps>(styles, name);
 
 const Aside: React.FC<AsideProps> = React.forwardRef<HTMLDivElement, AsideProps>((props, ref) => {
-    const { className, width, children, ...rest } = props;
+    const { className, width, children, style, ...rest } = props;
     const value = isNumeric(width) ? `${ width }px` : width;
     const widthStyle = {
         width: value,
-        flex: `0 0 ${ value }`
+        flex: `0 0 ${ value }`,
+        ...style
     };
 
     const classes = useStyles();
