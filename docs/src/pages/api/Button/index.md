@@ -4,7 +4,7 @@ filename: /packages/drug-ui/src/Button/Button.js
 
 # Button API
 
-<p class="description">Button React组件的API文档。</p>
+<p class="description">Button React 组件的 API 文档。</p>
 
 ## Import
 

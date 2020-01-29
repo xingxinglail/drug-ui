@@ -4,7 +4,7 @@ filename: /packages/drug-ui/src/ButtonBase/ButtonBase.js
 
 # ButtonBase API
 
-<p class="description">ButtonBase React组件的API文档。</p>
+<p class="description">ButtonBase React 组件的 API 文档。</p>
 
 ## Import
 

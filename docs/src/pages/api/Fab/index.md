@@ -4,7 +4,7 @@ filename: /packages/drug-ui/src/Fab/Fab.js
 
 # Fab API
 
-<p class="description">Fab React组件的API文档。</p>
+<p class="description">Fab React组件的 API 文档。</p>
 
 ## Import
 

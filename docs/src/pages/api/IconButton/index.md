@@ -4,7 +4,7 @@ filename: /packages/drug-ui/src/IconButton/IconButton.js
 
 # IconButton API
 
-<p class="description">IconButton React组件的API文档。</p>
+<p class="description">IconButton React 组件的 API 文档。</p>
 
 ## Import
 
