@@ -60,5 +60,5 @@ title: 按钮
 
 ## API
 
-- [&lt;Button /&gt;](/api/button/)
-- [&lt;ButtonBase /&gt;](/api/button-base/)
+- [&lt;Button /&gt;](/drug-ui/api/button)
+- [&lt;ButtonBase /&gt;](/drug-ui/api/button-base)

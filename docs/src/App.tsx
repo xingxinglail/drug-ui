@@ -4,21 +4,27 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
+    useLocation
 } from 'react-router-dom';
-import Buttons from './pages/Buttons/Buttons';
-import ButtonsApi from './pages/api/Button/Button';
+import Buttons from './pages/components/Buttons';
+import ButtonsApi from './pages/api/Button';
+import Install from './pages/components/install/Install';
+import GettingStarted from './pages/components/gettingStarted/GettingStarted';
 import { ThemeProvider } from '@drug-ui/core';
 
 const App = () => {
 
     return (
         <ThemeProvider>
-            <Router>
+            <Router basename="/drug-ui">
                 <nav>
                     <ul>
                         <li>
-                            <Link to="/">快速上手</Link>
+                            <Link to="/">安装</Link>
+                        </li>
+                        <li>
+                            <Link to="/getting-started">快速上手</Link>
                         </li>
                         <li>
                             <Link to="/components/buttons">Button (按钮)</Link>
@@ -31,7 +37,10 @@ const App = () => {
                 <Switch>
                     <Switch>
                         <Route exact path="/">
-                            getstarted
+                            <Install />
+                        </Route>
+                        <Route path="/getting-started">
+                            <GettingStarted />
                         </Route>
                         <Route path="/components/buttons">
                             <Buttons />

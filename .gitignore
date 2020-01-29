@@ -4,6 +4,7 @@ dist/
 build
 .idea/
 test-results/
+.DS_Store
 
 ### Node template
 # Logs

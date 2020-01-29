@@ -1,5 +1,5 @@
 import * as React from 'react';
-import MarkdownDocs from '../../components/MarkdownDocs';
+import MarkdownDocs from '../../../components/MarkdownDocs';
 import { createUseStyles } from '@drug-ui/styles';
 
 const req = require.context('./components', false, /\.(md|js|tsx)$/);
@@ -17,7 +17,7 @@ const useStyles = createUseStyles({
 
 const Pages = () => {
     const classes = useStyles();
-    
+
     return (
         <div className={ classes.root }>
             <MarkdownDocs req={ req } reqSource={reqSource} reqPrefix="pages/Buttons/components" />
