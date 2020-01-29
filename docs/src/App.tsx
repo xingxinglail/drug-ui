@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom';
 import Buttons from './pages/components/Buttons';
 import ButtonsApi from './pages/api/Button';
+import ButtonBaseApi from './pages/api/ButtonBase';
 import Install from './pages/components/install/Install';
 import GettingStarted from './pages/components/gettingStarted/GettingStarted';
 import { ThemeProvider } from '@drug-ui/core';
@@ -30,7 +31,10 @@ const App = () => {
                             <Link to="/components/buttons">Button (按钮)</Link>
                         </li>
                         <li>
-                            <Link to="/api/button">Button</Link>
+                            <Link to="/api/button">Button API</Link>
+                        </li>
+                        <li>
+                            <Link to="/api/button-base">ButtonBase API</Link>
                         </li>
                     </ul>
                 </nav>
@@ -47,6 +51,9 @@ const App = () => {
                         </Route>
                         <Route path="/api/button">
                             <ButtonsApi />
+                        </Route>
+                        <Route path="/api/button-base">
+                            <ButtonBaseApi />
                         </Route>
                     </Switch>
                 </Switch>
