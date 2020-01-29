@@ -20,6 +20,9 @@ import { ThemeProvider } from '@drug-ui/core';
 import Layouts from './pages/components/Layouts';
 import LayoutApi from './pages/api/Layout';
 
+import ScrollBars from './pages/components/ScrollBar';
+import ScrollBarApi from './pages/api/ScrollBar';
+
 const App = () => {
 
     return (
@@ -57,6 +60,12 @@ const App = () => {
                         <li>
                             <Link to="/api/layout">Layout API</Link>
                         </li>
+                        <li>
+                            <Link to="/components/scroll-bar">ScrollBar (滚动条)</Link>
+                        </li>
+                        <li>
+                            <Link to="/api/scroll-bar">ScrollBar API</Link>
+                        </li>
                     </ul>
                 </nav>
                 <Switch>
@@ -90,6 +99,12 @@ const App = () => {
                         </Route>
                         <Route path="/api/layout">
                             <LayoutApi />
+                        </Route>
+                        <Route path="/components/scroll-bar">
+                            <ScrollBars />
+                        </Route>
+                        <Route path="/api/scroll-bar">
+                            <ScrollBarApi />
                         </Route>
                     </Switch>
                 </Switch>
