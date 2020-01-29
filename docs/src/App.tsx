@@ -10,6 +10,8 @@ import {
 import Buttons from './pages/components/Buttons';
 import ButtonsApi from './pages/api/Button';
 import ButtonBaseApi from './pages/api/ButtonBase';
+import FabApi from './pages/api/Fab';
+import IconButtonApi from './pages/api/IconButton';
 import Install from './pages/components/install/Install';
 import GettingStarted from './pages/components/gettingStarted/GettingStarted';
 import { ThemeProvider } from '@drug-ui/core';
@@ -36,6 +38,12 @@ const App = () => {
                         <li>
                             <Link to="/api/button-base">ButtonBase API</Link>
                         </li>
+                        <li>
+                            <Link to="/api/fab">Fab API</Link>
+                        </li>
+                        <li>
+                            <Link to="/api/icon-button">IconButton API</Link>
+                        </li>
                     </ul>
                 </nav>
                 <Switch>
@@ -54,6 +62,12 @@ const App = () => {
                         </Route>
                         <Route path="/api/button-base">
                             <ButtonBaseApi />
+                        </Route>
+                        <Route path="/api/fab">
+                            <FabApi />
+                        </Route>
+                        <Route path="/api/icon-button">
+                            <IconButtonApi />
                         </Route>
                     </Switch>
                 </Switch>

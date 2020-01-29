@@ -33,7 +33,7 @@ Style sheet name: `DuiButtonBase`.
 
 ## Demos
 
-- [Button](/components/buttons/)
+- [Buttons](/components/buttons/)
 
 
 
