@@ -10,6 +10,7 @@ import {
 import Buttons from './pages/components/Buttons';
 import ButtonsApi from './pages/api/Button';
 import ButtonBaseApi from './pages/api/ButtonBase';
+import ButtonGroupApi from './pages/api/ButtonGroup';
 import FabApi from './pages/api/Fab';
 import IconButtonApi from './pages/api/IconButton';
 import Install from './pages/components/install/Install';
@@ -42,6 +43,9 @@ const App = () => {
                             <Link to="/api/button-base">ButtonBase API</Link>
                         </li>
                         <li>
+                            <Link to="/api/button-group">ButtonGroupApi API</Link>
+                        </li>
+                        <li>
                             <Link to="/api/fab">Fab API</Link>
                         </li>
                         <li>
@@ -71,6 +75,9 @@ const App = () => {
                         </Route>
                         <Route path="/api/button-base">
                             <ButtonBaseApi />
+                        </Route>
+                        <Route path="/api/button-group">
+                            <ButtonGroupApi />
                         </Route>
                         <Route path="/api/fab">
                             <FabApi />
