@@ -13,7 +13,8 @@ import {
     Form,
     Input,
     FormField,
-    ScrollBar
+    ScrollBar,
+    Menu
 } from '@drug-ui/core';
 import { Rule as ValidateRule } from '@drug-ui/core/Form/validate';
 import { Variant } from '@drug-ui/core/Button';
@@ -24,6 +25,7 @@ import createTheme, { Theme } from '../../packages/drug-ui/src/styles/createThem
 import { createUseStyles } from 'react-jss';
 
 const { Header, Content, Aside, Footer } = Layout;
+const { SubMenu, Item: MenuItem } = Menu;
 
 interface Props extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
     cc?: string;
@@ -158,8 +160,72 @@ const App: React.FC = () => {
             return [...prevState];
         });
     };
+    const [openIndexes, setOpenIndexes] = React.useState<any[]>(['1']);
+    const onTitleClick = (data: { index: string | number, domEvent: React.MouseEvent }) => {
+        //console.log(data);
+        //setOpenIndexes([...openIndexes, data.index])
+    };
+    const onOpenChange = (data: any[]) => {
+        console.log('onOpenChange');
+        console.log(data);
+        setOpenIndexes(data);
+    };
+
+    const onOpenChange2 = (data: any[]) => {
+        console.log('onOpenChange');
+        console.log(data);
+    };
     return (
         <ThemeProvider theme={ theme }>
+            <div style={ { width: 240, padding: '200px 16px 0 40px' } }>
+                <h2>不受控组件</h2>
+                <Menu defaultOpenIndexes={ ['1', '2'] } onOpenChange={ onOpenChange2 }>
+                    <span>123</span>
+                    <SubMenu index="1" title="Components（组件）" onTitleClick={ onTitleClick }>
+                        <MenuItem index="1-1">Button</MenuItem>
+                        <MenuItem index="1-2">Layout</MenuItem>
+                        <MenuItem index="1-3">ScrollBar</MenuItem>
+                        <MenuItem index="1-4">Dialog</MenuItem>
+                        <SubMenu index="1-1-1" title="Inner Components（组件）" onTitleClick={ onTitleClick }>
+                            <MenuItem index="1-1-1-1">Button</MenuItem>
+                            <MenuItem index="1-1-1-2">Layout</MenuItem>
+                            <MenuItem index="1-1-1-3">ScrollBar</MenuItem>
+                            <MenuItem index="1-1-1-4">Dialog</MenuItem>
+                        </SubMenu>
+                    </SubMenu>
+                    <SubMenu index="2" title="Components API" onTitleClick={ onTitleClick }>
+                        <MenuItem index="2-1">ButtonBase</MenuItem>
+                        <MenuItem index="2-2">Fab</MenuItem>
+                        <MenuItem index="2-3">IconButton</MenuItem>
+                        <MenuItem index="2-4">Dialog</MenuItem>
+                    </SubMenu>
+                </Menu>
+            </div>
+            <div style={ { width: 240, padding: '200px 16px 216px 40px' } }>
+                <h2>受控组件</h2>
+                <Menu defaultOpenIndexes={ ['1', '2'] } openIndexes={ openIndexes } onOpenChange={ onOpenChange }>
+                    1
+                    <span>123</span>
+                    <SubMenu index="1" title="Components（组件）" onTitleClick={ onTitleClick }>
+                        <MenuItem index="1-1">Button</MenuItem>
+                        <MenuItem index="1-2">Layout</MenuItem>
+                        <MenuItem index="1-3">ScrollBar</MenuItem>
+                        <MenuItem index="1-4">Dialog</MenuItem>
+                        <SubMenu index="1-1-1" title="Inner Components（组件）" onTitleClick={ onTitleClick }>
+                            <MenuItem index="1-1-1-1">Button</MenuItem>
+                            <MenuItem index="1-1-1-2">Layout</MenuItem>
+                            <MenuItem index="1-1-1-3">ScrollBar</MenuItem>
+                            <MenuItem index="1-1-1-4">Dialog</MenuItem>
+                        </SubMenu>
+                    </SubMenu>
+                    <SubMenu index="2" title="Components API" onTitleClick={ onTitleClick }>
+                        <MenuItem index="2-1">ButtonBase</MenuItem>
+                        <MenuItem index="2-2">Fab</MenuItem>
+                        <MenuItem index="2-3">IconButton</MenuItem>
+                        <MenuItem index="2-4">Dialog</MenuItem>
+                    </SubMenu>
+                </Menu>
+            </div>
             <div style={ { padding: '16px' } }>
                 <ButtonGroup variant="contained" color="primary">
                     <Button className="sdfsdf">添加</Button>

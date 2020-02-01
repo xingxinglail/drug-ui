@@ -19,3 +19,4 @@ export { default as Form } from './Form';
 export { default as FormField } from './FormField';
 export { default as Input } from './Input';
 export { default as ScrollBar } from './ScrollBar';
+export { default as Menu } from './Menu';
