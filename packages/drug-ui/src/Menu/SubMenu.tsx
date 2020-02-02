@@ -3,14 +3,16 @@ import classnames from 'classnames';
 import { styles } from './SubMenu.style';
 import { createUseStyles } from '../styles';
 import { SimpleSpread } from '..';
+import { MenuContext } from './Menu.context';
 import ButtonBase from '../ButtonBase';
+import { Index } from './Menu';
 
 interface PropsExtra {
     title?: string | React.ReactNode;
 }
 
 export interface SubMenuProps extends SimpleSpread<React.HTMLAttributes<HTMLLIElement>, PropsExtra> {
-    index: number | string;
+    index: Index;
     visible?: boolean;
     level?: number;
     onTitleClick?: (data: { index: string | number, domEvent: React.MouseEvent }) => void;
@@ -30,8 +32,9 @@ const SubMenu: React.FC<SubMenuProps> = React.forwardRef<HTMLLIElement, SubMenuP
         classes.root,
         className
     );
-
+    const { handleOpenChange } = React.useContext(MenuContext);
     const titleClickHandle = (e: React.MouseEvent) => {
+        handleOpenChange(index);
         onTitleClickProp && onTitleClickProp({ index, domEvent: e });
     };
 

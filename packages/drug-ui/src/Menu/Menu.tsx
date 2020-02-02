@@ -4,6 +4,7 @@ import { styles } from './Menu.style';
 import { createUseStyles } from '../styles';
 import SubMenu, { SubMenuProps } from './SubMenu';
 import Item, { ItemProps } from './Item';
+import { MenuContext } from './Menu.context';
 
 export interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
     defaultOpenIndexes?: any[];
@@ -11,6 +12,8 @@ export interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
     onOpenChange?: (indexes: any[]) => void;
     ref?: React.Ref<HTMLDivElement>;
 }
+
+export type Index = number | string;
 
 type ClassProps = 'root';
 
@@ -36,61 +39,63 @@ const Menu = React.forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
     const [openIndexesState, setOpenIndexesState] = React.useState(defaultOpenIndexes);
     const openIndexes = isControlled ? openIndexesProp : openIndexesState;
 
-    // todo 改为 useContext API
+    const contextValue = React.useMemo(() => {
+        return {
+            handleOpenChange (index: Index) {
+                const openIndexesCopy = [...openIndexes!];
+                const searchIndex = openIndexesCopy.findIndex(c => c === index);
+                if (searchIndex >= 0) {
+                    openIndexesCopy.splice(searchIndex, 1);
+                } else {
+                    openIndexesCopy.push(index);
+                }
+                if (!isControlled) {
+                    setOpenIndexesState(openIndexesCopy);
+                }
+                if (onOpenChange) {
+                    onOpenChange(openIndexesCopy);
+                }
+            }
+        };
+    }, [isControlled, openIndexes, onOpenChange]);
+
+    const fn = (data: any): data is React.ReactElement<{ index: Index, children: React.ReactNode, visible?: boolean }> => {
+        return typeof data === 'object' && typeof data.type === 'object';
+    };
 
     let level = 1;
-    const formatChildren = (children: React.ReactNode, isTop = false) => {
+    const formatChildren = React.useCallback((children: React.ReactNode, isTop = false) => {
         if (!isTop) level++;
         const cloneChild: React.ReactElement[] = [];
         React.Children.forEach(children, child => {
-            if (isTop) level = 1;
-            // @ts-ignore
-            if (typeof child === 'object' && typeof child.type === 'object' && (child.type.displayName === SubMenu.displayName || child.type.displayName === Item.displayName)) {
+            if (fn(child)) {
                 const cloneProps = {
-                    // @ts-ignore
                     ...child.props,
-                    // @ts-ignore
                     key: child.props.index,
                     level,
-                    // @ts-ignore
                     children: typeof child.props.children === 'object' ? formatChildren(child.props.children) : child.props.children
                 };
                 // @ts-ignore
                 if (child.type.displayName === SubMenu.displayName) {
-                    // @ts-ignore
-                    cloneProps.visible = openIndexes.includes(child.props.index);
-                    cloneProps.onTitleClick = (data: { index: string | number, domEvent: React.MouseEvent }) => {
-                        const openIndexesCopy = [...openIndexes!];
-                        const searchIndex = openIndexesCopy.findIndex(c => c === data.index);
-                        if (searchIndex >= 0) {
-                            openIndexesCopy.splice(searchIndex, 1);
-                        } else {
-                            openIndexesCopy.push(data.index);
-                        }
-                        if (!isControlled) {
-                            setOpenIndexesState(openIndexesCopy);
-                        }
-                        if (onOpenChange) {
-                            onOpenChange(openIndexesCopy);
-                        }
-                        // @ts-ignore
-                        child.props.onTitleClick && child.props.onTitleClick(data);
-                    };
+                    cloneProps.visible = openIndexes?.includes(child.props.index);
                 }
                 // @ts-ignore
                 cloneChild.push(React.cloneElement(child, cloneProps));
             }
+            if (isTop) level = 1;
         });
         return cloneChild;
-    };
+    }, [openIndexes]);
 
     return (
-        <div
-            className={ classNames }
-            ref={ ref }
-            { ...rest }>
-            { formatChildren(children, true) }
-        </div>
+        <MenuContext.Provider value={ contextValue }>
+            <div
+                className={ classNames }
+                ref={ ref }
+                { ...rest }>
+                { formatChildren(children, true) }
+            </div>
+        </MenuContext.Provider>
     );
 }) as MenuComponent;
 
