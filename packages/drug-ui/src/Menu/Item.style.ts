@@ -18,12 +18,7 @@ const label: Style = {
     width: '100%'
 };
 
-const active: Style = (theme: Theme) => ({
-    color: theme.palette.primary.main
-});
-
-export const styles = (theme: Theme): Styles => ({
+export const styles = (_: Theme): Styles => ({
     root,
-    label,
-    active: active(theme)
+    label
 });

@@ -11,7 +11,7 @@ export interface ItemProps extends React.HTMLAttributes<HTMLLIElement> {
     ref?: React.Ref<HTMLLIElement>;
 }
 
-type ClassProps = 'root' | 'label' | 'active';
+type ClassProps = 'root' | 'label';
 
 const name = 'Item';
 
@@ -23,7 +23,7 @@ const Item: React.FC<ItemProps> = React.forwardRef<HTMLLIElement, ItemProps>((pr
     const classes = useStyles();
     const classNames = classnames(
         classes.root,
-        { [classes.active]: activeSelectedIndex === index },
+        { selected: activeSelectedIndex === index },
         className
     );
 

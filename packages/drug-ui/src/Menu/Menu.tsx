@@ -8,14 +8,14 @@ import { MenuContext } from './Menu.context';
 
 export type Index = number | string;
 
-export interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
     defaultOpenIndexes?: any[];
     openIndexes?: any[];
     defaultSelectedIndex?: Index;
     selectedIndex?: Index;
     onOpenChange?: (indexes: any[]) => void;
     onSelectChange?: (index: Index) => void;
-    ref?: React.Ref<HTMLDivElement>;
+    ref?: React.Ref<HTMLUListElement>;
 }
 
 type ClassProps = 'root';
@@ -25,12 +25,12 @@ const name = 'Menu';
 const useStyles = createUseStyles<ClassProps>(styles, name);
 
 // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/34757
-export interface MenuComponent extends React.ForwardRefExoticComponent<MenuProps & React.RefAttributes<HTMLDivElement>> {
+export interface MenuComponent extends React.ForwardRefExoticComponent<MenuProps & React.RefAttributes<HTMLUListElement>> {
     SubMenu: React.FC<SubMenuProps>;
     Item: React.FC<ItemProps>;
 }
 
-const Menu = React.forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
+const Menu = React.forwardRef<HTMLUListElement, MenuProps>((props, ref) => {
     const {
         className,
         defaultOpenIndexes = [],
@@ -117,12 +117,12 @@ const Menu = React.forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
 
     return (
         <MenuContext.Provider value={ contextValue }>
-            <div
+            <ul
                 className={ classNames }
                 ref={ ref }
                 { ...rest }>
                 { formatChildren(children, true) }
-            </div>
+            </ul>
         </MenuContext.Provider>
     );
 }) as MenuComponent;
