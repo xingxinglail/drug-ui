@@ -199,7 +199,7 @@ const App: React.FC = () => {
     return (
         <Router>
             <ThemeProvider theme={ theme }>
-                <div style={ { width: 240, padding: '200px 16px 0 40px' } }>
+                <div style={ { width: 300, padding: '200px 16px 0 40px' } }>
                     <h2>不受控组件</h2>
                     <Menu defaultOpenIndexes={ ['1', '2'] } defaultSelectedIndex="1-3">
                         <span>123</span>
@@ -214,6 +214,15 @@ const App: React.FC = () => {
                                 <MenuItem index="1-1-1-2">Layout</MenuItem>
                                 <MenuItem index="1-1-1-3">ScrollBar</MenuItem>
                                 <MenuItem index="1-1-1-4">Dialog</MenuItem>
+                                <SubMenu index="333" title="Inner Components（组件）" onTitleClick={ onTitleClick }>
+                                    <MenuItem index="333-1">Button</MenuItem>
+                                    <SubMenu index="444" title="Inner Components（组件）" onTitleClick={ onTitleClick }>
+                                        <MenuItem index="444-1">Button</MenuItem>
+                                        <SubMenu index="555" title="Inner Components（组件）" onTitleClick={ onTitleClick }>
+                                            <MenuItem index="555-1">Button</MenuItem>
+                                        </SubMenu>
+                                    </SubMenu>
+                                </SubMenu>
                             </SubMenu>
                         </SubMenu>
                         <SubMenu index="2" title="Components API" onTitleClick={ onTitleClick }>

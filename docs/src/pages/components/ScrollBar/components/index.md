@@ -1,8 +1,8 @@
 ---
-title: 自定义滚动条
+title: 滚动条
 ---
 
-# ScrollBar（自定义滚动条）
+# ScrollBar（滚动条）
 
 <p class="description">美化滚动条，更方便的控制。</p>
 

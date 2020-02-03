@@ -85,6 +85,10 @@ const Nav = () => {
                 {
                     index: '/dialogs',
                     title: 'Dialog（对话框）'
+                },
+                {
+                    index: '/menus',
+                    title: 'Menu（导航菜单）'
                 }
             ]
         },
@@ -123,6 +127,18 @@ const Nav = () => {
                 {
                     index: '/dialog',
                     title: 'Dialog'
+                },
+                {
+                    index: '/menu',
+                    title: 'Menu'
+                },
+                {
+                    index: '/sub-menu',
+                    title: 'Menu.SubMenu'
+                },
+                {
+                    index: '/menu-item',
+                    title: 'Menu.Item'
                 }
             ]
         }

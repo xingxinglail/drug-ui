@@ -29,6 +29,11 @@ import ScrollBarApi from './pages/api/ScrollBar';
 import Dialogs from './pages/components/Dialogs';
 import DialogApi from './pages/api/Dialog';
 
+import Menu from './pages/components/Menu';
+import MenuApi from './pages/api/Menu';
+import SubMenuApi from './pages/api/SubMenu';
+import MenuItemApi from './pages/api/MenuItem';
+
 type ClassProps = 'header' | 'main' | 'nav' | 'logo' | 'menu';
 
 const useStyles = createUseStyles<ClassProps>((theme: Theme): Styles => {
@@ -52,37 +57,6 @@ const useStyles = createUseStyles<ClassProps>((theme: Theme): Styles => {
 
 const Test = () => {
     const classes = useStyles();
-    const location = useLocation();
-    const data = [
-        {
-            index: '/getting-started',
-            title: '入门教程',
-            children: [
-                {
-                    index: '/installation',
-                    title: '安装'
-                },
-                {
-                    index: '/usage',
-                    title: '使用'
-                }
-            ]
-        },
-        {
-            index: '/components',
-            title: 'Components（组件）',
-            children: [
-                {
-                    index: '/buttons',
-                    title: 'Button（按钮）'
-                },
-                {
-                    index: '/layouts',
-                    title: 'Layout（布局）'
-                }
-            ]
-        }
-    ];
 
     return (
         <div>
@@ -131,6 +105,18 @@ const Test = () => {
                     </Route>
                     <Route path="/api/dialog">
                         <DialogApi />
+                    </Route>
+                    <Route path="/components/menus">
+                        <Menu />
+                    </Route>
+                    <Route path="/api/menu">
+                        <MenuApi />
+                    </Route>
+                    <Route path="/api/sub-menu">
+                        <SubMenuApi />
+                    </Route>
+                    <Route path="/api/menu-item">
+                        <MenuItemApi />
                     </Route>
                 </Switch>
             </main>

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Menu from '@drug-ui/core/Menu';
 import { createUseStyles } from '@drug-ui/styles';
 
