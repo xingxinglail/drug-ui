@@ -139,7 +139,7 @@ const ScrollBar: React.FC<ScrollBarProps> = React.forwardRef<HTMLDivElement, Scr
             if (axisY.enabled) axisY.barRef.current!.classList.remove(classes.scrollbarHide);
             autoHideTimerId.current = window.setTimeout(() => {
                 if (axisX.enabled) axisX.barRef.current!.classList.add(classes.scrollbarHide);
-                if (axisX.enabled) axisY.barRef.current!.classList.add(classes.scrollbarHide);
+                if (axisY.enabled) axisY.barRef.current!.classList.add(classes.scrollbarHide);
             }, autoHideTime);
         }
     }, []);
