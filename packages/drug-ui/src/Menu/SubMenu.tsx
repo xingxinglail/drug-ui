@@ -4,7 +4,7 @@ import { styles } from './SubMenu.style';
 import { createUseStyles } from '../styles';
 import { SimpleSpread } from '..';
 import { MenuContext } from './Menu.context';
-import ButtonBase from '../ButtonBase';
+import Ripple from '../ButtonBase/Ripple';
 import { Index } from './Menu';
 
 interface PropsExtra {
@@ -48,6 +48,7 @@ const SubMenu: React.FC<SubMenuProps> = React.forwardRef<HTMLLIElement, SubMenuP
                 style={ { paddingLeft: level * 16 } }
                 onClick={ titleClickHandle }>
                 { title }
+                <Ripple />
             </div>
             <ul style={ { display: visible ? 'block' : 'none' } }>
                 { children }

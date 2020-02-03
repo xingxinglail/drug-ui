@@ -6,14 +6,17 @@ import SubMenu, { SubMenuProps } from './SubMenu';
 import Item, { ItemProps } from './Item';
 import { MenuContext } from './Menu.context';
 
+export type Index = number | string;
+
 export interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
     defaultOpenIndexes?: any[];
     openIndexes?: any[];
+    defaultSelectedIndex?: Index;
+    selectedIndex?: Index;
     onOpenChange?: (indexes: any[]) => void;
+    onSelectChange?: (index: Index) => void;
     ref?: React.Ref<HTMLDivElement>;
 }
-
-export type Index = number | string;
 
 type ClassProps = 'root';
 
@@ -28,7 +31,16 @@ export interface MenuComponent extends React.ForwardRefExoticComponent<MenuProps
 }
 
 const Menu = React.forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
-    const { className, defaultOpenIndexes = [], openIndexes: openIndexesProp, children, onOpenChange, ...rest } = props;
+    const {
+        className,
+        defaultOpenIndexes = [],
+        openIndexes: openIndexesProp,
+        defaultSelectedIndex,
+        selectedIndex: selectedIndexProp,
+        onOpenChange,
+        onSelectChange,
+        children,
+        ...rest } = props;
     const classes = useStyles();
     const classNames = classnames(
         classes.root,
@@ -39,8 +51,13 @@ const Menu = React.forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
     const [openIndexesState, setOpenIndexesState] = React.useState(defaultOpenIndexes);
     const openIndexes = isControlled ? openIndexesProp : openIndexesState;
 
+    const { current: isSelectedControlled } = React.useRef(selectedIndexProp !== undefined);
+    const [selectedIndexState, setSelectedIndexState] = React.useState(defaultSelectedIndex);
+    const selectedIndex = isSelectedControlled ? selectedIndexProp : selectedIndexState;
+
     const contextValue = React.useMemo(() => {
         return {
+            activeSelectedIndex: selectedIndex,
             handleOpenChange (index: Index) {
                 const openIndexesCopy = [...openIndexes!];
                 const searchIndex = openIndexesCopy.findIndex(c => c === index);
@@ -55,11 +72,19 @@ const Menu = React.forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
                 if (onOpenChange) {
                     onOpenChange(openIndexesCopy);
                 }
+            },
+            handleSelectChange (index: Index) {
+                if (!isSelectedControlled) {
+                    setSelectedIndexState(index);
+                }
+                if (onSelectChange) {
+                    onSelectChange(index);
+                }
             }
         };
-    }, [isControlled, openIndexes, onOpenChange]);
+    }, [isControlled, openIndexes,onOpenChange, isSelectedControlled, selectedIndex, onSelectChange]);
 
-    const fn = (data: any): data is React.ReactElement<{ index: Index, children: React.ReactNode, visible?: boolean }> => {
+    const isReactElement = (data: any): data is React.ReactElement<{ index: Index, children: React.ReactNode, visible?: boolean }> => {
         return typeof data === 'object' && typeof data.type === 'object';
     };
 
@@ -68,13 +93,16 @@ const Menu = React.forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
         if (!isTop) level++;
         const cloneChild: React.ReactElement[] = [];
         React.Children.forEach(children, child => {
-            if (fn(child)) {
+            if (isReactElement(child)) {
                 const cloneProps = {
                     ...child.props,
                     key: child.props.index,
-                    level,
-                    children: typeof child.props.children === 'object' ? formatChildren(child.props.children) : child.props.children
+                    level
                 };
+                // @ts-ignore
+                if (child.type.displayName === name || child.type.displayName === SubMenu.displayName) {
+                    cloneProps.children = typeof child.props.children === 'object' ? formatChildren(child.props.children) : child.props.children;
+                }
                 // @ts-ignore
                 if (child.type.displayName === SubMenu.displayName) {
                     cloneProps.visible = openIndexes?.includes(child.props.index);
