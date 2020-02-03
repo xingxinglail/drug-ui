@@ -31,7 +31,7 @@ Style sheet name: `DuiButtonGroup`.
 
 ## Demos
 
-- [Buttons](/components/buttons/)
+- [Buttons](/drug-ui/components/buttons/)
 
 
 

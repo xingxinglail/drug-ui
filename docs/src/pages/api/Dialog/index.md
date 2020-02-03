@@ -45,7 +45,7 @@ Style sheet name: `DuiDialog`.
 
 ## Demos
 
-- [Dialog](/components/dialogs/)
+- [Dialog](/drug-ui/components/dialogs/)
 
 
 

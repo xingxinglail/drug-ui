@@ -1,6 +1,5 @@
 import * as React from 'react';
 import MarkdownDocs from '../../../components/MarkdownDocs';
-import { createUseStyles } from '@drug-ui/styles';
 
 const req = require.context('./components', false, /\.(md|js|tsx)$/);
 const reqSource = require.context(
@@ -9,17 +8,9 @@ const reqSource = require.context(
     /\.(js|tsx)$/,
 );
 
-const useStyles = createUseStyles({
-    root: {
-        padding: 24
-    }
-}, { name: 'Page' });
-
 const Pages = () => {
-    const classes = useStyles();
-
     return (
-        <div className={ classes.root }>
+        <div>
             <MarkdownDocs req={ req } reqSource={reqSource} reqPrefix="pages/ScrollBars/components" />
         </div>
     );
