@@ -264,6 +264,13 @@ const ScrollBar: React.FC<ScrollBarProps> = React.forwardRef<HTMLDivElement, Scr
         resizeObserver.observe(innerRef.current!);
         resizeObserver.observe(wrapperRef.current!.children[0]);
 
+        const mutationObserver = new window.MutationObserver(recalculate);
+        mutationObserver.observe(innerRef.current!, {
+            childList: true,
+            subtree: true,
+            characterData: true
+        });
+
         return () => {
             resizeObserver.disconnect();
         };
