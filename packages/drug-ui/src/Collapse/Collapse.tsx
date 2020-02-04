@@ -16,7 +16,7 @@ export interface CollapseProps extends SimpleSpread<TransitionProps, PropsExtra>
 
 export const name = 'Collapse';
 
-type CollapseClassProps = 'container' | 'entered' | 'hidden';
+type CollapseClassProps = 'container' | 'entered' | 'hidden' | 'wrapper' | 'innerWrapper';
 
 const useStyles = createUseStyles<CollapseClassProps>(styles, name);
 
@@ -85,8 +85,10 @@ const Collapse: React.FC<CollapseProps> = React.forwardRef<HTMLDivElement, Colla
                             )
                         }
                         style={ { minHeight: collapsedHeight, ...style } }>
-                        <div ref={ wrapperRef } style={ { width: '100%' } }>
-                            { children }
+                        <div ref={ wrapperRef } className={ classes.wrapper }>
+                            <div className={ classes.innerWrapper }>
+                                { children }
+                            </div>
                         </div>
                     </div>
                 )

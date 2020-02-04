@@ -17,8 +17,18 @@ const hidden: Style = {
     visibility: 'hidden'
 };
 
+const wrapper: Style = {
+    display: 'flex'
+};
+
+const innerWrapper: Style = {
+    width: '100%'
+};
+
 export const styles = (_: Theme): Styles => ({
     container,
     entered,
-    hidden
+    hidden,
+    wrapper,
+    innerWrapper
 });
