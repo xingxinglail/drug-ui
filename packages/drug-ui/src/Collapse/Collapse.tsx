@@ -39,6 +39,7 @@ const Collapse: React.FC<CollapseProps> = React.forwardRef<HTMLDivElement, Colla
         }
 
         if (event === 'onEntered') {
+            node.style.height = 'auto';
             onEntered && onEntered(node, isAppearing);
         }
 
