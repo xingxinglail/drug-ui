@@ -147,6 +147,14 @@ const Nav = () => {
                 {
                     index: '/collapse',
                     title: 'Collapse'
+                },
+                {
+                    index: '/fade',
+                    title: 'Fade'
+                },
+                {
+                    index: '/zoom',
+                    title: 'Zoom'
                 }
             ]
         }
