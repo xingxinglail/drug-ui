@@ -208,13 +208,17 @@ const App: React.FC = () => {
                     <br />
                     <br />
                     <Collapse in={ collapse } timeout={ 1000 }>
-                        <div style={ { width: 200, height: 200, border: '1px solid red', padding: 10 } } />
+                        <div style={ { width: 200, height: 200, border: '1px solid red', padding: 10 } }>
+                            Collapse
+                        </div>
                     </Collapse>
                     <div onClick={ () => setCollapse2(!collapse2) }>切换</div>
                     <br />
                     <br />
-                    <Collapse in={ collapse2 } timeout={ 2000 }>
-                        <div style={ { width: 200, height: 200, border: '1px solid red', padding: 10 } } />
+                    <Collapse in={ collapse2 } collapsedHeight="40px">
+                        <div style={ { width: 200, height: 200, border: '1px solid red', padding: 10 } }>
+                            Collapse
+                        </div>
                     </Collapse>
                 </div>
                 <div style={ { width: 300, padding: '200px 16px 0 40px' } }>

@@ -11,6 +11,7 @@ interface PropsExtra {
 }
 
 export interface CollapseProps extends SimpleSpread<TransitionProps, PropsExtra> {
+    collapsedHeight?: string;
 }
 
 export const name = 'Collapse';
@@ -20,13 +21,13 @@ type CollapseClassProps = 'container' | 'entered' | 'hidden';
 const useStyles = createUseStyles<CollapseClassProps>(styles, name);
 
 const Collapse: React.FC<CollapseProps> = React.forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
-    const { className, style, in: inProp = false, timeout = 300, onEnter, onEntering, onEntered, onExit, onExiting, onExited, children, ...rest } = props;
+    const { className, style, collapsedHeight = '0px', in: inProp = false, timeout = 300, onEnter, onEntering, onEntered, onExit, onExiting, onExited, children, ...rest } = props;
     const classes = useStyles();
     const wrapperRef = React.useRef<HTMLDivElement>(null);
 
     const handleTransitionEvent = (event: string, node: HTMLElement, isAppearing?: boolean) => {
         if (event === 'onEnter') {
-            node.style.height = '0px';
+            node.style.height = collapsedHeight;
             onEnter && onEnter(node, isAppearing);
         }
 
@@ -50,7 +51,7 @@ const Collapse: React.FC<CollapseProps> = React.forwardRef<HTMLDivElement, Colla
         if (event === 'onExiting') {
             wrapperRef.current?.clientHeight;
             node.style.transitionDuration = `${ timeout }ms`;
-            node.style.height = '0px';
+            node.style.height = collapsedHeight;
             onExiting && onExiting(node);
         }
 
@@ -78,11 +79,11 @@ const Collapse: React.FC<CollapseProps> = React.forwardRef<HTMLDivElement, Colla
                             classnames(
                                 classes.container,
                                 { [classes.entered]: state === 'entered' },
-                                { [classes.hidden]: state === 'exited' && !inProp },
+                                { [classes.hidden]: state === 'exited' && !inProp && collapsedHeight !== '0px' },
                                 className
                             )
                         }
-                        style={ { ...style } }>
+                        style={ { minHeight: collapsedHeight, ...style } }>
                         <div ref={ wrapperRef } style={ { width: '100%' } }>
                             { children }
                         </div>
