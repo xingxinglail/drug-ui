@@ -7,7 +7,7 @@ import { createUseStyles } from '../styles';
 import { SimpleSpread } from '..';
 
 interface PropsExtra {
-    timeout?: number;
+    timeout?: number | { enter?: number, exit?: number };
 }
 
 export interface CollapseProps extends SimpleSpread<TransitionProps, PropsExtra> {
@@ -33,7 +33,7 @@ const Collapse: React.FC<CollapseProps> = React.forwardRef<HTMLDivElement, Colla
 
         if (event === 'onEntering') {
             const wrapperHeight = wrapperRef.current?.clientHeight || 0;
-            node.style.transitionDuration = `${ timeout }ms`;
+            node.style.transitionDuration = `${ typeof timeout === 'number' ? timeout : timeout.enter }ms`;
             node.style.height = `${ wrapperHeight }px`;
             onEntering && onEntering(node, isAppearing);
         }
@@ -50,7 +50,7 @@ const Collapse: React.FC<CollapseProps> = React.forwardRef<HTMLDivElement, Colla
 
         if (event === 'onExiting') {
             wrapperRef.current?.clientHeight;
-            node.style.transitionDuration = `${ timeout }ms`;
+            node.style.transitionDuration = `${ typeof timeout === 'number' ? timeout : timeout.exit }ms`;
             node.style.height = collapsedHeight;
             onExiting && onExiting(node);
         }
