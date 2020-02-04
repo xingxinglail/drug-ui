@@ -19,7 +19,8 @@ import {
     FormField,
     ScrollBar,
     Menu,
-    Collapse
+    Collapse,
+    Fade
 } from '@drug-ui/core';
 import { Rule as ValidateRule } from '@drug-ui/core/Form/validate';
 import { Variant } from '@drug-ui/core/Button';
@@ -200,9 +201,42 @@ const App: React.FC = () => {
 
     const [collapse, setCollapse] = React.useState(true);
     const [collapse2, setCollapse2] = React.useState(false);
+
+    const [fade, setFade] = React.useState(true);
+    const [fade2, setFade2] = React.useState(false);
     return (
         <Router>
             <ThemeProvider theme={ theme }>
+                <div style={ { padding: '20px' } }>
+                    <div onClick={ () => setFade(!fade) }>切换</div>
+                    <br />
+                    <br />
+                    <Fade in={ fade } timeout={ { enter: 2000, exit: 400 } }>
+                        <div style={ {
+                            width: 100,
+                            height: 100,
+                            border: '1px solid red',
+                            backgroundColor: '#09f',
+                            padding: 10
+                        } }>
+                            Fade
+                        </div>
+                    </Fade>
+                    <div onClick={ () => setFade2(!fade2) }>切换</div>
+                    <br />
+                    <br />
+                    <Fade in={ fade2 } unmountOnExit>
+                        <div style={ {
+                            width: 100,
+                            height: 100,
+                            border: '1px solid red',
+                            backgroundColor: '#09f',
+                            padding: 10
+                        } }>
+                            Fade
+                        </div>
+                    </Fade>
+                </div>
                 <div style={ { padding: '20px' } }>
                     <div onClick={ () => setCollapse(!collapse) }>切换</div>
                     <br />
