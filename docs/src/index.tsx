@@ -18,7 +18,8 @@ import {
     Input,
     FormField,
     ScrollBar,
-    Menu
+    Menu,
+    Collapse
 } from '@drug-ui/core';
 import { Rule as ValidateRule } from '@drug-ui/core/Form/validate';
 import { Variant } from '@drug-ui/core/Button';
@@ -196,9 +197,26 @@ const App: React.FC = () => {
         console.log(index);
         setSelectedIndex(index);
     };
+
+    const [collapse, setCollapse] = React.useState(true);
+    const [collapse2, setCollapse2] = React.useState(false);
     return (
         <Router>
             <ThemeProvider theme={ theme }>
+                <div style={ { padding: '20px' } }>
+                    <div onClick={ () => setCollapse(!collapse) }>切换</div>
+                    <br />
+                    <br />
+                    <Collapse in={ collapse } timeout={ 1000 }>
+                        <div style={ { width: 200, height: 200, border: '1px solid red', padding: 10 } } />
+                    </Collapse>
+                    <div onClick={ () => setCollapse2(!collapse2) }>切换</div>
+                    <br />
+                    <br />
+                    <Collapse in={ collapse2 } timeout={ 2000 }>
+                        <div style={ { width: 200, height: 200, border: '1px solid red', padding: 10 } } />
+                    </Collapse>
+                </div>
                 <div style={ { width: 300, padding: '200px 16px 0 40px' } }>
                     <h2>不受控组件</h2>
                     <Menu defaultOpenIndexes={ ['1', '2'] } defaultSelectedIndex="1-3">
