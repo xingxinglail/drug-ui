@@ -11,7 +11,7 @@ interface PropsExtra {
 }
 
 export interface CollapseProps extends SimpleSpread<TransitionProps, PropsExtra> {
-    collapsedHeight?: string;
+    collapsedHeight?: string | number;
 }
 
 export const name = 'Collapse';
@@ -21,9 +21,10 @@ type CollapseClassProps = 'container' | 'entered' | 'hidden' | 'wrapper' | 'inne
 const useStyles = createUseStyles<CollapseClassProps>(styles, name);
 
 const Collapse: React.FC<CollapseProps> = React.forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
-    const { className, style, collapsedHeight = '0px', in: inProp = false, timeout = 300, onEnter, onEntering, onEntered, onExit, onExiting, onExited, children, ...rest } = props;
+    const { className, style, collapsedHeight: collapsedHeightProp = '0px', in: inProp = false, timeout = 300, onEnter, onEntering, onEntered, onExit, onExiting, onExited, children, ...rest } = props;
     const classes = useStyles();
     const wrapperRef = React.useRef<HTMLDivElement>(null);
+    const collapsedHeight = typeof collapsedHeightProp === 'number' ? `${collapsedHeightProp}px` : collapsedHeightProp;
 
     const handleTransitionEvent = (event: string, node: HTMLElement, isAppearing?: boolean) => {
         if (event === 'onEnter') {
