@@ -20,7 +20,7 @@ import { Fade } from '@drug-ui/core';
 |:-----|:-----|:--------|:------------|
 | <span class="prop-name">children</span> | <span class="prop-type">node</span> |  | 内容节点。 |
 | <span class="prop-name">in</span> | <span class="prop-type">bool</span> | <span class="prop-default">false</span> | 如果为```true```，组件将开始进入过渡。 |
-| <span class="prop-name">timeout</span> | <span class="prop-type">number &#124; { enter?: number, exit?: number }</span> | <span class="prop-default">300ms</span> | 过渡时长。 |
+| <span class="prop-name">timeout</span> | <span class="prop-type">number &#124; { enter?: number, exit?: number }</span> | <span class="prop-default">{ enter: 225, exit: 195 }</span> | 过渡时长。 |
 
 `ref` 被转发到根元素.
 
