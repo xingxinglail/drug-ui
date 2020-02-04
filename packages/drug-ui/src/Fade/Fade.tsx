@@ -21,10 +21,21 @@ const useStyles = createUseStyles<FadeClassProps>(styles, name);
 
 const Fade: React.FC<FadeProps> = React.forwardRef<HTMLDivElement, FadeProps>((props, ref) => {
     const {
-        className, style, in: inProp = false, timeout = {
+        className,
+        style,
+        in: inProp = false,
+        timeout = {
             enter: 225,
             exit: 195
-        }, onEnter, onEntering, onEntered, onExit, onExiting, onExited, children, ...rest
+        },
+        onEnter,
+        onEntering,
+        onEntered,
+        onExit,
+        onExiting,
+        onExited,
+        children,
+        ...rest
     } = props;
     const classes = useStyles();
 
