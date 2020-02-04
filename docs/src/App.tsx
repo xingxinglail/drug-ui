@@ -37,6 +37,7 @@ import MenuItemApi from './pages/api/MenuItem';
 import Transitions from './pages/components/Transitions';
 import CollapseApi from './pages/api/Collapse';
 import FadeApi from './pages/api/Fade';
+import ZoomApi from './pages/api/zoom';
 
 type ClassProps = 'header' | 'main' | 'nav' | 'logo' | 'menu';
 
@@ -130,6 +131,9 @@ const Test = () => {
                     </Route>
                     <Route path="/api/fade">
                         <FadeApi />
+                    </Route>
+                    <Route path="/api/zoom">
+                        <ZoomApi />
                     </Route>
                 </Switch>
             </main>
