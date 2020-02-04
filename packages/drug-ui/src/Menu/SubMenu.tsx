@@ -6,6 +6,7 @@ import { SimpleSpread } from '..';
 import { MenuContext } from './Menu.context';
 import Ripple from '../ButtonBase/Ripple';
 import { Index, useStyles as menuUseStyles } from './Menu';
+import Collapse from '../Collapse';
 
 interface PropsExtra {
     title?: string | React.ReactNode;
@@ -63,9 +64,11 @@ const SubMenu: React.FC<SubMenuProps> = React.forwardRef<HTMLLIElement, SubMenuP
                 { title }
                 <Ripple />
             </div>
-            <ul style={ { display: openIndexes.includes(index) ? 'block' : 'none' } }>
-                { children }
-            </ul>
+            <Collapse in={ openIndexes.includes(index) }>
+                <ul>
+                    { children }
+                </ul>
+            </Collapse>
         </li>
     );
 });
