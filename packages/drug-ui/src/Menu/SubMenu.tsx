@@ -5,7 +5,7 @@ import { createUseStyles } from '../styles';
 import { SimpleSpread } from '..';
 import { MenuContext } from './Menu.context';
 import Ripple from '../ButtonBase/Ripple';
-import { Index } from './Menu';
+import { Index, useStyles as menuUseStyles } from './Menu';
 
 interface PropsExtra {
     title?: string | React.ReactNode;
@@ -13,8 +13,6 @@ interface PropsExtra {
 
 export interface SubMenuProps extends SimpleSpread<React.HTMLAttributes<HTMLLIElement>, PropsExtra> {
     index: Index;
-    visible?: boolean;
-    level?: number;
     onTitleClick?: (data: { index: string | number, domEvent: React.MouseEvent }) => void;
     ref?: React.Ref<HTMLLIElement>;
 }
@@ -23,20 +21,35 @@ type ClassProps = 'root' | 'subMenuTitle';
 
 const name = 'SubMenu';
 
-const useStyles = createUseStyles<ClassProps>(styles, name);
+export const useStyles = createUseStyles<ClassProps>(styles, name);
 
 const SubMenu: React.FC<SubMenuProps> = React.forwardRef<HTMLLIElement, SubMenuProps>((props, ref) => {
-    const { className, title, index, level = 1, onTitleClick: onTitleClickProp, visible, children, ...rest } = props;
+    const { className, title, index, onTitleClick: onTitleClickProp, children, ...rest } = props;
     const classes = useStyles();
+
     const classNames = classnames(
         classes.root,
         className
     );
-    const { handleOpenChange } = React.useContext(MenuContext);
+    const { openIndexes, handleOpenChange } = React.useContext(MenuContext);
     const titleClickHandle = (e: React.MouseEvent) => {
         handleOpenChange(index);
         onTitleClickProp && onTitleClickProp({ index, domEvent: e });
     };
+
+    const titleRef = React.useRef<HTMLDivElement>(null);
+    const menuClasses = menuUseStyles();
+    React.useEffect(() => {
+        let parent = titleRef.current!.parentElement!.parentElement;
+        let paddingLeft = 16;
+        while (parent && !parent.classList.contains(menuClasses.root)) {
+            if (parent.classList.contains(classes.root)) {
+                paddingLeft += 16;
+            }
+            parent = parent.parentElement;
+        }
+        titleRef.current!.style.paddingLeft = `${ paddingLeft }px`;
+    }, []);
 
     return (
         <li
@@ -45,12 +58,12 @@ const SubMenu: React.FC<SubMenuProps> = React.forwardRef<HTMLLIElement, SubMenuP
             { ...rest }>
             <div
                 className={ classes.subMenuTitle }
-                style={ { paddingLeft: level * 16 } }
+                ref={ titleRef }
                 onClick={ titleClickHandle }>
                 { title }
                 <Ripple />
             </div>
-            <ul style={ { display: visible ? 'block' : 'none' } }>
+            <ul style={ { display: openIndexes.includes(index) ? 'block' : 'none' } }>
                 { children }
             </ul>
         </li>

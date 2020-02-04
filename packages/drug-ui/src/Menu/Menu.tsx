@@ -22,7 +22,7 @@ type ClassProps = 'root';
 
 const name = 'Menu';
 
-const useStyles = createUseStyles<ClassProps>(styles, name);
+export const useStyles = createUseStyles<ClassProps>(styles, name);
 
 // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/34757
 export interface MenuComponent extends React.ForwardRefExoticComponent<MenuProps & React.RefAttributes<HTMLUListElement>> {
@@ -40,23 +40,27 @@ const Menu = React.forwardRef<HTMLUListElement, MenuProps>((props, ref) => {
         onOpenChange,
         onSelectChange,
         children,
-        ...rest } = props;
+        ...rest
+    } = props;
     const classes = useStyles();
     const classNames = classnames(
         classes.root,
         className
     );
-    // 是否是受控组件
+
+    // 展开是否受控
     const { current: isControlled } = React.useRef(Array.isArray(openIndexesProp));
     const [openIndexesState, setOpenIndexesState] = React.useState(defaultOpenIndexes);
     const openIndexes = isControlled ? openIndexesProp : openIndexesState;
 
+    // 选择是否受控
     const { current: isSelectedControlled } = React.useRef(selectedIndexProp !== undefined);
     const [selectedIndexState, setSelectedIndexState] = React.useState(defaultSelectedIndex);
     const selectedIndex = isSelectedControlled ? selectedIndexProp : selectedIndexState;
 
     const contextValue = React.useMemo(() => {
         return {
+            openIndexes: openIndexes!,
             activeSelectedIndex: selectedIndex,
             handleOpenChange (index: Index) {
                 const openIndexesCopy = [...openIndexes!];
@@ -66,51 +70,35 @@ const Menu = React.forwardRef<HTMLUListElement, MenuProps>((props, ref) => {
                 } else {
                     openIndexesCopy.push(index);
                 }
-                if (!isControlled) {
-                    setOpenIndexesState(openIndexesCopy);
-                }
-                if (onOpenChange) {
-                    onOpenChange(openIndexesCopy);
-                }
+                if (!isControlled) setOpenIndexesState(openIndexesCopy);
+                onOpenChange && onOpenChange(openIndexesCopy);
             },
             handleSelectChange (index: Index) {
-                if (!isSelectedControlled) {
-                    setSelectedIndexState(index);
-                }
-                if (onSelectChange) {
-                    onSelectChange(index);
-                }
+                if (!isSelectedControlled) setSelectedIndexState(index);
+                onSelectChange && onSelectChange(index);
             }
         };
-    }, [isControlled, openIndexes,onOpenChange, isSelectedControlled, selectedIndex, onSelectChange]);
+    }, [isControlled, openIndexes, onOpenChange, isSelectedControlled, selectedIndex, onSelectChange]);
 
-    const isReactElement = (data: any): data is React.ReactElement<{ index: Index, children: React.ReactNode, visible?: boolean }> => {
+    const isReactElement = React.useCallback((data: any): data is React.ReactElement<{ index: Index, children: React.ReactNode, visible?: boolean }> => {
         return typeof data === 'object' && typeof data.type === 'object';
-    };
+    }, []);
 
-    let level = 1;
-    const formatChildren = React.useCallback((children: React.ReactNode, isTop = false) => {
-        if (!isTop) level++;
+    const formatChildren = React.useCallback((children: React.ReactNode) => {
         const cloneChild: React.ReactElement[] = [];
         React.Children.forEach(children, child => {
             if (isReactElement(child)) {
                 const cloneProps = {
                     ...child.props,
-                    key: child.props.index,
-                    level
+                    key: child.props.index
                 };
                 // @ts-ignore
                 if (child.type.displayName === name || child.type.displayName === SubMenu.displayName) {
                     cloneProps.children = typeof child.props.children === 'object' ? formatChildren(child.props.children) : child.props.children;
                 }
                 // @ts-ignore
-                if (child.type.displayName === SubMenu.displayName) {
-                    cloneProps.visible = openIndexes?.includes(child.props.index);
-                }
-                // @ts-ignore
                 cloneChild.push(React.cloneElement(child, cloneProps));
             }
-            if (isTop) level = 1;
         });
         return cloneChild;
     }, [openIndexes]);
@@ -121,7 +109,7 @@ const Menu = React.forwardRef<HTMLUListElement, MenuProps>((props, ref) => {
                 className={ classNames }
                 ref={ ref }
                 { ...rest }>
-                { formatChildren(children, true) }
+                { formatChildren(children) }
             </ul>
         </MenuContext.Provider>
     );
@@ -129,5 +117,12 @@ const Menu = React.forwardRef<HTMLUListElement, MenuProps>((props, ref) => {
 
 Menu.SubMenu = SubMenu;
 Menu.Item = Item;
+
+Menu.defaultProps = {
+    defaultOpenIndexes: [],
+    openIndexes: undefined,
+    defaultSelectedIndex: undefined,
+    selectedIndex: undefined
+};
 
 export default Menu;

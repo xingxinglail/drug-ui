@@ -3,11 +3,12 @@ import classnames from 'classnames';
 import { styles } from './Item.style';
 import { createUseStyles } from '../styles';
 import { MenuContext } from './Menu.context';
+import { useCombinedRefs } from '@drug-ui/hooks';
+import { useStyles as menuUseStyles } from './Menu';
+import { useStyles as subMenuUseStyles } from './SubMenu';
 
 export interface ItemProps extends React.HTMLAttributes<HTMLLIElement> {
     index: number | string;
-    level?: number;
-    component?: React.ElementType;
     ref?: React.Ref<HTMLLIElement>;
 }
 
@@ -18,7 +19,7 @@ const name = 'Item';
 const useStyles = createUseStyles<ClassProps>(styles, name);
 
 const Item: React.FC<ItemProps> = React.forwardRef<HTMLLIElement, ItemProps>((props, ref) => {
-    const { className, level = 1, index, children, ...rest } = props;
+    const { className, index, children, ...rest } = props;
     const { activeSelectedIndex, handleSelectChange } = React.useContext(MenuContext);
     const classes = useStyles();
     const classNames = classnames(
@@ -31,11 +32,27 @@ const Item: React.FC<ItemProps> = React.forwardRef<HTMLLIElement, ItemProps>((pr
         handleSelectChange(index);
     };
 
+    const innerRef = React.useRef<HTMLLIElement>(null);
+    const combinedRef = useCombinedRefs<HTMLLIElement>(ref, innerRef);
+
+    const menuClasses = menuUseStyles();
+    const subMenuClasses = subMenuUseStyles();
+    React.useEffect(() => {
+        let paddingLeft = 16;
+        let parent = innerRef.current!.parentElement;
+        while (parent && !parent.classList.contains(menuClasses.root)) {
+            if (parent.classList.contains(subMenuClasses.root)) {
+                paddingLeft += 16;
+            }
+            parent = parent.parentElement;
+        }
+       innerRef.current!.style.paddingLeft = `${paddingLeft}px`;
+    }, []);
+
     return (
         <li
             className={ classNames }
-            style={ { paddingLeft: level * 16 } }
-            ref={ ref }
+            ref={ combinedRef }
             onClick={ handleClick }
             { ...rest }>
             { children }
