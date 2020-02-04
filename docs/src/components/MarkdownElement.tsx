@@ -126,13 +126,16 @@ const useStyles = createUseStyles({
         '& h1': {
             fontSize: 40,
             margin: '16px 0',
+            fontWeight: 400
         },
         '& .description': {
             margin: '0 0 40px',
+            fontSize: 24
         },
         '& h2': {
             fontSize: 30,
             margin: '40px 0 16px',
+            fontWeight: 400
         },
         '& h3': {
             margin: '40px 0 16px',

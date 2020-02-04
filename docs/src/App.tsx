@@ -34,6 +34,9 @@ import MenuApi from './pages/api/Menu';
 import SubMenuApi from './pages/api/SubMenu';
 import MenuItemApi from './pages/api/MenuItem';
 
+import Transitions from './pages/components/Transitions';
+import CollapseApi from './pages/api/Collapse';
+
 type ClassProps = 'header' | 'main' | 'nav' | 'logo' | 'menu';
 
 const useStyles = createUseStyles<ClassProps>((theme: Theme): Styles => {
@@ -50,7 +53,7 @@ const useStyles = createUseStyles<ClassProps>((theme: Theme): Styles => {
             boxShadow: '0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12)'
         },
         main: {
-            padding: [80, 200, 0, 340]
+            padding: [80, 200, 40, 340]
         }
     };
 }, 'Container');
@@ -117,6 +120,12 @@ const Test = () => {
                     </Route>
                     <Route path="/api/menu-item">
                         <MenuItemApi />
+                    </Route>
+                    <Route path="/components/transitions">
+                        <Transitions />
+                    </Route>
+                    <Route path="/api/collapse">
+                        <CollapseApi />
                     </Route>
                 </Switch>
             </main>

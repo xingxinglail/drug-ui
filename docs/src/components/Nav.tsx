@@ -89,6 +89,10 @@ const Nav = () => {
                 {
                     index: '/menus',
                     title: 'Menu（导航菜单）'
+                },
+                {
+                    index: '/transitions',
+                    title: 'Transitions（过渡动画）'
                 }
             ]
         },
@@ -139,6 +143,10 @@ const Nav = () => {
                 {
                     index: '/menu-item',
                     title: 'Menu.Item'
+                },
+                {
+                    index: '/collapse',
+                    title: 'Collapse'
                 }
             ]
         }

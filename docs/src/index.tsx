@@ -20,7 +20,8 @@ import {
     ScrollBar,
     Menu,
     Collapse,
-    Fade
+    Fade,
+    Zoom
 } from '@drug-ui/core';
 import { Rule as ValidateRule } from '@drug-ui/core/Form/validate';
 import { Variant } from '@drug-ui/core/Button';
@@ -204,14 +205,40 @@ const App: React.FC = () => {
 
     const [fade, setFade] = React.useState(true);
     const [fade2, setFade2] = React.useState(false);
+
+    const [zoom, setZoom] = React.useState(true);
+    const [zoom2, setZoom2] = React.useState(false);
+
     return (
         <Router>
             <ThemeProvider theme={ theme }>
                 <div style={ { padding: '20px' } }>
+                    <div onClick={ () => setZoom(!zoom) }>切换</div>
+                    <br />
+                    <br />
+                    <Zoom in={ zoom } timeout={ { enter: 2000, exit: 400 } } unmountOnExit>
+                        <Button variant="contained" color="secondary">打开Dialog</Button>
+                    </Zoom>
+                    <div onClick={ () => setZoom2(!zoom2) }>切换</div>
+                    <br />
+                    <br />
+                    <Zoom in={ zoom2 } unmountOnExit>
+                        <div style={ {
+                            width: 100,
+                            height: 100,
+                            border: '1px solid red',
+                            backgroundColor: '#09f',
+                            padding: 10
+                        } }>
+                            Fade
+                        </div>
+                    </Zoom>
+                </div>
+                <div style={ { padding: '20px' } }>
                     <div onClick={ () => setFade(!fade) }>切换</div>
                     <br />
                     <br />
-                    <Fade in={ fade } timeout={ { enter: 2000, exit: 400 } }>
+                    <Fade in={ fade } timeout={ { enter: 2000, exit: 400 } } appear>
                         <div style={ {
                             width: 100,
                             height: 100,
@@ -241,7 +268,7 @@ const App: React.FC = () => {
                     <div onClick={ () => setCollapse(!collapse) }>切换</div>
                     <br />
                     <br />
-                    <Collapse in={ collapse } timeout={ 1000 }>
+                    <Collapse in={ collapse } timeout={ { enter: 1000, exit: 300 } }>
                         <div style={ { width: 200, height: 200, border: '1px solid red', padding: 10 } }>
                             Collapse
                         </div>
