@@ -79,7 +79,7 @@ const Collapse: React.FC<CollapseProps> = React.forwardRef<HTMLDivElement, Colla
                             classnames(
                                 classes.container,
                                 { [classes.entered]: state === 'entered' },
-                                { [classes.hidden]: state === 'exited' && !inProp && collapsedHeight !== '0px' },
+                                { [classes.hidden]: state === 'exited' && !inProp && collapsedHeight === '0px' },
                                 className
                             )
                         }

@@ -13,7 +13,8 @@ const entered: Style = {
 };
 
 const hidden: Style = {
-    overflow: 'hidden'
+    overflow: 'hidden',
+    visibility: 'hidden'
 };
 
 export const styles = (_: Theme): Styles => ({
