@@ -55,16 +55,16 @@ const useStyles = createUseStyles<ClassProps>((theme: Theme): Styles => {
             boxShadow: '0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12)'
         },
         main: {
-            padding: [80, 210, 40, 340]
+            padding: [80, 266, 40, 340]
         }
     };
 }, 'Container');
 
-const Test = () => {
+const Container = () => {
     const classes = useStyles();
 
     return (
-        <div>
+        <>
             <Nav />
             <header className={ classes.header } />
             <main className={ classes.main }>
@@ -183,7 +183,7 @@ const Test = () => {
                     </li>
                 </ul>
             </nav>
-        </div>
+        </>
     );
 };
 
@@ -191,7 +191,7 @@ const App = () => {
     return (
         <ThemeProvider>
             <Router basename="/drug-ui">
-                <Test />
+                <Container />
             </Router>
         </ThemeProvider>
     );
