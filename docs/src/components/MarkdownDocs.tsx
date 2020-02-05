@@ -2,6 +2,7 @@ import * as React from 'react';
 import { demoRegexp, getContents } from '../utils/parseMarkdown';
 import Demo from './Demo';
 import MarkdownElement from './MarkdownElement';
+import AppTableOfContents from './AppTableOfContents';
 
 interface MarkdownDocsProps {
     req?: __WebpackModuleApi.RequireContext;
@@ -37,19 +38,21 @@ const MarkdownDocs: React.FC<MarkdownDocsProps> = props => {
         });
     }
     const contents = getContents(markdown);
-
     return (
         <>
-            {
-                contents.map((content, index) => {
-                    if (demoRegexp.test(content)) {
-                        const demoOptions = JSON.parse(`{${ content }}`);
-                        return <Demo key={ content } demo={ demos[demoOptions.demo] } />;
-                    } else {
-                        return <MarkdownElement key={ content } text={ content } />;
-                    }
-                })
-            }
+            <AppTableOfContents contents={ contents } />
+            <div>
+                {
+                    contents.map(content => {
+                        if (demoRegexp.test(content)) {
+                            const demoOptions = JSON.parse(`{${ content }}`);
+                            return <Demo key={ content } demo={ demos[demoOptions.demo] } />;
+                        } else {
+                            return <MarkdownElement key={ content } text={ content } />;
+                        }
+                    })
+                }
+            </div>
         </>
     );
 };
