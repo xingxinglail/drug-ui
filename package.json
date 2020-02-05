@@ -12,6 +12,7 @@
         "docs:start": "yarn workspace docs start",
         "docs:dev": "yarn workspace docs dev",
         "docs:build": "yarn workspace docs build:docs",
+        "docs:report": "yarn workspace docs report:docs",
         "commit": "npx git-cz",
         "build": "lerna run build",
         "release": "yarn run build && lerna publish from-package --contents build"
@@ -61,6 +62,7 @@
         "ts-node": "^8.3.0",
         "typescript": "^3.7.2",
         "webpack": "^4.29.6",
+        "webpack-bundle-analyzer": "^3.6.0",
         "webpack-cli": "^3.2.3",
         "webpack-dev-server": "^3.2.1"
     },

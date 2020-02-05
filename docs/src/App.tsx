@@ -5,39 +5,34 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link,
-    useLocation
+    Link
 } from 'react-router-dom';
-import Buttons from './pages/components/Buttons';
-import ButtonsApi from './pages/api/Button';
-import ButtonBaseApi from './pages/api/ButtonBase';
-import ButtonGroupApi from './pages/api/ButtonGroup';
-import FabApi from './pages/api/Fab';
-import IconButtonApi from './pages/api/IconButton';
-import Install from './pages/components/install/Install';
-import GettingStarted from './pages/components/gettingStarted/GettingStarted';
 import { ThemeProvider } from '@drug-ui/core';
 import { createUseStyles, Theme } from '@drug-ui/core/styles';
 import Nav from './components/Nav';
 
-import Layouts from './pages/components/Layouts';
-import LayoutApi from './pages/api/Layout';
-
-import ScrollBars from './pages/components/ScrollBar';
-import ScrollBarApi from './pages/api/ScrollBar';
-
-import Dialogs from './pages/components/Dialogs';
-import DialogApi from './pages/api/Dialog';
-
-import Menu from './pages/components/Menu';
-import MenuApi from './pages/api/Menu';
-import SubMenuApi from './pages/api/SubMenu';
-import MenuItemApi from './pages/api/MenuItem';
-
-import Transitions from './pages/components/Transitions';
-import CollapseApi from './pages/api/Collapse';
-import FadeApi from './pages/api/Fade';
-import ZoomApi from './pages/api/zoom';
+const Buttons = React.lazy(() => import('./pages/components/Buttons'));
+const ButtonsApi = React.lazy(() => import('./pages/api/Button'));
+const ButtonBaseApi = React.lazy(() => import('./pages/api/ButtonBase'));
+const ButtonGroupApi = React.lazy(() => import('./pages/api/ButtonGroup'));
+const FabApi = React.lazy(() => import('./pages/api/Fab'));
+const IconButtonApi = React.lazy(() => import('./pages/api/IconButton'));
+const Install = React.lazy(() => import('./pages/components/install/Install'));
+const GettingStarted = React.lazy(() => import('./pages/components/gettingStarted/GettingStarted'));
+const Layouts = React.lazy(() => import('./pages/components/Layouts'));
+const LayoutApi = React.lazy(() => import('./pages/api/Layout'));
+const ScrollBars = React.lazy(() => import('./pages/components/ScrollBar'));
+const ScrollBarApi = React.lazy(() => import('./pages/api/ScrollBar'));
+const Dialogs = React.lazy(() => import('./pages/components/Dialogs'));
+const DialogApi = React.lazy(() => import('./pages/api/Dialog'));
+const Menu = React.lazy(() => import('./pages/components/Menu'));
+const MenuApi = React.lazy(() => import('./pages/api/Menu'));
+const SubMenuApi = React.lazy(() => import('./pages/api/SubMenu'));
+const MenuItemApi = React.lazy(() => import('./pages/api/MenuItem'));
+const Transitions = React.lazy(() => import('./pages/components/Transitions'));
+const CollapseApi = React.lazy(() => import('./pages/api/Collapse'));
+const FadeApi = React.lazy(() => import('./pages/api/Fade'));
+const ZoomApi = React.lazy(() => import('./pages/api/zoom'));
 
 type ClassProps = 'header' | 'main' | 'nav' | 'logo' | 'menu';
 
@@ -60,6 +55,8 @@ const useStyles = createUseStyles<ClassProps>((theme: Theme): Styles => {
     };
 }, 'Container');
 
+const { Suspense } = React;
+
 const Container = () => {
     const classes = useStyles();
 
@@ -68,74 +65,36 @@ const Container = () => {
             <Nav />
             <header className={ classes.header } />
             <main className={ classes.main }>
-                <Switch>
-                    <Route path="/getting-started/installation">
-                        <Install />
-                    </Route>
-                    <Route path="/getting-started/usage">
-                        <GettingStarted />
-                    </Route>
-                    <Route path="/components/buttons">
-                        <Buttons />
-                    </Route>
-                    <Route path="/api/button">
-                        <ButtonsApi />
-                    </Route>
-                    <Route path="/api/button-base">
-                        <ButtonBaseApi />
-                    </Route>
-                    <Route path="/api/button-group">
-                        <ButtonGroupApi />
-                    </Route>
-                    <Route path="/api/fab">
-                        <FabApi />
-                    </Route>
-                    <Route path="/api/icon-button">
-                        <IconButtonApi />
-                    </Route>
-                    <Route path="/components/layouts">
-                        <Layouts />
-                    </Route>
-                    <Route path="/api/layout">
-                        <LayoutApi />
-                    </Route>
-                    <Route path="/components/scroll-bars">
-                        <ScrollBars />
-                    </Route>
-                    <Route path="/api/scroll-bar">
-                        <ScrollBarApi />
-                    </Route>
-                    <Route path="/components/dialogs">
-                        <Dialogs />
-                    </Route>
-                    <Route path="/api/dialog">
-                        <DialogApi />
-                    </Route>
-                    <Route path="/components/menus">
-                        <Menu />
-                    </Route>
-                    <Route path="/api/menu">
-                        <MenuApi />
-                    </Route>
-                    <Route path="/api/sub-menu">
-                        <SubMenuApi />
-                    </Route>
-                    <Route path="/api/menu-item">
-                        <MenuItemApi />
-                    </Route>
-                    <Route path="/components/transitions">
-                        <Transitions />
-                    </Route>
-                    <Route path="/api/collapse">
-                        <CollapseApi />
-                    </Route>
-                    <Route path="/api/fade">
-                        <FadeApi />
-                    </Route>
-                    <Route path="/api/zoom">
-                        <ZoomApi />
-                    </Route>
-                </Switch>
+                <Suspense fallback={ <div>Loading...</div> }>
+                    <Switch>
+                        <Route path="/getting-started/installation">
+                            <Install />
+                        </Route>
+                        <Route path="/getting-started/usage" component={ GettingStarted } />
+                        <Route path="/components/buttons">
+                            <Buttons />
+                        </Route>
+                        <Route path="/api/button" component={ ButtonsApi } />
+                        <Route path="/api/button-base" component={ ButtonBaseApi } />
+                        <Route path="/api/button-group" component={ ButtonGroupApi } />
+                        <Route path="/api/fab" component={ FabApi } />
+                        <Route path="/api/icon-button" component={ IconButtonApi } />
+                        <Route path="/components/layouts" component={ Layouts } />
+                        <Route path="/api/layout" component={ LayoutApi } />
+                        <Route path="/components/scroll-bars" component={ ScrollBars } />
+                        <Route path="/api/scroll-bar" component={ ScrollBarApi } />
+                        <Route path="/components/dialogs" component={ Dialogs } />
+                        <Route path="/api/dialog" component={ DialogApi } />
+                        <Route path="/components/menus" component={ Menu } />
+                        <Route path="/api/menu" component={ MenuApi } />
+                        <Route path="/api/sub-menu" component={ SubMenuApi } />
+                        <Route path="/api/menu-item" component={ MenuItemApi } />
+                        <Route path="/components/transitions" component={ Transitions } />
+                        <Route path="/api/collapse" component={ CollapseApi } />
+                        <Route path="/api/fade" component={ FadeApi } />
+                        <Route path="/api/zoom" component={ ZoomApi } />
+                    </Switch>
+                </Suspense>
             </main>
             <nav>
                 <ul>
