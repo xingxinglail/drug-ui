@@ -27,6 +27,7 @@
         "@types/enzyme": "^3.10.4",
         "@types/jest": "^24.0.9",
         "@types/marked": "^0.7.2",
+        "@types/nprogress": "^0.2.0",
         "@types/prismjs": "^1.16.0",
         "@types/prop-types": "^15.7.3",
         "@types/react": "^16.9.4",
@@ -73,6 +74,7 @@
     },
     "dependencies": {
         "marked": "^0.8.0",
+        "nprogress": "^0.2.0",
         "prismjs": "^1.19.0",
         "raw-loader": "^4.0.0",
         "react-router-dom": "^5.1.2"

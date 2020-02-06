@@ -11,7 +11,7 @@ const useStyles = createUseStyles<ClassProps>((theme: Theme): Styles => {
         nav: {
             width: 240,
             position: 'fixed',
-            zIndex: 99999,
+            zIndex: 1000,
             top: 0,
             bottom: 0,
             backgroundColor: '#fff',

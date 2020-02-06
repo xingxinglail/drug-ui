@@ -5,7 +5,7 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    useLocation, useHistory
+    useLocation
 } from 'react-router-dom';
 import { ThemeProvider } from '@drug-ui/core';
 import { createUseStyles, Theme } from '@drug-ui/core/styles';
@@ -40,9 +40,30 @@ type ClassProps = 'header' | 'main' | 'nav' | 'logo' | 'menu';
 
 const useStyles = createUseStyles<ClassProps>((theme: Theme): Styles => {
     return {
+        '@global': {
+            '#nprogress': {
+                direction: 'ltr',
+                pointerEvents: 'none',
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: 2,
+                backgroundColor: '#e0e0e0',
+                zIndex: 2000,
+                '& .bar': {
+                    position: 'fixed',
+                    backgroundColor: '#000',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: 2
+                }
+            }
+        },
         header: {
             position: 'fixed',
-            zIndex: 99999,
+            zIndex: 1000,
             top: 0,
             right: 0,
             width: 'calc(100% - 240px)',

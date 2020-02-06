@@ -1,4 +1,7 @@
 import * as React from 'react';
+import * as NProgress from 'nprogress';
+
+NProgress.configure({ showSpinner: false });
 
 const asyncComponent = (importComponent: () => Promise<{ default: () => React.ReactElement }>) => {
 
@@ -7,8 +10,10 @@ const asyncComponent = (importComponent: () => Promise<{ default: () => React.Re
         React.useEffect(() => {
             (async () => {
                 try {
+                    NProgress.start();
                     const res = await importComponent();
                     setComponent(res.default());
+                    NProgress.done();
                 } catch (err) {
                     console.error(err);
                 }
