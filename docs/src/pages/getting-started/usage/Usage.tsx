@@ -11,7 +11,7 @@ const reqSource = require.context(
 const Pages = () => {
     return (
         <div>
-            <MarkdownDocs req={ req } reqSource={reqSource} reqPrefix="pages/gettingStarted/components" />
+            <MarkdownDocs req={ req } reqSource={reqSource} reqPrefix="pages/getting-started/components" />
         </div>
     );
 };

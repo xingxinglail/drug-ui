@@ -30,7 +30,7 @@ Style sheet name: `DuiScrollBar`.
 
 ## Demos
 
-- [ScrollBar](/drug-ui/components/scroll-bar/)
+- [ScrollBar](/drug-ui/components/ScrollBar)
 
 
 

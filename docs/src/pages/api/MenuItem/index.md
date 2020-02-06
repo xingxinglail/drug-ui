@@ -30,7 +30,7 @@ Style sheet name: `DuiMenu`.
 
 ## Demos
 
-- [Menu](/drug-ui/components/menus/)
+- [Menu](/drug-ui/components/Menu)
 
 
 

@@ -60,8 +60,8 @@ title: 按钮
 
 ## API
 
-- [&lt;Button /&gt;](/drug-ui/api/button)
-- [&lt;ButtonBase /&gt;](/drug-ui/api/button-base)
-- [&lt;ButtonGroup /&gt;](/drug-ui/api/button-group)
-- [&lt;Fab /&gt;](/drug-ui/api/fab)
-- [&lt;IconButton /&gt;](/drug-ui/api/icon-button)
+- [&lt;Button /&gt;](/drug-ui/api/Button)
+- [&lt;ButtonBase /&gt;](/drug-ui/api/ButtonBase)
+- [&lt;ButtonGroup /&gt;](/drug-ui/api/ButtonGroup)
+- [&lt;Fab /&gt;](/drug-ui/api/Fab)
+- [&lt;IconButton /&gt;](/drug-ui/api/IconButton)

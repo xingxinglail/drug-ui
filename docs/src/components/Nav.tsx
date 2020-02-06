@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { Menu, ScrollBar } from '@drug-ui/core';
 import { createUseStyles, Theme } from '@drug-ui/core/styles';
 import { Styles } from 'jss';
@@ -71,27 +71,27 @@ const Nav = () => {
             title: 'Components（组件）',
             children: [
                 {
-                    index: '/buttons',
+                    index: '/Buttons',
                     title: 'Button（按钮）'
                 },
                 {
-                    index: '/layouts',
+                    index: '/Layouts',
                     title: 'Layout（布局）'
                 },
                 {
-                    index: '/scroll-bars',
+                    index: '/ScrollBar',
                     title: 'ScrollBar（滚动条）'
                 },
                 {
-                    index: '/dialogs',
+                    index: '/Dialogs',
                     title: 'Dialog（对话框）'
                 },
                 {
-                    index: '/menus',
+                    index: '/Menu',
                     title: 'Menu（导航菜单）'
                 },
                 {
-                    index: '/transitions',
+                    index: '/Transitions',
                     title: 'Transitions（过渡动画）'
                 }
             ]
@@ -101,69 +101,75 @@ const Nav = () => {
             title: 'Components API',
             children: [
                 {
-                    index: '/button',
+                    index: '/Button',
                     title: 'Button'
                 },
                 {
-                    index: '/button-base',
+                    index: '/ButtonBase',
                     title: 'ButtonBase'
                 },
                 {
-                    index: '/button-group',
+                    index: '/ButtonGroup',
                     title: 'ButtonGroup'
                 },
                 {
-                    index: '/fab',
+                    index: '/Fab',
                     title: 'Fab'
                 },
                 {
-                    index: '/icon-button',
+                    index: '/IconButton',
                     title: 'IconButton'
                 },
                 {
-                    index: '/layout',
+                    index: '/Layout',
                     title: 'Layout'
                 },
                 {
-                    index: '/scroll-bar',
+                    index: '/ScrollBar',
                     title: 'ScrollBar'
                 },
                 {
-                    index: '/dialog',
+                    index: '/Dialog',
                     title: 'Dialog'
                 },
                 {
-                    index: '/menu',
+                    index: '/Menu',
                     title: 'Menu'
                 },
                 {
-                    index: '/sub-menu',
+                    index: '/SubMenu',
                     title: 'Menu.SubMenu'
                 },
                 {
-                    index: '/menu-item',
+                    index: '/MenuItem',
                     title: 'Menu.Item'
                 },
                 {
-                    index: '/collapse',
+                    index: '/Collapse',
                     title: 'Collapse'
                 },
                 {
-                    index: '/fade',
+                    index: '/Fade',
                     title: 'Fade'
                 },
                 {
-                    index: '/zoom',
+                    index: '/Zoom',
                     title: 'Zoom'
                 }
             ]
         }
     ];
 
+    const history = useHistory();
+
+    const handleClick = () => {
+        history.push('/');
+    };
+
     return (
         <nav className={ classes.nav }>
             <ScrollBar style={ { height: '100%' } }>
-                <div className={ classes.logo }>logo</div>
+                <div className={ classes.logo } onClick={ handleClick }>logo</div>
                 <Menu
                     className={ classes.menu }
                     defaultOpenIndexes={ data.map(c => c.index) }

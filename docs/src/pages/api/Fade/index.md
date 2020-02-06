@@ -30,7 +30,7 @@ Style sheet name: `DuiFade`.
 
 ## Demos
 
-- [Transitions](/drug-ui/components/transitions/)
+- [Transitions](/drug-ui/components/Transitions)
 
 
 

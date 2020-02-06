@@ -12,4 +12,4 @@ title: 滚动条
 
 ## API
 
-- [&lt;ScrollBar /&gt;](/drug-ui/api/scroll-bar)
+- [&lt;ScrollBar /&gt;](/drug-ui/api/ScrollBar)

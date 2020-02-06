@@ -5,34 +5,36 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    useLocation, useHistory
 } from 'react-router-dom';
 import { ThemeProvider } from '@drug-ui/core';
 import { createUseStyles, Theme } from '@drug-ui/core/styles';
+import asyncComponent from './components/asyncComponent';
 import Nav from './components/Nav';
+import Index from './pages/Index';
 
-const Buttons = React.lazy(() => import('./pages/components/Buttons'));
-const ButtonsApi = React.lazy(() => import('./pages/api/Button'));
-const ButtonBaseApi = React.lazy(() => import('./pages/api/ButtonBase'));
-const ButtonGroupApi = React.lazy(() => import('./pages/api/ButtonGroup'));
-const FabApi = React.lazy(() => import('./pages/api/Fab'));
-const IconButtonApi = React.lazy(() => import('./pages/api/IconButton'));
-const Install = React.lazy(() => import('./pages/components/install/Install'));
-const GettingStarted = React.lazy(() => import('./pages/components/gettingStarted/GettingStarted'));
-const Layouts = React.lazy(() => import('./pages/components/Layouts'));
-const LayoutApi = React.lazy(() => import('./pages/api/Layout'));
-const ScrollBars = React.lazy(() => import('./pages/components/ScrollBar'));
-const ScrollBarApi = React.lazy(() => import('./pages/api/ScrollBar'));
-const Dialogs = React.lazy(() => import('./pages/components/Dialogs'));
-const DialogApi = React.lazy(() => import('./pages/api/Dialog'));
-const Menu = React.lazy(() => import('./pages/components/Menu'));
-const MenuApi = React.lazy(() => import('./pages/api/Menu'));
-const SubMenuApi = React.lazy(() => import('./pages/api/SubMenu'));
-const MenuItemApi = React.lazy(() => import('./pages/api/MenuItem'));
-const Transitions = React.lazy(() => import('./pages/components/Transitions'));
-const CollapseApi = React.lazy(() => import('./pages/api/Collapse'));
-const FadeApi = React.lazy(() => import('./pages/api/Fade'));
-const ZoomApi = React.lazy(() => import('./pages/api/zoom'));
+const Buttons = asyncComponent(() => import('./pages/components/Buttons'));
+const ButtonsApi = asyncComponent(() => import('./pages/api/Button'));
+const ButtonBaseApi = asyncComponent(() => import('./pages/api/ButtonBase'));
+const ButtonGroupApi = asyncComponent(() => import('./pages/api/ButtonGroup'));
+const FabApi = asyncComponent(() => import('./pages/api/Fab'));
+const IconButtonApi = asyncComponent(() => import('./pages/api/IconButton'));
+const Installation = asyncComponent(() => import('./pages/getting-started/installation/Installation'));
+const Usage = asyncComponent(() => import('./pages/getting-started/usage/Usage'));
+const Layouts = asyncComponent(() => import('./pages/components/Layouts'));
+const LayoutApi = asyncComponent(() => import('./pages/api/Layout'));
+const ScrollBars = asyncComponent(() => import('./pages/components/ScrollBar'));
+const ScrollBarApi = asyncComponent(() => import('./pages/api/ScrollBar'));
+const Dialogs = asyncComponent(() => import('./pages/components/Dialogs'));
+const DialogApi = asyncComponent(() => import('./pages/api/Dialog'));
+const Menu = asyncComponent(() => import('./pages/components/Menu'));
+const MenuApi = asyncComponent(() => import('./pages/api/Menu'));
+const SubMenuApi = asyncComponent(() => import('./pages/api/SubMenu'));
+const MenuItemApi = asyncComponent(() => import('./pages/api/MenuItem'));
+const Transitions = asyncComponent(() => import('./pages/components/Transitions'));
+const CollapseApi = asyncComponent(() => import('./pages/api/Collapse'));
+const FadeApi = asyncComponent(() => import('./pages/api/Fade'));
+const ZoomApi = asyncComponent(() => import('./pages/api/zoom'));
 
 type ClassProps = 'header' | 'main' | 'nav' | 'logo' | 'menu';
 
@@ -55,8 +57,6 @@ const useStyles = createUseStyles<ClassProps>((theme: Theme): Styles => {
     };
 }, 'Container');
 
-const { Suspense } = React;
-
 const Container = () => {
     const classes = useStyles();
 
@@ -65,92 +65,50 @@ const Container = () => {
             <Nav />
             <header className={ classes.header } />
             <main className={ classes.main }>
-                <Suspense fallback={ <div>Loading...</div> }>
-                    <Switch>
-                        <Route path="/getting-started/installation">
-                            <Install />
-                        </Route>
-                        <Route path="/getting-started/usage" component={ GettingStarted } />
-                        <Route path="/components/buttons">
-                            <Buttons />
-                        </Route>
-                        <Route path="/api/button" component={ ButtonsApi } />
-                        <Route path="/api/button-base" component={ ButtonBaseApi } />
-                        <Route path="/api/button-group" component={ ButtonGroupApi } />
-                        <Route path="/api/fab" component={ FabApi } />
-                        <Route path="/api/icon-button" component={ IconButtonApi } />
-                        <Route path="/components/layouts" component={ Layouts } />
-                        <Route path="/api/layout" component={ LayoutApi } />
-                        <Route path="/components/scroll-bars" component={ ScrollBars } />
-                        <Route path="/api/scroll-bar" component={ ScrollBarApi } />
-                        <Route path="/components/dialogs" component={ Dialogs } />
-                        <Route path="/api/dialog" component={ DialogApi } />
-                        <Route path="/components/menus" component={ Menu } />
-                        <Route path="/api/menu" component={ MenuApi } />
-                        <Route path="/api/sub-menu" component={ SubMenuApi } />
-                        <Route path="/api/menu-item" component={ MenuItemApi } />
-                        <Route path="/components/transitions" component={ Transitions } />
-                        <Route path="/api/collapse" component={ CollapseApi } />
-                        <Route path="/api/fade" component={ FadeApi } />
-                        <Route path="/api/zoom" component={ ZoomApi } />
-                    </Switch>
-                </Suspense>
+                <Switch>
+                    <Route path="/getting-started/installation" component={ Installation } />
+                    <Route path="/getting-started/usage" component={ Usage } />
+                    <Route path="/components/Buttons" component={ Buttons } />
+                    <Route path="/api/Button" component={ ButtonsApi } />
+                    <Route path="/api/ButtonBase" component={ ButtonBaseApi } />
+                    <Route path="/api/ButtonGroup" component={ ButtonGroupApi } />
+                    <Route path="/api/Fab" component={ FabApi } />
+                    <Route path="/api/IconButton" component={ IconButtonApi } />
+                    <Route path="/components/Layouts" component={ Layouts } />
+                    <Route path="/api/Layout" component={ LayoutApi } />
+                    <Route path="/components/scrollBar" component={ ScrollBars } />
+                    <Route path="/api/scrollBar" component={ ScrollBarApi } />
+                    <Route path="/components/Dialogs" component={ Dialogs } />
+                    <Route path="/api/Dialog" component={ DialogApi } />
+                    <Route path="/components/Menu" component={ Menu } />
+                    <Route path="/api/Menu" component={ MenuApi } />
+                    <Route path="/api/SubMenu" component={ SubMenuApi } />
+                    <Route path="/api/MenuItem" component={ MenuItemApi } />
+                    <Route path="/components/Transitions" component={ Transitions } />
+                    <Route path="/api/Collapse" component={ CollapseApi } />
+                    <Route path="/api/Fade" component={ FadeApi } />
+                    <Route path="/api/Zoom" component={ ZoomApi } />
+                </Switch>
             </main>
-            <nav>
-                <ul>
-                    <li>
-                        <Link to="/">安装</Link>
-                    </li>
-                    <li>
-                        <Link to="/getting-started">快速上手</Link>
-                    </li>
-                    <li>
-                        <Link to="/components/buttons">Button (按钮)</Link>
-                    </li>
-                    <li>
-                        <Link to="/api/button">Button API</Link>
-                    </li>
-                    <li>
-                        <Link to="/api/button-base">ButtonBase API</Link>
-                    </li>
-                    <li>
-                        <Link to="/api/button-group">ButtonGroupApi API</Link>
-                    </li>
-                    <li>
-                        <Link to="/api/fab">Fab API</Link>
-                    </li>
-                    <li>
-                        <Link to="/api/icon-button">IconButton API</Link>
-                    </li>
-                    <li>
-                        <Link to="/components/layouts">Layout (布局)</Link>
-                    </li>
-                    <li>
-                        <Link to="/api/layout">Layout API</Link>
-                    </li>
-                    <li>
-                        <Link to="/components/scroll-bar">ScrollBar (滚动条)</Link>
-                    </li>
-                    <li>
-                        <Link to="/api/scroll-bar">ScrollBar API</Link>
-                    </li>
-                    <li>
-                        <Link to="/components/dialogs">Dialog (对话框)</Link>
-                    </li>
-                    <li>
-                        <Link to="/api/dialog">Dialog API</Link>
-                    </li>
-                </ul>
-            </nav>
         </>
     );
 };
 
+const RouterWrapper = () => {
+    const location = useLocation();
+
+    return location.pathname !== '/' ? <Container /> :
+        <Switch>
+            <Route path="/" component={ Index } />
+        </Switch>;
+};
+
 const App = () => {
+
     return (
         <ThemeProvider>
             <Router basename="/drug-ui">
-                <Container />
+                <RouterWrapper />
             </Router>
         </ThemeProvider>
     );

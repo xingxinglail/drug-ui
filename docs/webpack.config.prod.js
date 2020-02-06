@@ -11,16 +11,8 @@ function resolve (dir) {
 
 function getIndexEntry () {
     const entry = {};
-    glob.sync(resolve('src/pages/components/install/Install.tsx')).forEach(name => {
+    glob.sync(resolve('src/pages/Index.tsx')).forEach(name => {
         entry.index = [resolve('src/App.tsx')];
-    });
-    return entry;
-}
-
-function getGettingStartedEntry () {
-    const entry = {};
-    glob.sync(resolve('src/pages/components/gettingStarted/GettingStarted.tsx')).forEach(name => {
-        entry['getting-started'] = [resolve('src/App.tsx')];
     });
     return entry;
 }
@@ -31,17 +23,17 @@ function getEntry (path) {
         const start = name.indexOf('src/') + 4;
         const end = name.length - 3;
         let n = name.slice(start, end).split('/');
-        n = n[1].toLowerCase() + '/' + n[2].toLowerCase();
+        n = n[1] + '/' + n[2];
         entry[n] = [resolve('src/App.tsx')];
     });
     return entry;
 }
 
 const indexEntry  = getIndexEntry();
-const gettingStartedEntry  = getGettingStartedEntry();
 const componentsEntrys = getEntry('src/pages/components/**/Index.ts');
 const apiEntrys = getEntry('src/pages/api/**/Index.ts');
-const entry = Object.assign({}, indexEntry, gettingStartedEntry, componentsEntrys, apiEntrys);
+const gettingStartedEntrys = getEntry('src/pages/getting-started/**/Index.ts');
+const entry = Object.assign({}, indexEntry, componentsEntrys, apiEntrys, gettingStartedEntrys);
 
 module.exports = Object.assign({}, base, {
     mode: 'production',
