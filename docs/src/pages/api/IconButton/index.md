@@ -33,7 +33,7 @@ Style sheet name: `DuiIconButton`.
 
 ## Demos
 
-- [Buttons](/drug-ui/components/Buttons)
+- [Buttons](/components/Buttons)
 
 
 

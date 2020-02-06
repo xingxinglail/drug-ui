@@ -39,7 +39,7 @@ renderer.link = (href, title, text) => {
     //     finalHref = `/${ finalHref }`;
     // }
 
-    return `<a href="${ href }">${ text }</a>`;
+    return `<a href="${ href }" renderer-link>${ text }</a>`;
 };
 
 const markedOptions = {

@@ -33,7 +33,7 @@ Style sheet name: `DuiFab`.
 
 ## Demos
 
-- [Buttons](/drug-ui/components/Buttons)
+- [Buttons](/components/Buttons)
 
 
 

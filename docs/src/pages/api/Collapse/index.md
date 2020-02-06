@@ -31,8 +31,8 @@ Style sheet name: `DuiCollapse`.
 
 ## Demos
 
-- [Menu](/drug-ui/components/Menu)
-- [Transitions](/drug-ui/components/Transitions)
+- [Menu](/components/Menu)
+- [Transitions](/components/Transitions)
 
 
 

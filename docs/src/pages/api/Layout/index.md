@@ -40,7 +40,7 @@ Style sheet name: `DuiLayout`.
 
 ## Demos
 
-- [Layouts](/drug-ui/components/Layouts)
+- [Layouts](/components/Layouts)
 
 
 

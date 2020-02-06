@@ -12,4 +12,4 @@ title: 对话框
 
 ## API
 
-- [&lt;Dialog /&gt;](/drug-ui/api/Dialog)
+- [&lt;Dialog /&gt;](/api/Dialog)

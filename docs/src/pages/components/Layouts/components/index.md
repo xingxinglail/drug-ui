@@ -24,4 +24,4 @@ title: 布局
 
 ## API
 
-- [&lt;Layout /&gt;](/drug-ui/api/Layout)
+- [&lt;Layout /&gt;](/api/Layout)

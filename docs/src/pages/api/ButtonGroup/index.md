@@ -1,5 +1,5 @@
 ---
-filename: /packages/drug-ui/src/ButtonGroup/ButtonGroup.js
+filename: /packages/src/ButtonGroup/ButtonGroup.js
 ---
 
 # ButtonGroup API
@@ -31,7 +31,7 @@ Style sheet name: `DuiButtonGroup`.
 
 ## Demos
 
-- [Buttons](/drug-ui/components/Buttons)
+- [Buttons](/components/Buttons)
 
 
 

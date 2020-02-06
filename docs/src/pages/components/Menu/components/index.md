@@ -12,6 +12,6 @@ title: 导航菜单
 
 ## API
 
-- [&lt;Menu /&gt;](/drug-ui/api/Menu)
-- [&lt;SubMenu /&gt;](/drug-ui/api/SubMenu)
-- [&lt;Item /&gt;](/drug-ui/api/MenuItem)
+- [&lt;Menu /&gt;](/api/Menu)
+- [&lt;SubMenu /&gt;](/api/SubMenu)
+- [&lt;Item /&gt;](/api/MenuItem)

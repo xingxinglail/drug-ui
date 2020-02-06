@@ -10,6 +10,7 @@ import {
 import { ThemeProvider } from '@drug-ui/core';
 import { createUseStyles, Theme } from '@drug-ui/core/styles';
 import asyncComponent from './components/asyncComponent';
+import MarkdownLinks from './components/MarkdownLinks';
 import Nav from './components/Nav';
 import Index from './pages/Index';
 
@@ -129,6 +130,7 @@ const App = () => {
     return (
         <ThemeProvider>
             <Router basename="/drug-ui">
+                <MarkdownLinks />
                 <RouterWrapper />
             </Router>
         </ThemeProvider>
