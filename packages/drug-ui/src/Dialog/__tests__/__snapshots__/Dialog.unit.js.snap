@@ -12,7 +12,7 @@ exports[`<Dialog /> render successful 1`] = `
             "palette": Object {
               "primary": Object {
                 "contrastText": "#fff",
-                "main": "#1976d2",
+                "main": "#4d3087",
               },
               "secondary": Object {
                 "contrastText": "#fff",
@@ -69,6 +69,7 @@ exports[`<Dialog /> render successful 1`] = `
                             <button
                               class="DuiButtonBase-root DuiIconButton-root DuiIconButton-sizeSmall"
                             >
+                              ×
                               <span
                                 class="DuiRipple-root"
                               />
@@ -112,6 +113,7 @@ exports[`<Dialog /> render successful 1`] = `
                             <button
                               class="DuiButtonBase-root DuiIconButton-root DuiIconButton-sizeSmall"
                             >
+                              ×
                               <span
                                 class="DuiRipple-root"
                               />
@@ -205,6 +207,7 @@ exports[`<Dialog /> render successful 1`] = `
                                 className="DuiButtonBase-root DuiIconButton-root DuiIconButton-sizeSmall"
                                 disabled={false}
                               >
+                                ×
                                 <Ripple
                                   center={true}
                                 >
@@ -270,6 +273,7 @@ exports[`<Dialog /> render successful 1`] = `
                                               <button
                                                 class="DuiButtonBase-root DuiIconButton-root DuiIconButton-sizeSmall"
                                               >
+                                                ×
                                                 <span
                                                   class="DuiRipple-root"
                                                 />
@@ -313,6 +317,7 @@ exports[`<Dialog /> render successful 1`] = `
                                               <button
                                                 class="DuiButtonBase-root DuiIconButton-root DuiIconButton-sizeSmall"
                                               >
+                                                ×
                                                 <span
                                                   class="DuiRipple-root"
                                                 />
@@ -406,6 +411,7 @@ exports[`<Dialog /> render successful 1`] = `
                                                   className="DuiButtonBase-root DuiIconButton-root DuiIconButton-sizeSmall"
                                                   disabled={false}
                                                 >
+                                                  ×
                                                   <Ripple
                                                     center={true}
                                                   >
