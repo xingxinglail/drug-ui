@@ -1,6 +1,6 @@
 {
     "name": "@drug-ui/core",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "private": false,
     "description": "A UI Design Language and React UI library.",
     "author": "star <istarcoming@163.com>",

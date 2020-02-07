@@ -12,7 +12,7 @@ export { default as ButtonGroup } from './ButtonGroup';
 export { default as Button } from './Button';
 export { default as Fab } from './Fab';
 export { default as IconButton } from './IconButton';
-export { default as SvgIcon, SvgIconProps } from './SvgIcon';
+export { default as SvgIcon } from './SvgIcon';
 export { default as Layout } from './Layout';
 export { default as Dialog } from './Dialog';
 export { default as Form } from './Form';
