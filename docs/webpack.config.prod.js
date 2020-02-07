@@ -1,8 +1,9 @@
 const path = require('path');
 const glob = require('glob');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const base = require('./webpack.config');
 
 function resolve (dir) {
@@ -29,7 +30,7 @@ function getEntry (path) {
     return entry;
 }
 
-const indexEntry  = getIndexEntry();
+const indexEntry = getIndexEntry();
 const componentsEntrys = getEntry('src/pages/components/**/Index.ts');
 const apiEntrys = getEntry('src/pages/api/**/Index.ts');
 const gettingStartedEntrys = getEntry('src/pages/getting-started/**/Index.ts');
@@ -90,13 +91,20 @@ module.exports = Object.assign({}, base, {
     //     }
     // },
     plugins: [
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        new CopyWebpackPlugin([
+            {
+                from: resolve('./static'),
+                to: 'static',
+                ignore: ['.*']
+            }
+        ])
     ]
 });
 
 const htmlArray = [];
 
-Object.keys(entry).forEach(element =>{
+Object.keys(entry).forEach(element => {
     htmlArray.push({
         _html: element,
         chunks: ['vendor', 'common', element]
@@ -106,15 +114,15 @@ Object.keys(entry).forEach(element =>{
 function getHtmlConfig (name, chunks) {
     return {
         template: resolve(`index.html`),
-        filename: `${name}.html`,
+        filename: `${ name }.html`,
         inject: true,
         hash: false,
         chunks
-    }
+    };
 }
 
 //自动生成html模板
-htmlArray.forEach(element =>{
+htmlArray.forEach(element => {
     module.exports.plugins.push(new HtmlWebpackPlugin(getHtmlConfig(element._html, element.chunks)));
 });
 

@@ -24,8 +24,30 @@ const useStyles = createUseStyles<ClassProps>((theme: Theme): Styles => {
             }
         },
         logo: {
+            display: 'flex',
+            alignItems: 'flex-start',
+            justifyContent: 'center',
+            flexDirection: 'column',
             height: 64,
-            borderBottom: '1px solid rgba(0, 0, 0, 0.12)'
+            paddingLeft: 24,
+            borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
+
+            '& .title': {
+                color: 'rgba(0, 0, 0, 0.54)',
+                fontSize: 20,
+                marginBottom: 4,
+                fontWeight: 500,
+
+                '&:hover': {
+                    textDecoration: 'underline',
+                    color: theme.palette.primary.main
+                }
+            },
+
+            '& .version': {
+                color: 'rgba(0, 0, 0, 0.54)',
+                fontSize: 12
+            }
         },
         menu: {
             '& a': {
@@ -169,7 +191,10 @@ const Nav = () => {
     return (
         <nav className={ classes.nav }>
             <ScrollBar style={ { height: '100%' } }>
-                <div className={ classes.logo } onClick={ handleClick }>logo</div>
+                <div className={ classes.logo }>
+                    <Link className="title" to='/'>Drug-UI</Link>
+                    <span className="version">v0.1.0</span>
+                </div>
                 <Menu
                     className={ classes.menu }
                     defaultOpenIndexes={ data.map(c => c.index) }

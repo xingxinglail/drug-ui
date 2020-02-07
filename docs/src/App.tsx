@@ -7,12 +7,14 @@ import {
     Route,
     useLocation
 } from 'react-router-dom';
-import { ThemeProvider } from '@drug-ui/core';
+import { ThemeProvider, IconButton } from '@drug-ui/core';
+import { Github, Search } from '@drug-ui/icons';
 import { createUseStyles, Theme } from '@drug-ui/core/styles';
 import asyncComponent from './components/asyncComponent';
 import MarkdownLinks from './components/MarkdownLinks';
 import Nav from './components/Nav';
 import Index from './pages/Index';
+
 
 const Buttons = asyncComponent(() => import('./pages/components/Buttons'));
 const ButtonsApi = asyncComponent(() => import('./pages/api/Button'));
@@ -62,17 +64,6 @@ const useStyles = createUseStyles<ClassProps>((theme: Theme): Styles => {
                 }
             }
         },
-        header: {
-            position: 'fixed',
-            zIndex: 1000,
-            top: 0,
-            right: 0,
-            width: 'calc(100% - 240px)',
-            height: 64,
-            color: '#fff',
-            backgroundColor: '#1976d2',
-            boxShadow: '0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12)'
-        },
         main: {
             padding: [80, 266, 40, 340]
         }
@@ -85,7 +76,6 @@ const Container = () => {
     return (
         <>
             <Nav />
-            <header className={ classes.header } />
             <main className={ classes.main }>
                 <Switch>
                     <Route path="/getting-started/installation" component={ Installation } />
@@ -116,13 +106,50 @@ const Container = () => {
     );
 };
 
+type HeaderClassProps = 'root';
+
+const useHeaderStyles = createUseStyles<HeaderClassProps>((theme: Theme): Styles => {
+    return {
+        root: {
+            position: 'fixed',
+            zIndex: 1000,
+            top: 0,
+            right: 0,
+            width: 'calc(100% - 240px)',
+            height: 64,
+            color: '#fff',
+            backgroundColor: theme.palette.primary.main,
+            boxShadow: '0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'flex-end',
+            padding: [0, 24],
+            boxSizing: 'border-box',
+            '& svg': {
+                fontSize: 28
+            }
+        }
+    };
+}, 'Header');
+
 const RouterWrapper = () => {
     const location = useLocation();
+    const classes = useHeaderStyles();
 
-    return location.pathname !== '/' ? <Container /> :
-        <Switch>
-            <Route path="/" component={ Index } />
-        </Switch>;
+    return (
+        <>
+            <header className={ classes.root } style={{ width: location.pathname === '/' ? '100%' : '' }}>
+                {/*<Search  />*/ }
+                <IconButton size="medium" href="https://xingxinglail.github.io/drug-ui"><Github /></IconButton>
+            </header>
+            {
+                location.pathname !== '/' ? <Container /> :
+                    <Switch>
+                        <Route path="/" component={ Index } />
+                    </Switch>
+            }
+        </>
+    );
 };
 
 const App = () => {
