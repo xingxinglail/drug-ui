@@ -1,6 +1,6 @@
 {
     "name": "@drug-ui/styles",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "private": false,
     "description": "Drug-UI React styles.",
     "author": "star <istarcoming@163.com>",
