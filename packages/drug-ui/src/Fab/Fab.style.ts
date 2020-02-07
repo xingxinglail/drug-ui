@@ -30,7 +30,7 @@ const primary: Style = (theme: Theme) => ({
     color: theme.palette.primary.contrastText,
     backgroundColor: theme.palette.primary.main,
     '&:hover': {
-        backgroundColor: '#115293'
+        backgroundColor: '#35215e'
     }
 });
 

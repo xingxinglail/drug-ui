@@ -22,7 +22,7 @@ const root: Style = () => ({
 const primary: Style = (theme: Theme) => ({
     color: theme.palette.primary.main,
     '&:hover': {
-        backgroundColor: 'rgba(25, 118, 210, 0.08)'
+        backgroundColor: 'rgba(77, 48, 135, 0.04)'
     }
 });
 

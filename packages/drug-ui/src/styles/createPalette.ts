@@ -16,7 +16,7 @@ export interface Palette {
 const createPalette = (paletteOptions: PaletteOptions): Palette => {
     const {
         primary = {
-            main: '#40336f',
+            main: '#4d3087',
             contrastText: '#fff'
         },
         secondary = {

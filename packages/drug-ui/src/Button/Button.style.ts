@@ -41,7 +41,7 @@ const containedPrimary: Style = (theme: Theme) => ({
     color: theme.palette.primary.contrastText,
     backgroundColor: theme.palette.primary.main,
     '&:hover': {
-        backgroundColor: '#2c244d'
+        backgroundColor: '#35215e'
     }
 });
 
@@ -104,10 +104,10 @@ const outlined: Style = {
 
 const outlinedPrimary: Style = (theme: Theme) => ({
     color: theme.palette.primary.main,
-    border: '1px solid rgba(64, 51, 111, 0.5)',
+    border: '1px solid rgba(77, 48, 135, 0.5)',
     '&:hover': {
-        border: '1px solid 1976d2',
-        backgroundColor: 'rgba(64, 51, 111, 0.08)'
+        border: '1px solid #4d3087',
+        backgroundColor: 'rgba(77, 48, 135, 0.04)'
     }
 });
 
