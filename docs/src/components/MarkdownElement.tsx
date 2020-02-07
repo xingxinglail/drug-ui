@@ -111,6 +111,7 @@ const useStyles = createUseStyles({
             padding: '2px 6px',
             fontSize: 14,
             borderRadius: 2,
+            backgroundColor: 'rgba(255,229,100,0.2)',
         },
         '& code[class*="language-"]': {
             color: '#fff',
