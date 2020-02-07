@@ -41,7 +41,7 @@ const containedPrimary: Style = (theme: Theme) => ({
     color: theme.palette.primary.contrastText,
     backgroundColor: theme.palette.primary.main,
     '&:hover': {
-        backgroundColor: '#115293'
+        backgroundColor: '#2c244d'
     }
 });
 
@@ -67,12 +67,12 @@ const text: Style = {
     padding: [6, 8]
 };
 
-const textPrimary: Style = {
-    color: '#1976d2',
+const textPrimary: Style = (theme: Theme) => ({
+    color: theme.palette.primary.main,
     '&:hover': {
-        backgroundColor: 'rgba(25, 118, 210, 0.08)'
+        backgroundColor: 'rgba(64, 51, 111, 0.08)'
     }
-};
+});
 
 const textSecondary: Style = {
     color: '#dc004e',
@@ -102,14 +102,14 @@ const outlined: Style = {
     }
 };
 
-const outlinedPrimary: Style = {
-    color: '#1976d2',
-    border: '1px solid rgba(25, 118, 210, 0.5)',
+const outlinedPrimary: Style = (theme: Theme) => ({
+    color: theme.palette.primary.main,
+    border: '1px solid rgba(64, 51, 111, 0.5)',
     '&:hover': {
         border: '1px solid 1976d2',
-        backgroundColor: 'rgba(25, 118, 210, 0.08)'
+        backgroundColor: 'rgba(64, 51, 111, 0.08)'
     }
-};
+});
 
 const outlinedSecondary: Style = {
     color: '#dc004e',
@@ -197,12 +197,12 @@ export const styles = (theme: Theme): Styles => ({
     containedSizeSmall: containedSizeSmall(theme),
     containedSizeLarge: containedSizeLarge(theme),
     text: text,
-    textPrimary: textPrimary,
+    textPrimary: textPrimary(theme),
     textSecondary: textSecondary,
     textSizeSmall: textSizeSmall(theme),
     textSizeLarge: textSizeLarge(theme),
     outlined: outlined,
-    outlinedPrimary: outlinedPrimary,
+    outlinedPrimary: outlinedPrimary(theme),
     outlinedSecondary: outlinedSecondary,
     outlinedSizeSmall: outlinedSizeSmall(theme),
     outlinedSizeLarge: outlinedSizeLarge(theme),

@@ -30,7 +30,7 @@ const groupedContained: Style = {
 
 const groupedContainedPrimary: Style = {
     '&:not(:last-child)': {
-        borderColor: 'rgb(17, 82, 147)'
+        borderColor: '#2c244d'
     }
 };
 
@@ -69,7 +69,7 @@ const groupedText: Style = {
 
 const groupedTextPrimary: Style = {
     '&:not(:last-child)': {
-        borderColor: 'rgba(25, 118, 210, 0.5)'
+        borderColor: 'rgba(64, 52, 111, 0.5)'
     }
 };
 
