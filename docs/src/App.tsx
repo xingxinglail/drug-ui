@@ -1,3 +1,4 @@
+import './public-path';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Styles } from 'jss';
@@ -14,7 +15,6 @@ import asyncComponent from './components/asyncComponent';
 import MarkdownLinks from './components/MarkdownLinks';
 import Nav from './components/Nav';
 import Index from './pages/Index';
-
 
 const Buttons = asyncComponent(() => import('./pages/components/Buttons'));
 const ButtonsApi = asyncComponent(() => import('./pages/api/Button'));
