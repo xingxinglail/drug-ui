@@ -1,4 +1,3 @@
 import * as React from 'react';
-import { SvgIconProps } from '@drug-ui/core';
-declare const createSvgIcon: (path: React.ReactNode, name: string) => React.FC<SvgIconProps>;
+declare const createSvgIcon: (path: React.ReactNode, name: string) => React.FC<import("../../../drug-ui/src/SvgIcon").SvgIconProps>;
 export default createSvgIcon;

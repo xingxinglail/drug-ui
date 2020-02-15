@@ -27,6 +27,6 @@
         "prettier": "^1.19.1"
     },
     "dependencies": {
-        "@drug-ui/core": "^0.0.2"
+        "@drug-ui/core": "^0.1.2"
     }
 }
