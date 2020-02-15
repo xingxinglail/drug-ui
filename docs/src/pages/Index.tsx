@@ -35,7 +35,7 @@ const useStyles = createUseStyles<ClassProps>((theme: Theme): Styles => {
             marginBottom: 24
         }
     };
-}, 'Nav');
+}, 'Index');
 
 const Index = () => {
     const history = useHistory();

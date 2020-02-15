@@ -140,7 +140,7 @@ const RouterWrapper = () => {
         <>
             <header className={ classes.root } style={{ width: location.pathname === '/' ? '100%' : '' }}>
                 {/*<Search  />*/ }
-                <IconButton size="medium" href="https://xingxinglail.github.io/drug-ui"><Github /></IconButton>
+                <IconButton size="medium" href="https://github.com/xingxinglail/drug-ui"><Github /></IconButton>
             </header>
             {
                 location.pathname !== '/' ? <Container /> :
