@@ -38,7 +38,7 @@ const componentsEntrys = getEntry('src/pages/components/**/Index.ts');
 const apiEntrys = getEntry('src/pages/api/**/Index.ts');
 const gettingStartedEntrys = getEntry('src/pages/getting-started/**/Index.ts');
 const entry = Object.assign({}, indexEntry, componentsEntrys, apiEntrys, gettingStartedEntrys);
-
+const OUTPUT_DIR = 'dist';
 module.exports = Object.assign({}, base, {
     mode: 'production',
     entry: {
@@ -59,6 +59,13 @@ module.exports = Object.assign({}, base, {
             {
                 from: resolve('./static'),
                 to: 'static',
+                ignore: ['.*']
+            }
+        ]),
+        new CopyWebpackPlugin([
+            {
+                from: resolve('./src/sw.js'),
+                to: '',
                 ignore: ['.*']
             }
         ]),
