@@ -33,7 +33,7 @@ Style sheet name: `DuiFab`.
 
 ## Demos
 
-- [Buttons](/components/Buttons)
+- [Buttons](/components/Buttons/)
 
 
 

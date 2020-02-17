@@ -40,7 +40,7 @@ Style sheet name: `DuiLayout`.
 
 ## Demos
 
-- [Layouts](/components/Layouts)
+- [Layouts](/components/Layouts/)
 
 
 

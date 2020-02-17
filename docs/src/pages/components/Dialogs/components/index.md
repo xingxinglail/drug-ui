@@ -12,4 +12,4 @@ title: 对话框
 
 ## API
 
-- [&lt;Dialog /&gt;](/api/Dialog)
+- [&lt;Dialog /&gt;](/api/Dialog/)

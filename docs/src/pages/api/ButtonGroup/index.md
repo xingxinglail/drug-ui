@@ -31,7 +31,7 @@ Style sheet name: `DuiButtonGroup`.
 
 ## Demos
 
-- [Buttons](/components/Buttons)
+- [Buttons](/components/Buttons/)
 
 
 

@@ -30,7 +30,7 @@ Style sheet name: `DuiZoom`.
 
 ## Demos
 
-- [Transitions](/components/Transitions)
+- [Transitions](/components/Transitions/)
 
 
 

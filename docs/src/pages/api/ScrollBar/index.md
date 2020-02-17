@@ -30,7 +30,7 @@ Style sheet name: `DuiScrollBar`.
 
 ## Demos
 
-- [ScrollBar](/components/ScrollBar)
+- [ScrollBar](/components/ScrollBar/)
 
 
 

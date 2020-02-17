@@ -14,10 +14,11 @@ import { createUseStyles, Theme } from '@drug-ui/core/styles';
 import asyncComponent from './components/asyncComponent';
 import MarkdownLinks from './components/MarkdownLinks';
 import Nav from './components/Nav';
-import Index from './pages/Index';
 
+// todo 删除打包后 html 文件里多余的 script 标签
+
+// todo 封装在单独 js 文件里
 if ('serviceWorker' in navigator) {
-    console.log(333);
     // Your service-worker.js *must* be located at the top-level directory relative to your site.
     // It won't be able to control pages unless it's located at the same level or higher than them.
     // *Don't* register service worker file in, e.g., a scripts/ sub-directory!
@@ -58,6 +59,7 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+const Index = asyncComponent(() => import('./pages/Index'));
 const Buttons = asyncComponent(() => import('./pages/components/Buttons'));
 const ButtonsApi = asyncComponent(() => import('./pages/api/Button'));
 const ButtonBaseApi = asyncComponent(() => import('./pages/api/ButtonBase'));

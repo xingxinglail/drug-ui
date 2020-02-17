@@ -12,4 +12,4 @@ title: 滚动条
 
 ## API
 
-- [&lt;ScrollBar /&gt;](/api/ScrollBar)
+- [&lt;ScrollBar /&gt;](/api/ScrollBar/)

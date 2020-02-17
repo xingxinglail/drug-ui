@@ -28,6 +28,6 @@ Drug-UI提供了一系列的过渡效果, 你可以将一些基本的 动作 添
 
 ## API
 
-- [&lt;Collapse /&gt;](/api/Collapse)
-- [&lt;Fade /&gt;](/api/Fade)
-- [&lt;Zoom /&gt;](/api/Zoom)
+- [&lt;Collapse /&gt;](/api/Collapse/)
+- [&lt;Fade /&gt;](/api/Fade/)
+- [&lt;Zoom /&gt;](/api/Zoom/)

@@ -31,8 +31,8 @@ Style sheet name: `DuiCollapse`.
 
 ## Demos
 
-- [Menu](/components/Menu)
-- [Transitions](/components/Transitions)
+- [Menu](/components/Menu/)
+- [Transitions](/components/Transitions/)
 
 
 

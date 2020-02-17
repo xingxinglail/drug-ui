@@ -60,8 +60,8 @@ title: 按钮
 
 ## API
 
-- [&lt;Button /&gt;](/api/Button)
-- [&lt;ButtonBase /&gt;](/api/ButtonBase)
-- [&lt;ButtonGroup /&gt;](/api/ButtonGroup)
-- [&lt;Fab /&gt;](/api/Fab)
-- [&lt;IconButton /&gt;](/api/IconButton)
+- [&lt;Button /&gt;](/api/Button/)
+- [&lt;ButtonBase /&gt;](/api/ButtonBase/)
+- [&lt;ButtonGroup /&gt;](/api/ButtonGroup/)
+- [&lt;Fab /&gt;](/api/Fab/)
+- [&lt;IconButton /&gt;](/api/IconButton/)

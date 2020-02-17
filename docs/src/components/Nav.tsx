@@ -208,7 +208,7 @@ const Nav = () => {
                                 {
                                     v.children.map(c => (
                                         <MenuItem key={ c.index } index={ c.index }>
-                                            <Link to={ `${ v.index }${ c.index }` }>{ c.title }</Link>
+                                            <Link to={ `${ v.index }${ c.index }/` }>{ c.title }</Link>
                                         </MenuItem>
                                     ))
                                 }
