@@ -42,7 +42,7 @@ const Index = () => {
     const classes = useStyles();
 
     const handleClick = () => {
-        history.push('/getting-started/installation');
+        history.push('/getting-started/installation/');
     };
 
     return (
@@ -57,4 +57,6 @@ const Index = () => {
     )
 };
 
-export default Index;
+export default () => {
+    return <Index />
+};
