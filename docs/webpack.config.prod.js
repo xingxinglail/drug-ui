@@ -50,6 +50,19 @@ module.exports = Object.assign({}, base, {
         filename: 'js/[name].[contenthash].js',
         chunkFilename: 'js/[name].[contenthash].js'
     },
+    optimization: {
+        splitChunks: {
+            chunks: "all",
+            cacheGroups: {
+                vendor: {
+                    name: "vendor",
+                    test: /[\\/]node_modules[\\/]/,
+                    priority: 10,
+                    chunks: "initial" // 只打包初始时依赖的第三方
+                }
+            }
+        }
+    },
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
