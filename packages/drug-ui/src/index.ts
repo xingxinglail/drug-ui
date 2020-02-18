@@ -23,3 +23,4 @@ export { default as Menu } from './Menu';
 export { default as Collapse } from './Collapse';
 export { default as Fade } from './Fade';
 export { default as Zoom } from './Zoom';
+export { default as notification } from './Notification';
