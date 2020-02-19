@@ -4,7 +4,7 @@ import { Theme } from '../styles';
 const root: Style = {
     position: 'fixed',
     top: 24,
-    right: 0,
+    right: 24,
     zIndex: 1000
 };
 

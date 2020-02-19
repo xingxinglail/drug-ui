@@ -1,31 +1,47 @@
 import * as React from 'react';
+import { Transition } from 'react-transition-group';
 import { styles } from './Notice.style';
 import { createUseStyles } from '../styles';
+import classnames from 'classnames';
 
 export interface NoticeProps {
-    onClose?: () => void;
+    visible: boolean;
+    onClose: () => void;
 }
 
 export const name = 'Notice';
 
-type NoticeClasses = 'root';
+type NoticeClasses = 'root' | 'animated' | 'fadeInRight' | 'fadeOut';
 
 const useStyles = createUseStyles<NoticeClasses>(styles, name);
 
 const Notice: React.FC<NoticeProps> = props => {
-    const { onClose } = props;
+    const { visible, onClose } = props;
     const classes = useStyles();
     const [count, setCount] = React.useState(0);
     console.log('Notice render');
-    const handleClose = () => {
-        onClose && onClose();
-    };
 
     return (
-        <div className={ classes.root }>
-            <div onClick={ handleClose }>close</div>
-            <div onClick={ () => setCount(count + 1) }>{ count }</div>
-        </div>
+        <Transition
+            in={ visible }
+            appear
+            unmountOnExit
+            timeout={ 300 }>
+            { state => (
+                <div className={
+                    classnames(
+                        classes.root,
+                        {
+                            [classes.animated]: state === 'entering' || state === 'exiting',
+                            [classes.fadeInRight]: state === 'entering',
+                            [classes.fadeOut]: state === 'exiting',
+                        })
+                }>
+                    <div onClick={ onClose }>close</div>
+                    <div onClick={ () => setCount(count + 1) }>{ count }</div>
+                </div>
+            ) }
+        </Transition>
     );
 };
 
