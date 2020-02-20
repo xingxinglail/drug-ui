@@ -1,16 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Notification, { NotificationProps } from './Notification';
-
-// todo css、内容参数配置
-
-export interface Config {
-    message: string | React.ReactNode;
-    description: string | React.ReactNode;
-    key?: string;
-    duration?: number;
-    onClose?: () => void;
-}
+export * from './Notification';
 
 interface Notices {
     keyProp: string;
@@ -23,8 +14,7 @@ const noticeKey = `${ name }-key-`;
 const notices: Notices[] = [];
 
 const render = (props: NotificationProps, key: string, container: HTMLDivElement) => {
-    // ReactDOM.render(<Notification key={ key } { ...props } />, container);
-    ReactDOM.render(React.createElement(Notification, { key, ...props }), container)
+    ReactDOM.render(React.createElement(Notification, props), container)
 };
 
 const close = (key: string) => {
@@ -37,6 +27,11 @@ const close = (key: string) => {
         }
     }
 };
+
+export interface Config extends Omit<NotificationProps, 'visible' | 'onClose'> {
+    key?: string;
+    onClose?: () => void;
+}
 
 const notification = {
     open (config: Config) {
@@ -74,8 +69,8 @@ const notification = {
     },
     destroy () {
         while (notices.length) {
-            const { props, keyProp, container } = notices.pop()!;
-            render(Object.assign(props, { visible: false, timeout: 0 }), keyProp, container);
+            const { container } = notices.pop()!;
+            ReactDOM.unmountComponentAtNode(container)
         }
     }
 };

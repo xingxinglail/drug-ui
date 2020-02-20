@@ -2,24 +2,59 @@ import { Style, Styles } from 'jss';
 import { Theme } from '../styles';
 
 const root: Style = {
+    position: 'fixed',
+    zIndex: 1000
+};
+
+const topLeft: Style = {
+    top: 24,
+    left: 24
+};
+
+const topRight: Style = {
+    top: 24,
+    right: 24
+};
+
+const bottomLeft: Style = {
+    bottom: 24,
+    left: 24
+};
+
+const bottomRight: Style = {
+    bottom: 24,
+    right: 24
+};
+
+const notice: Style = {
     width: 300,
     marginBottom: 16,
     padding: [16, 24],
     borderRadius: 4,
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
-};
-
-const container: Style = {
-    position: 'fixed',
-    top: 24,
-    right: 24,
-    zIndex: 1000
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+    backgroundColor: '#fff'
 };
 
 const animated: Style = {
     animationDuration: '300ms',
     animationTimingFunction: 'cubic-bezier(0.645, 0.045, 0.355, 1)',
     animationFillMode: 'both'
+};
+
+const fadeInLeft: Style = {
+    '@global': {
+        '@keyframes fadeInLeft': {
+            from: {
+                opacity: 0,
+                transform: 'translate3d(-100%, 0, 0)',
+            },
+            to: {
+                opacity: 1,
+                transform: 'translate3d(0, 0, 0)'
+            }
+        },
+    },
+    animationName: '$fadeInLeft'
 };
 
 const fadeInRight: Style = {
@@ -73,10 +108,15 @@ const description: Style = {
 
 export const styles = (_: Theme): Styles => ({
     root,
-    container,
+    topLeft,
+    topRight,
+    bottomLeft,
+    bottomRight,
     animated,
+    fadeInLeft,
     fadeInRight,
     fadeOut,
+    notice,
     message,
     description
 });
