@@ -65,7 +65,7 @@ SvgIcon.defaultProps = {
     fontSize: 'default',
     htmlColor: undefined,
     titleAccess: '',
-    viewBox: '0 0 1024 1024'
+    viewBox: '0 0 24 24'
 };
 
 SvgIcon.propTypes = {
