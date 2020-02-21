@@ -22,6 +22,7 @@ export interface NotificationProps {
     readonly type?: NotificationType;
     icon?: React.ReactNode;
     closeIcon?: React.ReactNode;
+    getContainer?: () => Element;
 }
 
 export const name = 'Notification';
@@ -51,14 +52,12 @@ type NoticeClasses =
 
 const useStyles = createUseStyles<NoticeClasses>(styles, name);
 
-// todo 自定义container
-
-const getSelector = (placementClassName: string, classes: string): HTMLDivElement => {
+const getSelector = (placementClassName: string, classes: string, mountContainer: Element): HTMLDivElement => {
     let container: HTMLDivElement | null = document.querySelector(`.${ placementClassName }`);
     if (!container) {
         container = document.createElement('div');
         container.className = classes;
-        document.body.appendChild(container);
+        mountContainer.appendChild(container);
     }
     return container;
 };
@@ -75,12 +74,14 @@ const Notification: React.FC<NotificationProps> = props => {
         type,
         icon: iconProp,
         closeIcon,
+        getContainer: getContainerProp,
         onClose
     } = props;
     const classes = useStyles();
     const timeId = React.useRef<number | null>(null);
     const duration = typeof durationProp === 'number' ? durationProp : 4500;
-    const selector = getSelector(classes[placement], classnames(classes.root, classes[placement]));
+    const container = typeof getContainerProp === 'function' ? getContainerProp() : document.body;
+    const selector = getSelector(classes[placement], classnames(classes.root, classes[placement]), container);
 
     React.useEffect(() => {
         if (duration > 0 && visible) timeId.current = window.setTimeout(onClose, duration);
