@@ -3,6 +3,8 @@ import { Theme } from '../styles';
 
 const root: Style = {
     position: 'fixed',
+    width: 384,
+    maxWidth: 'calc(100vw - 32px)',
     zIndex: 1000
 };
 
@@ -27,12 +29,12 @@ const bottomRight: Style = {
 };
 
 const notice: Style = {
-    width: 300,
     marginBottom: 16,
     padding: [16, 24],
     borderRadius: 4,
     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    overflow: 'hidden'
 };
 
 const animated: Style = {
@@ -106,6 +108,11 @@ const description: Style = {
     fontSize: 14
 };
 
+const btn: Style = {
+    float: 'right',
+    marginTop: 16
+};
+
 export const styles = (_: Theme): Styles => ({
     root,
     topLeft,
@@ -118,5 +125,6 @@ export const styles = (_: Theme): Styles => ({
     fadeOut,
     notice,
     message,
-    description
+    description,
+    btn
 });

@@ -70,6 +70,8 @@ const notification = {
     destroy () {
         while (notices.length) {
             const { container } = notices.pop()!;
+            console.log(container);
+            console.log(container.parentNode);
             ReactDOM.unmountComponentAtNode(container)
         }
     }
