@@ -36,7 +36,8 @@ const notice: Style = {
     borderRadius: 4,
     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
     backgroundColor: '#fff',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    position: 'relative'
 };
 
 const animated: Style = {
@@ -142,6 +143,23 @@ const error: Style = {
     color: '#f44335'
 };
 
+const close: Style = {
+    position: 'absolute',
+    display: 'flex',
+    top: 18,
+    right: 20,
+    cursor: 'pointer',
+    color: 'rgba(0, 0, 0, 0.45)',
+    'transition': 'color 0.3s ease',
+    '&:hover': {
+        color: 'rgba(0, 0, 0, 0.67)'
+    }
+};
+
+const closeIcon: Style = {
+    fontSize: 18
+};
+
 export const styles = (_: Theme): Styles => ({
     root,
     topLeft,
@@ -161,5 +179,7 @@ export const styles = (_: Theme): Styles => ({
     success,
     info,
     warning,
-    error
+    error,
+    close,
+    closeIcon
 });

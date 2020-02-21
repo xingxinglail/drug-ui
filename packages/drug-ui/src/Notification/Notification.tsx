@@ -21,6 +21,7 @@ export interface NotificationProps {
     btn?: React.ReactNode;
     readonly type?: NotificationType;
     icon?: React.ReactNode;
+    closeIcon?: React.ReactNode;
 }
 
 export const name = 'Notification';
@@ -44,12 +45,12 @@ type NoticeClasses =
     | 'success'
     | 'info'
     | 'warning'
-    | 'error';
+    | 'error'
+    | 'close'
+    | 'closeIcon';
 
 const useStyles = createUseStyles<NoticeClasses>(styles, name);
 
-// todo 增加 success error info warning warn 类型
-// todo 关闭按钮
 // todo 自定义container
 
 const getSelector = (placementClassName: string, classes: string): HTMLDivElement => {
@@ -63,7 +64,19 @@ const getSelector = (placementClassName: string, classes: string): HTMLDivElemen
 };
 
 const Notification: React.FC<NotificationProps> = props => {
-    const { visible, message, description, duration: durationProp = 4500, placement = 'topRight', style, btn, type, icon: iconProp, onClose } = props;
+    const {
+        visible,
+        message,
+        description,
+        duration: durationProp = 4500,
+        placement = 'topRight',
+        style,
+        btn,
+        type,
+        icon: iconProp,
+        closeIcon,
+        onClose
+    } = props;
     const classes = useStyles();
     const timeId = React.useRef<number | null>(null);
     const duration = typeof durationProp === 'number' ? durationProp : 4500;
@@ -139,6 +152,15 @@ const Notification: React.FC<NotificationProps> = props => {
                             style={ style }
                             onMouseEnter={ onMouseEnter }
                             onMouseLeave={ onMouseLeave }>
+                            <div className={ classes.close } onClick={ onClose }>
+                                {
+                                    closeIcon ? closeIcon :
+                                        <SvgIcon className={ classes.closeIcon }>
+                                            <path
+                                                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" />
+                                        </SvgIcon>
+                                }
+                            </div>
                             <IconWrapper />
                             <div>
                                 <p className={ classes.message }>{ message }</p>
