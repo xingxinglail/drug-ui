@@ -29,6 +29,8 @@ const bottomRight: Style = {
 };
 
 const notice: Style = {
+    display: 'flex',
+    alignItems: 'flex-start',
     marginBottom: 16,
     padding: [16, 24],
     borderRadius: 4,
@@ -113,6 +115,33 @@ const btn: Style = {
     marginTop: 16
 };
 
+const iconWrapper: Style = {
+    display: 'flex',
+    alignItems: 'center',
+    fontSize: 26,
+    marginRight: 20
+};
+
+const icon: Style = {
+    fontSize: 'inherit'
+};
+
+const success: Style = {
+    color: '#4caf50'
+};
+
+const info: Style = {
+    color: '#2196f3'
+};
+
+const warning: Style = {
+    color: '#ff9800'
+};
+
+const error: Style = {
+    color: '#f44335'
+};
+
 export const styles = (_: Theme): Styles => ({
     root,
     topLeft,
@@ -126,5 +155,11 @@ export const styles = (_: Theme): Styles => ({
     notice,
     message,
     description,
-    btn
+    btn,
+    iconWrapper,
+    icon,
+    success,
+    info,
+    warning,
+    error
 });

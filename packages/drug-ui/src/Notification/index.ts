@@ -33,7 +33,18 @@ export interface Config extends Omit<NotificationProps, 'visible' | 'onClose'> {
     onClose?: () => void;
 }
 
-const notification = {
+export interface NotificationApi {
+    open: (config: Config) => void;
+    close: (key: string) => void;
+    destroy: () => void;
+    success: (config: Config) => void;
+    info: (config: Config) => void;
+    error: (config: Config) => void;
+    warning: (config: Config) => void;
+    warn: (config: Config) => void;
+}
+
+const notification: any = {
     open (config: Config) {
         if (!config) return;
         const defaultKey = `${ noticeKey }${ keyID }`;
@@ -70,11 +81,17 @@ const notification = {
     destroy () {
         while (notices.length) {
             const { container } = notices.pop()!;
-            console.log(container);
-            console.log(container.parentNode);
             ReactDOM.unmountComponentAtNode(container)
         }
     }
 };
 
-export default notification;
+['success', 'info', 'error', 'warning'].forEach(type => {
+    notification[type] = (config: Config) => {
+        notification.open({ ...config, type });
+    }
+});
+
+notification.warn = notification.warning;
+
+export default notification as NotificationApi;
