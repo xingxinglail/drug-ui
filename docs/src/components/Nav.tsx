@@ -115,6 +115,10 @@ const Nav = () => {
                 {
                     index: '/Transitions',
                     title: 'Transitions（过渡动画）'
+                },
+                {
+                    index: '/Notifications',
+                    title: 'Notifications（通知提醒框）'
                 }
             ]
         },
@@ -177,6 +181,10 @@ const Nav = () => {
                 {
                     index: '/Zoom',
                     title: 'Zoom'
+                },
+                {
+                    index: '/Notification',
+                    title: 'Notification'
                 }
             ]
         }

@@ -8,6 +8,9 @@ import {
     Route,
     useLocation
 } from 'react-router-dom';
+// @ts-ignore
+import docsearch from 'docsearch.js';
+import 'docsearch.js/dist/cdn/docsearch.css';
 import { ThemeProvider, IconButton } from '@drug-ui/core';
 import { Github, Search } from '@drug-ui/icons';
 import { createUseStyles, Theme } from '@drug-ui/core/styles';
@@ -15,8 +18,9 @@ import asyncComponent from './components/asyncComponent';
 import MarkdownLinks from './components/MarkdownLinks';
 import Nav from './components/Nav';
 
+// todo docsearch 申请
+// todo Notification 组件文档
 // todo 删除打包后 html 文件里多余的 script 标签
-
 // todo 封装在单独 js 文件里
 if ('serviceWorker' in navigator) {
     // Your service-worker.js *must* be located at the top-level directory relative to your site.
@@ -82,6 +86,8 @@ const Transitions = asyncComponent(() => import('./pages/components/Transitions'
 const CollapseApi = asyncComponent(() => import('./pages/api/Collapse'));
 const FadeApi = asyncComponent(() => import('./pages/api/Fade'));
 const ZoomApi = asyncComponent(() => import('./pages/api/zoom'));
+const Notifications = asyncComponent(() => import('./pages/components/Notifications'));
+const NotificationApi = asyncComponent(() => import('./pages/api/Notification'));
 
 type ClassProps = 'header' | 'main' | 'nav' | 'logo' | 'menu';
 
@@ -117,10 +123,19 @@ const useStyles = createUseStyles<ClassProps>((theme: Theme): Styles => {
 const Container = () => {
     const classes = useStyles();
 
+    React.useEffect(() => {
+        docsearch({
+            apiKey: '25626fae796133dc1e734c6bcaaeac3c',
+            indexName: 'docsearch',
+            inputSelector: '.docsearch'
+        });
+    }, []);
+
     return (
         <>
             <Nav />
             <main className={ classes.main }>
+                <input type="text" className="docsearch" />
                 <Switch>
                     <Route path="/getting-started/installation" component={ Installation } />
                     <Route path="/getting-started/usage" component={ Usage } />
@@ -144,6 +159,8 @@ const Container = () => {
                     <Route path="/api/Collapse" component={ CollapseApi } />
                     <Route path="/api/Fade" component={ FadeApi } />
                     <Route path="/api/Zoom" component={ ZoomApi } />
+                    <Route path="/components/Notifications" component={ Notifications } />
+                    <Route path="/api/Notification" component={ NotificationApi } />
                 </Switch>
             </main>
         </>

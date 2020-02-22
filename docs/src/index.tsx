@@ -23,6 +23,7 @@ import {
     Fade,
     Zoom
 } from '@drug-ui/core';
+import notification, { NotificationPlacement, NotificationType } from '@drug-ui/core/Notification';
 import { Rule as ValidateRule } from '@drug-ui/core/Form/validate';
 import { Variant } from '@drug-ui/core/Button';
 // import { Setting, Down, Left, CloseCircleFill } from '../../packages/drug-ui-icons/src';
@@ -209,9 +210,127 @@ const App: React.FC = () => {
     const [zoom, setZoom] = React.useState(true);
     const [zoom2, setZoom2] = React.useState(false);
 
+    const openNotification = () => {
+        notification.open({
+            message: 'Title',
+            description: 'I will never close automatically. I will be close automatically. I will never close automatically.我是谁？',
+            duration: 0,
+            placement: 'topLeft',
+            style: {
+                backgroundColor: '#e0e0e0'
+            },
+            icon: <Left />
+        });
+        // setTimeout(() => {
+        //     notification.open({
+        //         message: '6666',
+        //         description: '8888',
+        //         duration: 4000,
+        //         key: '777'
+        //     });
+        // }, 1000)
+    };
+
+    const openBtnNotification = () => {
+        const key = 'btn';
+        const btn = (
+            <Button
+                variant="contained"
+                color="primary"
+                size="small"
+                onClick={ () => notification.close(key) }>
+                Confirm
+            </Button>
+        );
+        notification.open({
+            message: 'Title',
+            description: 'I will never close automatically. I will be close automatically. I will never close automatically.我是谁？',
+            duration: 0,
+            placement: 'topLeft',
+            key,
+            btn
+        });
+        // setTimeout(() => {
+        //     notification.open({
+        //         message: '6666',
+        //         description: '8888',
+        //         duration: 4000,
+        //         key: '777'
+        //     });
+        // }, 1000)
+    };
+
+    const openNotification2 = (placement: NotificationPlacement) => {
+        notification.open({
+            message: 'Title',
+            description: 'I will never close automatically. I will be close automatically. I will never close automatically.我是谁？',
+            duration: 3000,
+            placement
+        });
+    };
+
+    const openTypeNotification = (type: NotificationType) => {
+        notification[type]({
+            message: 'Title',
+            description: 'I will never close automatically. I will be close automatically. I will never close automatically.我是谁？',
+            duration: 0,
+            getContainer () {
+                return document.querySelector('.notification-container')!;
+            }
+        });
+    };
+
+    const openTypeNotification2 = () => {
+        notification.warn({
+            message: 'Title',
+            description: 'I will never close automatically. I will be close automatically. I will never close automatically.我是谁？',
+            duration: 3000
+        });
+    };
+
+    setTimeout(() => {
+        // console.log('close');
+        // notification.close('13');
+    }, 2000);
+
     return (
         <Router>
             <ThemeProvider theme={ theme }>
+                <div className="notification-container"></div>
+                <div style={ { padding: '50px 300px' } }>
+                    <Button variant="contained" color="primary" onClick={ openNotification }>Notification</Button>
+                    <Button variant="contained" color="primary" onClick={ () => notification.destroy() }>Notification
+                        destroy</Button>
+                    <br />
+                    <br />
+                    <Button variant="contained" color="primary"
+                            onClick={ () => openNotification2('topLeft') }>topLeft</Button>
+                    <Button variant="contained" color="primary"
+                            onClick={ () => openNotification2('topRight') }>topRight</Button>
+                    <br />
+                    <br />
+                    <Button variant="contained" color="primary"
+                            onClick={ () => openNotification2('bottomLeft') }>bottomLeft</Button>
+                    <Button variant="contained" color="primary"
+                            onClick={ () => openNotification2('bottomRight') }>bottomRight</Button>
+                    <br />
+                    <br />
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={ () => openBtnNotification() }>
+                        openBtnNotification
+                    </Button>
+                    <br/>
+                    <br/>
+                    <div>
+                        <Button variant="outlined" color="default" onClick={ () => openTypeNotification('success') }>Success</Button>&nbsp;
+                        <Button variant="outlined" color="default" onClick={ () => openTypeNotification('info') }>Info</Button>&nbsp;
+                        <Button variant="outlined" color="default" onClick={ () => openTypeNotification('error') }>Error</Button>&nbsp;
+                        <Button variant="outlined" color="default" onClick={ () => openTypeNotification('warning') }>Warning</Button>&nbsp;
+                        <Button variant="outlined" color="default" onClick={ () => openTypeNotification2() }>Warn</Button>&nbsp;
+                    </div>
+                </div>
                 <div style={ { padding: '20px' } }>
                     <div onClick={ () => setZoom(!zoom) }>切换</div>
                     <br />
