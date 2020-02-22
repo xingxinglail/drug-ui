@@ -8,7 +8,6 @@ import {
     Route,
     useLocation
 } from 'react-router-dom';
-// @ts-ignore
 import docsearch from 'docsearch.js';
 import 'docsearch.js/dist/cdn/docsearch.css';
 import { ThemeProvider, IconButton } from '@drug-ui/core';

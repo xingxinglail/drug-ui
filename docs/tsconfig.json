@@ -29,8 +29,5 @@
                 "./drug-ui-hooks/src/*"
             ]
         }
-    },
-    "include": [
-        "src/**/*"
-    ]
+    }
 }

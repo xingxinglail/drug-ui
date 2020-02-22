@@ -1,6 +1,5 @@
 import * as React from 'react';
 import MarkdownDocs from '../../../components/MarkdownDocs';
-// @ts-ignore
 import markdown from './index.md';
 
 export default function Page () {

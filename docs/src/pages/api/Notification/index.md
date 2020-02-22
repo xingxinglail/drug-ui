@@ -32,8 +32,6 @@ import { notification } from '@drug-ui/core';
 
 config 参数如下：
 
-## Props
-
 | Name | Type | Default | Description |
 |:-----|:-----|:--------|:------------|
 | <span class="prop-name required">message&nbsp;*</span> | <span class="prop-type">string&#124;ReactNode</span> |  | 通知提醒标题，必选。 |

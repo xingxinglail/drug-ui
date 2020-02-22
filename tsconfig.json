@@ -21,10 +21,12 @@
         "baseUrl": "./packages",
         "allowJs": true
     },
+    "include": [
+        "./types"
+    ],
     "exclude": [
         "**/build/",
         "node_modules",
-        "docs",
         "scripts",
         "dist",
         "build",
