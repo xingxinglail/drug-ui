@@ -27,7 +27,7 @@ describe('<SvgIcon />', () => {
         const classList = dom.classList;
         expect(classList.contains('DuiSvgIcon-root')).toBeTruthy();
         expect(classList.length).toBe(1);
-        expect(dom.getAttribute('viewBox')).toBe('0 0 1024 1024');
+        expect(dom.getAttribute('viewBox')).toBe('0 0 24 24');
         expect(dom.getAttribute('color')).toBeNull();
     });
 
