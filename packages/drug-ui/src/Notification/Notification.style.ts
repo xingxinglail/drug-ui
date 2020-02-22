@@ -9,22 +9,18 @@ const root: Style = {
 };
 
 const topLeft: Style = {
-    top: 24,
     left: 24
 };
 
 const topRight: Style = {
-    top: 24,
     right: 24
 };
 
 const bottomLeft: Style = {
-    bottom: 24,
     left: 24
 };
 
 const bottomRight: Style = {
-    bottom: 24,
     right: 24
 };
 

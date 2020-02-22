@@ -23,6 +23,10 @@ export interface NotificationProps {
     icon?: React.ReactNode;
     closeIcon?: React.ReactNode;
     getContainer?: () => Element;
+    top?: number;
+    bottom?: number;
+    className?: string;
+    onClick?: (e: React.MouseEvent) => void;
 }
 
 export const name = 'Notification';
@@ -52,11 +56,13 @@ type NoticeClasses =
 
 const useStyles = createUseStyles<NoticeClasses>(styles, name);
 
-const getSelector = (placementClassName: string, classes: string, mountContainer: Element): HTMLDivElement => {
+const getSelector = (placementClassName: string, classes: string, mountContainer: Element, placement: NotificationPlacement, top: number, bottom: number): HTMLDivElement => {
     let container: HTMLDivElement | null = document.querySelector(`.${ placementClassName }`);
     if (!container) {
         container = document.createElement('div');
         container.className = classes;
+        if (placement.startsWith('top')) container.style.top = `${ top }px`;
+        if (placement.startsWith('bottom')) container.style.bottom = `${ bottom }px`;
         mountContainer.appendChild(container);
     }
     return container;
@@ -75,13 +81,17 @@ const Notification: React.FC<NotificationProps> = props => {
         icon: iconProp,
         closeIcon,
         getContainer: getContainerProp,
+        top = 24,
+        bottom = 24,
+        className = '',
+        onClick,
         onClose
     } = props;
     const classes = useStyles();
     const timeId = React.useRef<number | null>(null);
     const duration = typeof durationProp === 'number' ? durationProp : 4500;
     const container = typeof getContainerProp === 'function' ? getContainerProp() : document.body;
-    const selector = getSelector(classes[placement], classnames(classes.root, classes[placement]), container);
+    const selector = getSelector(classes[placement], classnames(classes.root, classes[placement]), container, placement, top, bottom);
 
     React.useEffect(() => {
         if (duration > 0 && visible) timeId.current = window.setTimeout(onClose, duration);
@@ -89,6 +99,15 @@ const Notification: React.FC<NotificationProps> = props => {
             if (timeId.current) window.clearTimeout(timeId.current);
         };
     }, [visible, duration]);
+
+    const onClickHandle = (e: React.MouseEvent) => {
+        onClick && onClick(e);
+    };
+
+    const onCloseClickHandle = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        onClose && onClose();
+    };
 
     const onMouseEnter = () => {
         if (duration > 0 && timeId.current) window.clearTimeout(timeId.current);
@@ -122,7 +141,7 @@ const Notification: React.FC<NotificationProps> = props => {
                 );
             }
             return (
-                <div className={ classnames(classes.iconWrapper, { [classes[type!]]: type }) }>
+                <div className={ classnames(classes.iconWrapper, { [classes[type!]]: type }, className) }>
                     { Icon }
                 </div>
             );
@@ -151,9 +170,10 @@ const Notification: React.FC<NotificationProps> = props => {
                                     })
                             }
                             style={ style }
+                            onClick={ e => onClickHandle(e) }
                             onMouseEnter={ onMouseEnter }
                             onMouseLeave={ onMouseLeave }>
-                            <div className={ classes.close } onClick={ onClose }>
+                            <div className={ classes.close } onClick={ onCloseClickHandle }>
                                 {
                                     closeIcon ? closeIcon :
                                         <SvgIcon className={ classes.closeIcon }>
