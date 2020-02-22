@@ -3,15 +3,16 @@ import * as ReactDOM from 'react-dom';
 import Notification, { NotificationProps } from './Notification';
 export * from './Notification';
 
-interface Notices {
+interface Notice {
     keyProp: string;
     props: NotificationProps;
     container: HTMLDivElement;
+    onClose?: () => void;
 }
 
 let keyID = 1;
 const noticeKey = `${ name }-key-`;
-const notices: Notices[] = [];
+const notices: Notice[] = [];
 
 const render = (props: NotificationProps, key: string, container: HTMLDivElement) => {
     ReactDOM.render(React.createElement(Notification, props), container)
@@ -21,9 +22,10 @@ const close = (key: string) => {
     if (key) {
         const index = notices.findIndex(c => c.keyProp === key);
         if (index >= 0) {
-            const { props, container } = notices[index];
+            const { props, container, onClose } = notices[index];
             render(Object.assign(props, { visible: false }), key, container);
             notices.splice(index, 1);
+            onClose && onClose();
         }
     }
 };
@@ -52,7 +54,6 @@ const notification: any = {
 
         const onClose = () => {
             close(key);
-            onCloseProp && onCloseProp();
         };
 
         const props = {
@@ -65,14 +66,14 @@ const notification: any = {
         const index = notices.findIndex(c => c.keyProp === key);
         if (index >= 0) {
             const { container } = notices[index];
-            notices.splice(index, 1, { keyProp: key, props, container });
+            notices.splice(index, 1, { keyProp: key, props, container, onClose: onCloseProp });
             render(Object.assign(props), key, container);
             return;
         }
 
         const div = document.createElement('div');
         render(props, key, div);
-        notices.push({ keyProp: key, props, container: div });
+        notices.push({ keyProp: key, props, container: div, onClose: onCloseProp });
         keyID++;
     },
     close (key: string) {
