@@ -104,4 +104,9 @@ Button.propTypes = {
     href: PropTypes.string
 };
 
+if (process.env.NODE_ENV !== 'production') {
+    // @ts-ignore
+    Button.useStyles = useStyles;
+}
+
 export default Button;

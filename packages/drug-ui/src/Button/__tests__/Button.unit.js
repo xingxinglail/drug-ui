@@ -2,8 +2,7 @@ import * as renderer from 'react-test-renderer';
 import * as React from 'react';
 import * as enzyme from 'enzyme';
 import Button from '..';
-import { Wrapper } from '@drug-ui/core/test-utils';
-import Fab from '@drug-ui/core/Fab';
+import { Wrapper, getClasses } from '@drug-ui/core/test-utils';
 
 const mount = enzyme.mount;
 
@@ -12,6 +11,7 @@ describe('<Button />', () => {
     it('render successful', () => {
         const json = renderer.create(<Wrapper><Button /></Wrapper>).toJSON();
         expect(json).toMatchSnapshot();
+        console.log(getClasses(<Button />));
     });
 
     it('设置 className', () => {
