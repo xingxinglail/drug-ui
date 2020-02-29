@@ -5,6 +5,8 @@ import { wait } from '@drug-ui/core/test-utils';
 import Notification from '../Notification';
 import notification from '..';
 
+const mount = enzyme.mount;
+
 describe('Notification', () => {
 
     let classes;
@@ -35,6 +37,23 @@ describe('Notification', () => {
         const json = renderer.create(<Notification />).toJSON();
         expect(json).toMatchSnapshot();
         classes = getClasses(<Notification />);
+        const dom = document.body.querySelector(`.${ classes.root }`);
+        dom.remove();
+    });
+
+    it('simulate mouseenter mouseleave', async () => {
+        const fn = jest.fn();
+        const wrapper = mount(
+            <Notification visible duration={ 100 } onClose={ fn } />
+        );
+        await wait(90);
+        wrapper.simulate('mouseenter');
+        await wait(90);
+        expect(fn).not.toBeCalled();
+        wrapper.simulate('mouseleave');
+        await wait(110);
+        expect(fn).toBeCalled();
+        expect(fn).toBeCalledTimes(1);
         const dom = document.body.querySelector(`.${ classes.root }`);
         dom.remove();
     });
