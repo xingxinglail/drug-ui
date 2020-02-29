@@ -12,7 +12,6 @@ describe('Notification', () => {
     let classes;
 
     const getClasses = (element) => {
-        // @ts-ignore
         const { useStyles } = element.type;
         let classes;
 
