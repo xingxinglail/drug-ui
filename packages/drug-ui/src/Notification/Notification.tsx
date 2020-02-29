@@ -141,7 +141,7 @@ const Notification: React.FC<NotificationProps> = props => {
                 );
             }
             return (
-                <div className={ classnames(classes.iconWrapper, { [classes[type!]]: type }, className) }>
+                <div className={ classnames(classes.iconWrapper, { [classes[type!]]: type }) }>
                     { Icon }
                 </div>
             );
@@ -167,7 +167,8 @@ const Notification: React.FC<NotificationProps> = props => {
                                         [classes.fadeInLeft]: state === 'entering' && placement.endsWith('Left'),
                                         [classes.fadeInRight]: state === 'entering' && placement.endsWith('Right'),
                                         [classes.fadeOut]: state === 'exiting',
-                                    })
+                                    },
+                                    className)
                             }
                             style={ style }
                             onClick={ e => onClickHandle(e) }
@@ -195,5 +196,10 @@ const Notification: React.FC<NotificationProps> = props => {
         </ThemeProvider>
     );
 };
+
+if (process.env.NODE_ENV !== 'production') {
+    // @ts-ignore
+    Notification.useStyles = useStyles;
+}
 
 export default Notification;

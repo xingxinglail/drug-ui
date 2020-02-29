@@ -215,11 +215,13 @@ const App: React.FC = () => {
             message: 'Title',
             description: 'I will never close automatically. I will be close automatically. I will never close automatically.我是谁？',
             duration: 0,
-            placement: 'topLeft',
+            placement: 'bottomLeft',
+            bottom: 100,
             style: {
                 backgroundColor: '#e0e0e0'
             },
-            icon: <Left />
+            icon: <Left />,
+            className: 'xxxxx'
         });
         // setTimeout(() => {
         //     notification.open({
