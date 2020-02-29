@@ -18,8 +18,6 @@ import MarkdownLinks from './components/MarkdownLinks';
 import Nav from './components/Nav';
 import './swRegister';
 
-// todo icons
-// todo 配置 karma
 // todo docsearch 申请
 // todo 删除打包后 html 文件里多余的 script 标签
 
