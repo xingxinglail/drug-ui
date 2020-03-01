@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Collapse /> render successful 1`] = `
+<div
+  className="DuiCollapse-container DuiCollapse-hidden"
+  style={
+    Object {
+      "minHeight": "0px",
+    }
+  }
+>
+  <div
+    className="DuiCollapse-wrapper"
+  >
+    <div
+      className="DuiCollapse-innerWrapper"
+    >
+      <div
+        className="DuiCollapse-container DuiCollapse-hidden"
+        style={
+          Object {
+            "minHeight": "0px",
+          }
+        }
+      >
+        <div
+          className="DuiCollapse-wrapper"
+        >
+          <div
+            className="DuiCollapse-innerWrapper"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

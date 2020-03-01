@@ -17,10 +17,10 @@ module.exports = {
         '^@drug-ui/icons(.*)$': '<rootDir>/packages/drug-ui-icons/src/$1',
         '^@drug-ui/hooks(.*)$': '<rootDir>/packages/drug-ui-hooks/src/$1'
     },
-    testMatch: ['<rootDir>/**/__tests__/**/*.unit.(js|jsx|ts|tsx)'],
+    testMatch: ['<rootDir>/**/__tests__/**/*.unit.js'],
     transform: {
         '^.+unit\\.(js|jsx)$': 'babel-jest',
         '^.+\\.(ts|tsx)$': 'ts-jest'
     },
-    setupFilesAfterEnv: ['<rootDir>test/setup.js']
+    setupFilesAfterEnv: ['<rootDir>test/setup.js', 'jest-extended']
 };

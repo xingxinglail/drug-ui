@@ -100,4 +100,9 @@ const Collapse: React.FC<CollapseProps> = React.forwardRef<HTMLDivElement, Colla
 
 Collapse.displayName = name;
 
+if (process.env.NODE_ENV !== 'production') {
+    // @ts-ignore
+    Collapse.useStyles = useStyles;
+}
+
 export default Collapse;
