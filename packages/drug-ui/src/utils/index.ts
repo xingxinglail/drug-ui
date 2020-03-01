@@ -7,8 +7,8 @@ export const isNumeric = (value: any): boolean => {
     return !isNaN(parseFloat(value)) && isFinite(value);
 };
 
-export const isEmptyObject = (value: Object): boolean => {
-    if (typeof value !== 'object') return false;
+export const isEmptyObject = (value: object): boolean => {
+    if (Object.prototype.toString.call(value) !== '[object Object]') return false;
     for (let k in value) {
         if (value.hasOwnProperty(k)) return false;
     }
