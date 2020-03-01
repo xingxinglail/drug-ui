@@ -16,6 +16,7 @@ export const isEmptyObject = (value: object): boolean => {
 };
 
 export const throttle = (fn: Function, wait: number = 0): (...args: any[]) => any => {
+    if (typeof fn !== 'function') throw new Error('fn is not a function');
     let startTime = 0;
     let result: any;
     return (...args: any[]) => {
