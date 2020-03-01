@@ -320,4 +320,9 @@ ScrollBar.propTypes = {
     autoHideTime: PropTypes.number
 };
 
+if (process.env.NODE_ENV !== 'production') {
+    // @ts-ignore
+    ScrollBar.useStyles = useStyles;
+}
+
 export default ScrollBar;

@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ScrollBar /> render successful 1`] = `
+<div
+  className="DuiScrollBar-root"
+  onMouseDown={[Function]}
+>
+  <div
+    className="DuiScrollBar-contentWrapper"
+    onScroll={[Function]}
+  >
+    <div
+      className="DuiScrollBar-root"
+      onMouseDown={[Function]}
+    >
+      <div
+        className="DuiScrollBar-contentWrapper"
+        onScroll={[Function]}
+      />
+      <div
+        className="DuiScrollBar-track DuiScrollBar-trackHorizontal"
+      >
+        <div
+          className="DuiScrollBar-scrollbar DuiScrollBar-scrollbarHorizontal DuiScrollBar-scrollbarHide"
+          style={
+            Object {
+              "transform": "translate3d(0px, 0, 0)",
+            }
+          }
+        />
+      </div>
+      <div
+        className="DuiScrollBar-track DuiScrollBar-trackVertical"
+      >
+        <div
+          className="DuiScrollBar-scrollbar DuiScrollBar-scrollbarVertical DuiScrollBar-scrollbarHide"
+          style={
+            Object {
+              "transform": "translate3d(0, 0px, 0)",
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="DuiScrollBar-track DuiScrollBar-trackHorizontal"
+  >
+    <div
+      className="DuiScrollBar-scrollbar DuiScrollBar-scrollbarHorizontal DuiScrollBar-scrollbarHide"
+      style={
+        Object {
+          "transform": "translate3d(0px, 0, 0)",
+        }
+      }
+    />
+  </div>
+  <div
+    className="DuiScrollBar-track DuiScrollBar-trackVertical"
+  >
+    <div
+      className="DuiScrollBar-scrollbar DuiScrollBar-scrollbarVertical DuiScrollBar-scrollbarHide"
+      style={
+        Object {
+          "transform": "translate3d(0, 0px, 0)",
+        }
+      }
+    />
+  </div>
+</div>
+`;
