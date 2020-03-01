@@ -106,4 +106,9 @@ const Fade: React.FC<FadeProps> = React.forwardRef<HTMLDivElement, FadeProps>((p
 
 Fade.displayName = name;
 
+if (process.env.NODE_ENV !== 'production') {
+    // @ts-ignore
+    Fade.useStyles = useStyles;
+}
+
 export default Fade;

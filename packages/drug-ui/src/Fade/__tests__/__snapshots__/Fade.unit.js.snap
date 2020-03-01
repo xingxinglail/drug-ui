@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Fade /> render successful 1`] = `
+<div
+  className="DuiFade-container DuiFade-hidden"
+  style={Object {}}
+>
+  <div
+    className="DuiFade-container DuiFade-hidden"
+    style={Object {}}
+  />
+</div>
+`;
