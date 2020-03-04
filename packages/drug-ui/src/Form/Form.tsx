@@ -5,11 +5,14 @@ import { styles } from './Form.style';
 import { createUseStyles } from '../styles';
 import { Rule, Rules } from './validate';
 import FormField from '../FormField';
+import { FormFieldContext } from '../FormField/FormField.context';
 import { FormContext } from './Form.context';
+import { Store, FormInstance, InternalFormInstance } from './interface';
+import useForm from './useForm';
 
 export interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
-    initialState?: { [key: string]: any };
-    onSubmit?: (e: React.FormEvent) => void;
+    initialValues?: Store;
+    form?: FormInstance;
     rules?: Rules;
     ref?: React.Ref<HTMLFormElement>
 }
@@ -25,10 +28,21 @@ export interface FormValue {
 }
 
 const Form: React.FC<FormProps> = React.forwardRef<HTMLFormElement, FormProps>((props, ref) => {
-    const { className, initialState, onSubmit, children, ...rest } = props;
-    const [state, setState] = React.useState(initialState);
-    const [count, setCount] = React.useState(0);
+    const { className, initialValues, form, onSubmit, children, ...rest } = props;
+    const [formInstance] = useForm(form);
+    const {
+        useSubscribe,
+        setInitialValues,
+        setCallbacks
+    } = (formInstance as InternalFormInstance).getInternalHooks();
     const classes = useStyles();
+
+    const mountRef = React.useRef(false);
+    setInitialValues(initialValues, !mountRef.current);
+    if (!mountRef.current) mountRef.current = true;
+
+    useSubscribe(true);
+
     const classNames = classnames(
         classes.root,
         className
@@ -40,84 +54,7 @@ const Form: React.FC<FormProps> = React.forwardRef<HTMLFormElement, FormProps>((
     //     return prev;
     // }, {});
 
-    const contextValue = {
-        values: state,
-        setValue (key: string, val: any) {
-            setState({
-                ...state,
-                [key]: val
-            });
-        },
-        count,
-        setError (key: string) {
-            console.log(key);
-            return () => {
-                console.log(`${key}done`);
-            }
-        }
-    };
-    const newChildren = React.Children.map(children, (child :React.ReactNode) => {
-        if (typeof child === 'object' && typeof (child as React.ReactElement).type === 'object' && (child as any).type.displayName === FormField.displayName) {
-            return React.cloneElement(child as React.ReactElement, { error: false });
-        }
-        return child;
-    });
-
-    // console.log(contextValue);
-    // const validator = (rule: Rule, value: any, callback: (str?: string) => void) => {
-    //     if (value === '123') {
-    //         callback('fk');
-    //     } else {
-    //         callback();
-    //     }
-    // };
-    //
-    // const validator2 = (rule: Rule, value: any, callback: (str?: string) => void) => {
-    //     if (value === 'dddddd') {
-    //         setTimeout(() => {
-    //             callback('密码错误');
-    //         }, 500);
-    //     } else {
-    //         callback();
-    //     }
-    // };
-    // const rules: Rules = {
-    //     name: [
-    //         {
-    //             required: true, message: '请输入用户名！'
-    //         },
-    //         {
-    //             validator: validator
-    //         }
-    //     ],
-    //     password: [
-    //         {
-    //             required: true, message: '请输入密码！'
-    //         },
-    //         {
-    //             min: 5, max: 10, message: '最小 5 个字符'
-    //         },
-    //         {
-    //             validator: validator2
-    //         }
-    //     ],
-    //     types: [
-    //         {
-    //             required: true, message: '请选择类型！'
-    //         },
-    //         {
-    //             min: 3, max: 5, message: '长度在 3 到 5 个类型'
-    //         }
-    //     ]
-    // };
-    // validate({ name: '12s3', password: 'sdddd', types: ['asd', 'kjh', 'asd'] }, rules, (errors) => {
-    //     console.log(isEmptyObject(errors));
-    //     console.log(errors);
-    // });
-
-    const handleSubmit = (e: React.FormEvent) => {
-        // todo 如何触FormField组件验证
-        setCount(count + 1);
+    const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
         onSubmit && onSubmit(e);
     };
 
@@ -127,9 +64,9 @@ const Form: React.FC<FormProps> = React.forwardRef<HTMLFormElement, FormProps>((
             ref={ ref }
             onSubmit={ handleSubmit }
             { ...rest }>
-            <FormContext.Provider value={ contextValue }>
-                { newChildren }
-            </FormContext.Provider>
+            <FormFieldContext.Provider value={ formInstance as InternalFormInstance }>
+                { children }
+            </FormFieldContext.Provider>
         </form>
     );
 });
@@ -137,14 +74,9 @@ const Form: React.FC<FormProps> = React.forwardRef<HTMLFormElement, FormProps>((
 Form.displayName = name;
 
 Form.defaultProps = {
-    initialState: {},
+    initialValues: undefined,
     onSubmit: undefined,
     rules: undefined
-};
-
-Form.propTypes = {
-    initialState: PropTypes.object,
-    onSubmit: PropTypes.func
 };
 
 export default Form;
