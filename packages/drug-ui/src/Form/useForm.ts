@@ -11,7 +11,7 @@ import {
     Callbacks,
     NotifyInfo
 } from './interface';
-import { getNamePath, setValue, setValues } from './utils/value';
+import { getNamePath, getValue, setValue, setValues } from './utils/value';
 
 interface UpdateAction {
     type: 'updateValue';
@@ -84,16 +84,37 @@ class FormStore {
         return true;
     };
 
-    private resetFields = () => {
+    private resetFields = (nameList?: NamePath[]) => {
+        const prevStore = this.store;
+        if (!nameList) {
+            this.store = setValues({}, this.initialValues);
+            this.notifyObservers(prevStore, null, { type: 'reset' });
+            return;
+        }
 
+        const namePathList: InternalNamePath[] = nameList.map(getNamePath);
+        namePathList.forEach(namePath => {
+            const initialValue = getValue(this.initialValues, namePath);
+            this.store = setValue(this.store, namePath, initialValue);
+        });
+        this.notifyObservers(prevStore, namePathList, { type: 'reset' });
     };
 
     private setFields = () => {
 
     };
 
-    private setFieldsValue = () => {
+    private setFieldsValue = (store: Store) => {
+        const prevStore = this.store;
 
+        if (store) {
+            this.store = setValues(this.store, store);
+        }
+
+        this.notifyObservers(prevStore, null, {
+            type: 'valueUpdate',
+            source: 'external',
+        });
     };
 
     private submit = () => {

@@ -27,6 +27,9 @@ export interface FormValue {
     [key: string]: any;
 }
 
+// todo setFieldsValue
+// todo 验证
+
 const Form: React.FC<FormProps> = React.forwardRef<HTMLFormElement, FormProps>((props, ref) => {
     const { className, initialValues, form, onSubmit, children, ...rest } = props;
     const [formInstance] = useForm(form);
