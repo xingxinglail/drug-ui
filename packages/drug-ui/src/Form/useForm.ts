@@ -11,7 +11,7 @@ import {
     Callbacks,
     NotifyInfo
 } from './interface';
-import { getNamePath } from './utils/value';
+import { getNamePath, setValue, setValues } from './utils/value';
 
 interface UpdateAction {
     type: 'updateValue';
@@ -73,7 +73,7 @@ class FormStore {
     };
 
     private getFieldsValue = (nameList?: NamePath[] | true): Store => {
-        return {};
+        return this.store;
     };
 
     private isFieldsTouched = (nameList?: NamePath[], allFieldsTouched?: boolean): boolean => {
@@ -120,8 +120,7 @@ class FormStore {
     private updateValue = (name: NamePath, value: StoreValue) => {
         const namePath = getNamePath(name);
         const prevStore = this.store;
-        // this.store = setValue(this.store, namePath, value);
-
+        this.store = setValue(this.store, namePath, value);
         this.notifyObservers(prevStore, [namePath], {
             type: 'valueUpdate',
             source: 'internal',
@@ -134,24 +133,26 @@ class FormStore {
         info: NotifyInfo,
     ) => {
         if (this.subscribable) {
-            console.log(333);
-            // this.getFieldEntities().forEach(({ onStoreChange }) => {
-            //     onStoreChange(prevStore, namePathList, info);
-            // });
+            this.getFieldEntities().forEach(({ onStoreChange }) => {
+                onStoreChange(prevStore, namePathList, info);
+            });
         } else {
             this.forceRootUpdate();
         }
+    };
+
+    private getFieldEntities = () => {
+        return this.fieldEntities;
     };
 
     private useSubscribe = (subscribable: boolean) => {
         this.subscribable = subscribable;
     };
 
-    private setInitialValues = (initialValues?: Store, init?: boolean) => {
+    private setInitialValues = (initialValues: Store, init?: boolean) => {
         this.initialValues = initialValues || {};
         if (init) {
-            // this.store = setValues({}, initialValues, this.store);
-            this.store = initialValues || {};
+            this.store = setValues({}, initialValues, this.store);
         }
     };
 

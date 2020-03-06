@@ -38,7 +38,7 @@ const Form: React.FC<FormProps> = React.forwardRef<HTMLFormElement, FormProps>((
     const classes = useStyles();
 
     const mountRef = React.useRef(false);
-    setInitialValues(initialValues, !mountRef.current);
+    setInitialValues(initialValues!, !mountRef.current);
     if (!mountRef.current) mountRef.current = true;
 
     useSubscribe(true);
@@ -79,4 +79,4 @@ Form.defaultProps = {
     rules: undefined
 };
 
-export default Form;
+export default React.memo(Form);

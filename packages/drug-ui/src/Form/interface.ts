@@ -8,6 +8,8 @@ export interface Store {
     [name: string]: StoreValue;
 }
 
+export type EventArgs = any[];
+
 export interface Meta {
     touched: boolean;
     validating: boolean;
@@ -45,15 +47,15 @@ export interface FieldData extends Partial<Omit<Meta, 'name'>> {
 
 export interface FieldEntity {
     onStoreChange: (store: Store, namePathList: InternalNamePath[] | null, info: NotifyInfo) => void;
-    isFieldTouched: () => boolean;
-    isFieldValidating: () => boolean;
-    getMeta: () => Meta;
-    getNamePath: () => InternalNamePath;
-    getErrors: () => string[];
-    props: {
-        name?: NamePath;
-        dependencies?: NamePath[];
-    };
+    // isFieldTouched: () => boolean;
+    // isFieldValidating: () => boolean;
+    // getMeta: () => Meta;
+    // getNamePath: () => InternalNamePath;
+    // getErrors: () => string[];
+    // props: {
+    //     name?: NamePath;
+    //     dependencies?: NamePath[];
+    // };
 }
 
 export interface Callbacks {
@@ -67,7 +69,7 @@ export interface InternalHooks {
     dispatch: (action: ReducerAction) => void;
     registerField: (entity: FieldEntity) => () => void;
     useSubscribe: (subscribable: boolean) => void;
-    setInitialValues: (values?: Store, init?: boolean) => void;
+    setInitialValues: (values: Store, init?: boolean) => void;
     setCallbacks: (callbacks: Callbacks) => void;
     getFields?: (namePathList?: InternalNamePath[]) => FieldData[];
 }
