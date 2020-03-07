@@ -6,6 +6,7 @@ const fn: any = () => {};
 export const FormFieldContext = React.createContext<InternalFormInstance>({
     getFieldValue: fn,
     getFieldsValue: fn,
+    getFieldError: fn,
     isFieldsTouched: fn,
     isFieldTouched: fn,
     resetFields: fn,

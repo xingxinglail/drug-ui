@@ -9,9 +9,10 @@ import {
     InternalFormInstance,
     FieldEntity,
     Callbacks,
-    NotifyInfo
+    NotifyInfo,
+    ValidateOptions
 } from './interface';
-import { getNamePath, getValue, setValue, setValues } from './utils/value';
+import { getNamePath, getValue, setValue, setValues, containsNamePath } from './utils/value';
 
 interface UpdateAction {
     type: 'updateValue';
@@ -48,6 +49,7 @@ class FormStore {
     public getForm = (): InternalFormInstance => ({
         getFieldValue: this.getFieldValue,
         getFieldsValue: this.getFieldsValue,
+        getFieldError: this.getFieldError,
         isFieldsTouched: this.isFieldsTouched,
         isFieldTouched: this.isFieldTouched,
         resetFields: this.resetFields,
@@ -68,9 +70,15 @@ class FormStore {
         };
     };
 
-    private getFieldValue = () => {
+    // todo 1 获取对应字段名的值
+    private getFieldValue = (name: NamePath): StoreValue => {
 
     };
+
+    // todo 2 获取对应字段名的错误信息
+    private getFieldError = (): string[] => {
+        return [];
+    }
 
     private getFieldsValue = (nameList?: NamePath[] | true): Store => {
         return this.store;
@@ -100,6 +108,7 @@ class FormStore {
         this.notifyObservers(prevStore, namePathList, { type: 'reset' });
     };
 
+    // todo 3 设置一组字段状态
     private setFields = () => {
 
     };
@@ -118,7 +127,7 @@ class FormStore {
     };
 
     private submit = () => {
-
+        this.validateFields();
     };
 
     private dispatch = (action: ReducerAction) => {
@@ -128,11 +137,11 @@ class FormStore {
                 this.updateValue(namePath, value);
                 break;
             }
-            // case 'validateField': {
-            //     const { namePath, triggerName } = action;
-            //     this.validateFields([namePath], { triggerName });
-            //     break;
-            // }
+            case 'validateField': {
+                const { namePath, triggerName } = action;
+                this.validateFields([namePath], { triggerName });
+                break;
+            }
             default:
             // Currently we don't have other action. Do nothing.
         }
@@ -154,6 +163,7 @@ class FormStore {
         info: NotifyInfo,
     ) => {
         if (this.subscribable) {
+            // 触发所有 Field 组件内的 onStoreChange 方法
             this.getFieldEntities().forEach(({ onStoreChange }) => {
                 onStoreChange(prevStore, namePathList, info);
             });
@@ -162,8 +172,12 @@ class FormStore {
         }
     };
 
-    private getFieldEntities = () => {
-        return this.fieldEntities;
+    private getFieldEntities = (pure: boolean = false) => {
+        if (!pure) {
+            return this.fieldEntities;
+        }
+        // 有 name 才验证或者其他操作
+        return this.fieldEntities.filter(field => field.getNamePath().length);
     };
 
     private useSubscribe = (subscribable: boolean) => {
@@ -191,6 +205,65 @@ class FormStore {
 
     private getFields = () => {
 
+    };
+
+    private validateFields = (nameList?: NamePath[], options?: ValidateOptions) => {
+        const namePathList: InternalNamePath[] | undefined = nameList
+            ? nameList.map(getNamePath)
+            : [];
+
+        const promiseList: Promise<{
+            name: InternalNamePath;
+            errors: string[];
+        }>[] = [];
+
+        this.getFieldEntities(true).forEach((field: FieldEntity) => {
+
+            if (!field.props.rules || !field.props.rules.length) {
+                return;
+            }
+
+            if (!nameList) { // 验证所有子段
+                namePathList.push(field.getNamePath());
+            }
+
+            const fieldNamePath = field.getNamePath();
+
+            if (containsNamePath(namePathList, fieldNamePath)) {
+                const promsie = field.validateRules();
+                promiseList.push(
+                    promsie.then(() => ({ name: fieldNamePath, errors: [] })).catch(errors => (
+                        Promise.reject({ name: fieldNamePath, errors })
+                    ))
+                );
+            }
+            // Add field validate rule in to promise list
+            // if (!provideNameList || containsNamePath(namePathList, fieldNamePath)) {
+            //     const promise = field.validateRules({
+            //         validateMessages: {
+            //             ...defaultValidateMessages,
+            //             ...this.validateMessages,
+            //         },
+            //         ...options,
+            //     });
+            //
+            //     // Wrap promise with field
+            //     promiseList.push(
+            //         promise
+            //         .then(() => ({ name: fieldNamePath, errors: [] }))
+            //         .catch(errors =>
+            //             Promise.reject({
+            //                 name: fieldNamePath,
+            //                 errors,
+            //             }),
+            //         ),
+            //     );
+            // }
+        });
+        Promise.allSettled(promiseList).then(res => {
+            console.log('promiseList');
+            console.log(res);
+        });
     };
 }
 

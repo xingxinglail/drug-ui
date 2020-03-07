@@ -27,7 +27,6 @@ export interface FormValue {
     [key: string]: any;
 }
 
-// todo setFieldsValue
 // todo 验证
 
 const Form: React.FC<FormProps> = React.forwardRef<HTMLFormElement, FormProps>((props, ref) => {
@@ -58,7 +57,10 @@ const Form: React.FC<FormProps> = React.forwardRef<HTMLFormElement, FormProps>((
     // }, {});
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
-        onSubmit && onSubmit(e);
+        e.preventDefault();
+        e.stopPropagation();
+        formInstance.submit();
+        // onSubmit && onSubmit(e);
     };
 
     return (

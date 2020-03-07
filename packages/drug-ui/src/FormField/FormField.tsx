@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import * as PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { styles } from './FormField.style';
@@ -17,12 +18,14 @@ import {
 import { isEmptyObject } from '../utils/index';
 import { FormContext, FormContextType } from '../Form/Form.context';
 import { FormFieldContext } from './FormField.context';
+import { toArray } from '../Form/utils';
 import { getNamePath, getValue, defaultGetValueFromEvent } from '../Form/utils/value';
 
 export interface FormFieldProps extends React.HTMLAttributes<HTMLDivElement> {
     children: React.ReactElement;
     name?: NamePath;
     trigger?: string;
+    validateTrigger?: string | string[] | false;
     valuePropName?: string;
     error?: boolean;
     rules?: Rule[];
@@ -36,17 +39,23 @@ const name = 'FormField';
 const useStyles = createUseStyles<FormFieldClassProps>(styles, name);
 
 const FormField: React.FC<FormFieldProps> = React.forwardRef<HTMLDivElement, FormFieldProps>((props, ref) => {
-    const { className, name, trigger, valuePropName, children } = props;
+    const { className, name, trigger, validateTrigger, valuePropName, rules, children } = props;
     const [, reRender] = React.useState();
     const context = React.useContext<InternalFormInstance>(FormFieldContext);
-    // const [error, setError] = React.useState(errorProp);
+    const [isValidating, setIsValidating] = React.useState(false);
+    const [errors, setErrors] = React.useState<string[]>([]);
     const classes = useStyles();
     const classNames = classnames(
         classes.root,
         className
     );
-
+    const validatePromise = React.useRef<Promise<string[]> | null>(null);
     const instance = React.useRef<FieldEntity>({
+        props: {
+            name,
+            rules
+        },
+        isFieldValidating: () => isValidating,
         onStoreChange (prevStore: Store, namePathList: InternalNamePath[] | null, info: NotifyInfo) {
             const { getFieldsValue }: FormInstance = context;
             const values = getFieldsValue(true);
@@ -54,6 +63,37 @@ const FormField: React.FC<FormFieldProps> = React.forwardRef<HTMLDivElement, For
             const prevValue = _getValue(prevStore);
             const curValue = _getValue();
             if (prevValue !== curValue) reRender({});
+        },
+        validateRules () {
+            /*
+            * promise 1 === validatePromise
+            * promise pedding...
+            * */
+            /*
+            * promise 2 === validatePromise
+            * promise2 pedding...
+            * promise 1.then  validatePromise.current !== promise
+            * */
+            // promise 2.then validatePromise.current === promise 多次调用只渲染最后一次
+            const promise = validate(_getNamePath(), _getValue(), rules || []);
+            validatePromise.current = promise;
+            setIsValidating(true);
+            setErrors([]);
+            promise.catch(e => e).then(errors => {
+                if (validatePromise.current === promise) {
+                    console.log(33333);
+                    ReactDOM.unstable_batchedUpdates(() => {
+                        setIsValidating(false);
+                        setErrors(errors);
+                        validatePromise.current = null;
+                    });
+                }
+            });
+            return promise;
+        },
+        getNamePath (): InternalNamePath {
+            const namePath = getNamePath(name!);
+            return 'name' in props ? [...namePath] : [];
         }
     });
 
@@ -65,7 +105,7 @@ const FormField: React.FC<FormFieldProps> = React.forwardRef<HTMLDivElement, For
 
     const _getNamePath = (): InternalNamePath => {
         const namePath = getNamePath(name!);
-        return name ? [...namePath] : [];
+        return 'name' in props ? [...namePath] : [];
     };
 
     const _getValue = (store?: Store) => {
@@ -99,7 +139,29 @@ const FormField: React.FC<FormFieldProps> = React.forwardRef<HTMLDivElement, For
 
             if (originTriggerFunc) originTriggerFunc(...args);
         };
-        console.log(control);
+
+        const validateTriggerList: string[] = toArray(validateTrigger || []);
+
+        validateTriggerList.forEach((triggerName: string) => {
+            // Wrap additional function of component, so that we can get latest value from store
+            const originTrigger = control[triggerName];
+            control[triggerName] = (...args: EventArgs) => {
+                if (originTrigger) {
+                    originTrigger(...args);
+                }
+                // Always use latest rules
+                if (rules && rules.length) {
+                    // We dispatch validate to root,
+                    // since it will update related data with other field with same name
+                    dispatch({
+                        type: 'validateField',
+                        namePath,
+                        triggerName,
+                    });
+                }
+            };
+        });
+
         return control;
     };
 
@@ -117,7 +179,15 @@ const FormField: React.FC<FormFieldProps> = React.forwardRef<HTMLDivElement, For
     // };
 
     return (
-        <>{ returnChildNode }</>
+        <>
+            { returnChildNode }
+            {
+                errors.map((error, index) => (
+                    <p key={ index }>{ error }</p>
+                ))
+            }
+            { isValidating && '正在验证...' }
+        </>
     );
 });
 
@@ -126,6 +196,7 @@ FormField.displayName = name;
 FormField.defaultProps = {
     name: undefined,
     trigger: 'onChange',
+    validateTrigger: 'onChange',
     valuePropName: 'value',
     error: false,
     onSubmit: undefined
@@ -137,4 +208,4 @@ FormField.propTypes = {
     onSubmit: PropTypes.func
 };
 
-export default React.memo(FormField);
+export default FormField;

@@ -1,4 +1,6 @@
+import * as React from 'react';
 import { FormValue } from './Form';
+import { NamePath, StoreValue } from './interface';
 
 interface Validate {
     [key: string]: Array<string | Promise<string | undefined>>;
@@ -13,7 +15,7 @@ export interface Rule {
     message?: string;
     min?: number;
     max?: number;
-    validator?: (rule: Rule, value: any, cb: (str?: string) => void) => void;
+    validator?: (value: StoreValue) => Promise<unknown>;
 }
 
 export interface Rules {
@@ -25,57 +27,94 @@ const isEmpty = (value: any): boolean => {
     return value === undefined || value === null || value === '';
 };
 
-export const validate = (formValue: FormValue, rules: Rules, cb: (errors: Errors) => void): Validate => {
-    const errors: Validate = {};
-    const promiseList: Promise<string>[] = [];
+// export const validate = (formValue: FormValue, rules: Rules, cb: (errors: Errors) => void): Validate => {
+//     const errors: Validate = {};
+//     const promiseList: Promise<string>[] = [];
+//
+//     const addError = (key: string, message: string | undefined | Promise<string | undefined>) => {
+//         if (errors[key] === undefined) errors[key] = [];
+//         if (!message) message = '';
+//         errors[key].push(message);
+//     };
+//
+//     for (let key in rules) {
+//         const value = formValue[key];
+//         rules[key].forEach(rule => {
+//             const { required, min, max, validator, message } = rule;
+//             if (required && isEmpty(value)) addError(key, message);
+//
+//             if (!isEmpty(value)) {
+//                 const minIsNum = typeof min === 'number';
+//                 const maxIsNum = typeof max === 'number';
+//                 if (minIsNum && maxIsNum) {
+//                     if (value.length < (min as number) || value.length > (max as number)) addError(key, message);
+//                 } else if (maxIsNum && value.length > (max as number)) {
+//                     if (value.length > (max as number)) addError(key, message);
+//                 } else if (minIsNum && value.length < (min as number)) {
+//                     if (value.length < (min as number)) addError(key, message);
+//                 }
+//             }
+//
+//             if (validator) {
+//                 const p = new Promise<string>((resolve, reject) => {
+//                     validator!(rule, value, msg => {
+//                         msg ? reject({ key, msg}) : resolve();
+//                     });
+//                 });
+//                 // addError(key, p);
+//                 promiseList.push(p);
+//             }
+//         });
+//     }
+//     if (promiseList.length > 0) {
+//         Promise.allSettled(promiseList).then(
+//             (res) => {
+//                 res.forEach(c => {
+//                     if (c.status === 'rejected') addError(c.reason.key, c.reason.msg);
+//                 });
+//                 cb(errors as Errors);
+//             }
+//         )
+//     } else {
+//         cb(errors as Errors);
+//     }
+//     return errors;
+// };
 
-    const addError = (key: string, message: string | undefined | Promise<string | undefined>) => {
-        if (errors[key] === undefined) errors[key] = [];
-        if (!message) message = '';
-        errors[key].push(message);
-    };
+export const validate = (name: NamePath, value: StoreValue, rules: Rule[]): Promise<string[]> => {
 
-    for (let key in rules) {
-        const value = formValue[key];
-        rules[key].forEach(rule => {
+    return new Promise((resolve, reject) => {
+        const errors: string[] = [];
+        const validatorPromise: Promise<unknown>[] = [];
+        rules.forEach(rule => {
             const { required, min, max, validator, message } = rule;
-            if (required && isEmpty(value)) addError(key, message);
-
-            if (!isEmpty(value)) {
+            if (message && required && isEmpty(value)) errors.push(message);
+            if (message && !isEmpty(value)) {
                 const minIsNum = typeof min === 'number';
                 const maxIsNum = typeof max === 'number';
                 if (minIsNum && maxIsNum) {
-                    if (value.length < (min as number) || value.length > (max as number)) addError(key, message);
+                    if (value.length < (min as number) || value.length > (max as number)) errors.push(message);
                 } else if (maxIsNum && value.length > (max as number)) {
-                    if (value.length > (max as number)) addError(key, message);
+                    if (value.length > (max as number)) errors.push(message);
                 } else if (minIsNum && value.length < (min as number)) {
-                    if (value.length < (min as number)) addError(key, message);
+                    if (value.length < (min as number)) errors.push(message);
                 }
             }
-
             if (validator) {
-                const p = new Promise<string>((resolve, reject) => {
-                    validator!(rule, value, msg => {
-                        msg ? reject({ key, msg}) : resolve();
-                    });
-                });
-                // addError(key, p);
-                promiseList.push(p);
+                validatorPromise.push(validator(value));
             }
         });
-    }
-    if (promiseList.length > 0) {
-        // @ts-ignore
-        Promise.allSettled(promiseList).then(
-            (res: { status: 'resolved' | 'rejected', reason: { key: string, msg: string } }[]) => {
-                res.forEach(c => {
-                    if (c.status === 'rejected') addError(c.reason.key, c.reason.msg);
+        if (validatorPromise.length) {
+            Promise.allSettled(validatorPromise).then(results => {
+                results.forEach(result => {
+                    if (result.status === 'rejected') {
+                        errors.push(result.reason);
+                    }
                 });
-                cb(errors as Errors);
-            }
-        )
-    } else {
-        cb(errors as Errors);
-    }
-    return errors;
+                errors.length ? reject(errors) : resolve([]);
+            });
+        } else {
+            errors.length ? reject(errors) : resolve([]);
+        }
+    });
 };

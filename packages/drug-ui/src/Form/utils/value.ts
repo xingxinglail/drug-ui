@@ -59,3 +59,17 @@ export function setValues<T> (store: T, ...restValues: T[]): T {
         store,
     );
 }
+
+export function matchNamePath (
+    namePath: InternalNamePath,
+    changedNamePath: InternalNamePath | null,
+) {
+    if (!namePath || !changedNamePath || namePath.length !== changedNamePath.length) {
+        return false;
+    }
+    return namePath.every((nameUnit, i) => changedNamePath[i] === nameUnit);
+}
+
+export function containsNamePath (namePathList: InternalNamePath[], namePath: InternalNamePath) {
+    return namePathList && namePathList.some(path => matchNamePath(path, namePath));
+}

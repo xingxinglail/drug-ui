@@ -1,4 +1,5 @@
 import { ReducerAction } from './useForm';
+import { Rule } from './validate';
 
 export type InternalNamePath = (string | number)[];
 export type NamePath = string | number | InternalNamePath;
@@ -48,14 +49,20 @@ export interface FieldData extends Partial<Omit<Meta, 'name'>> {
 export interface FieldEntity {
     onStoreChange: (store: Store, namePathList: InternalNamePath[] | null, info: NotifyInfo) => void;
     // isFieldTouched: () => boolean;
-    // isFieldValidating: () => boolean;
+    isFieldValidating: () => boolean;
     // getMeta: () => Meta;
-    // getNamePath: () => InternalNamePath;
+    getNamePath: () => InternalNamePath;
     // getErrors: () => string[];
-    // props: {
-    //     name?: NamePath;
-    //     dependencies?: NamePath[];
-    // };
+    validateRules: () => Promise<string[]>;
+    props: {
+        name?: NamePath;
+        rules?: Rule[];
+        // dependencies?: NamePath[];
+    };
+}
+
+export interface ValidateOptions {
+    triggerName?: string;
 }
 
 export interface Callbacks {
@@ -77,6 +84,7 @@ export interface InternalHooks {
 export interface FormInstance {
     getFieldValue: (name: NamePath) => StoreValue;
     getFieldsValue: (nameList?: NamePath[] | true) => Store;
+    getFieldError: (name: NamePath) => string[];
     isFieldsTouched(nameList?: NamePath[], allFieldsTouched?: boolean): boolean;
     isFieldTouched: (name: NamePath) => boolean;
     resetFields: (fields?: NamePath[]) => void;
