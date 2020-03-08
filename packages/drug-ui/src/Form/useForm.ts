@@ -10,9 +10,12 @@ import {
     FieldEntity,
     Callbacks,
     NotifyInfo,
-    ValidateOptions
+    ValidateOptions,
+    FieldError,
+    FieldData
 } from './interface';
 import { getNamePath, getValue, setValue, setValues, containsNamePath } from './utils/value';
+import NameMap from './utils/NameMap';
 
 interface UpdateAction {
     type: 'updateValue';
@@ -25,6 +28,8 @@ interface ValidateAction {
     namePath: InternalNamePath;
     triggerName: string;
 }
+
+type InvalidateFieldEntity = { INVALIDATE_NAME_PATH: InternalNamePath };
 
 export type ReducerAction = UpdateAction | ValidateAction;
 
@@ -50,6 +55,7 @@ class FormStore {
         getFieldValue: this.getFieldValue,
         getFieldsValue: this.getFieldsValue,
         getFieldError: this.getFieldError,
+        getFieldsError: this.getFieldsError,
         isFieldsTouched: this.isFieldsTouched,
         isFieldTouched: this.isFieldTouched,
         resetFields: this.resetFields,
@@ -66,19 +72,35 @@ class FormStore {
             registerField: this.registerField,
             useSubscribe: this.useSubscribe,
             setInitialValues: this.setInitialValues,
-            setCallbacks: this.setCallbacks
+            setCallbacks: this.setCallbacks,
+            getFields: this.getFields
         };
     };
 
-    // todo 1 获取对应字段名的值
     private getFieldValue = (name: NamePath): StoreValue => {
-
+        const namePath: InternalNamePath = getNamePath(name);
+        return getValue(this.store, namePath);
     };
 
-    // todo 2 获取对应字段名的错误信息
-    private getFieldError = (): string[] => {
-        return [];
-    }
+    private getFieldError = (name: NamePath): string[] => {
+        return this.getFieldsError([name])[0].errors;
+    };
+
+    private getFieldsError = (nameList?: NamePath[]): FieldError[] => {
+        const fieldEntities = this.getFieldEntitiesForNamePathList(nameList);
+        return fieldEntities.map((entity, index) => {
+            if (entity && !('INVALIDATE_NAME_PATH' in entity)) {
+                return {
+                    name: entity.getNamePath(),
+                    errors: entity.getErrors(),
+                };
+            }
+            return {
+                name: getNamePath(nameList![index]),
+                errors: [],
+            };
+        });
+    };
 
     private getFieldsValue = (nameList?: NamePath[] | true): Store => {
         return this.store;
@@ -108,9 +130,37 @@ class FormStore {
         this.notifyObservers(prevStore, namePathList, { type: 'reset' });
     };
 
-    // todo 3 设置一组字段状态
-    private setFields = () => {
+    private getFields = (): FieldData[] => {
+        return this.getFieldEntities(true).map(
+            (field: FieldEntity): FieldData => {
+                const namePath = field.getNamePath();
+                const meta = field.getMeta();
+                return {
+                    ...meta,
+                    name: namePath,
+                    value: this.getFieldValue(namePath),
+                };
+            },
+        );
+    };
 
+
+    private setFields = (fields: FieldData[]) => {
+        const prevStore = this.store;
+
+        fields.forEach((fieldData: FieldData) => {
+            const { name, errors, ...data } = fieldData;
+            const namePath = getNamePath(name);
+
+            if ('value' in data) {
+                this.store = setValue(this.store, namePath, data.value);
+            }
+
+            this.notifyObservers(prevStore, [namePath], {
+                type: 'setField',
+                data: fieldData,
+            });
+        });
     };
 
     private setFieldsValue = (store: Store) => {
@@ -203,10 +253,6 @@ class FormStore {
         this.callbacks = callbacks;
     };
 
-    private getFields = () => {
-
-    };
-
     private validateFields = (nameList?: NamePath[], options?: ValidateOptions) => {
         const namePathList: InternalNamePath[] | undefined = nameList
             ? nameList.map(getNamePath)
@@ -263,6 +309,28 @@ class FormStore {
         Promise.allSettled(promiseList).then(res => {
             console.log('promiseList');
             console.log(res);
+        });
+    };
+
+    private getFieldsMap = (pure: boolean = false) => {
+        const cache: NameMap<FieldEntity> = new NameMap();
+        this.getFieldEntities(pure).forEach(field => {
+            const namePath = field.getNamePath();
+            cache.set(namePath, field);
+        });
+        return cache;
+    };
+
+    private getFieldEntitiesForNamePathList = (
+        nameList?: NamePath[],
+    ): (FieldEntity | InvalidateFieldEntity)[] => {
+        if (!nameList) {
+            return this.getFieldEntities(true);
+        }
+        const cache = this.getFieldsMap(true);
+        return nameList.map(name => {
+            const namePath = getNamePath(name);
+            return cache.get(namePath) || { INVALIDATE_NAME_PATH: getNamePath(name) };
         });
     };
 }

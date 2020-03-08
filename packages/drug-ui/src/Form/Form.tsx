@@ -27,7 +27,8 @@ export interface FormValue {
     [key: string]: any;
 }
 
-// todo 验证
+// todo  onFinish
+// todo onFinishFailed
 
 const Form: React.FC<FormProps> = React.forwardRef<HTMLFormElement, FormProps>((props, ref) => {
     const { className, initialValues, form, onSubmit, children, ...rest } = props;

@@ -5,18 +5,13 @@ export type InternalNamePath = (string | number)[];
 export type NamePath = string | number | InternalNamePath;
 
 export type StoreValue = any;
+
 export interface Store {
     [name: string]: StoreValue;
 }
 
 export type EventArgs = any[];
 
-export interface Meta {
-    touched: boolean;
-    validating: boolean;
-    errors: string[];
-    name: InternalNamePath;
-}
 interface ValueUpdateInfo {
     type: 'valueUpdate';
     source: 'internal' | 'external';
@@ -41,18 +36,29 @@ export type NotifyInfo =
     relatedFields: InternalNamePath[];
 };
 
+export interface Meta {
+    validating: boolean;
+    errors: string[];
+    name: InternalNamePath;
+}
+
 export interface FieldData extends Partial<Omit<Meta, 'name'>> {
     name: NamePath;
     value?: StoreValue;
+}
+
+export interface FieldError {
+    name: InternalNamePath;
+    errors: string[];
 }
 
 export interface FieldEntity {
     onStoreChange: (store: Store, namePathList: InternalNamePath[] | null, info: NotifyInfo) => void;
     // isFieldTouched: () => boolean;
     isFieldValidating: () => boolean;
-    // getMeta: () => Meta;
+    getMeta: () => Meta;
     getNamePath: () => InternalNamePath;
-    // getErrors: () => string[];
+    getErrors: () => string[];
     validateRules: () => Promise<string[]>;
     props: {
         name?: NamePath;
@@ -78,14 +84,17 @@ export interface InternalHooks {
     useSubscribe: (subscribable: boolean) => void;
     setInitialValues: (values: Store, init?: boolean) => void;
     setCallbacks: (callbacks: Callbacks) => void;
-    getFields?: (namePathList?: InternalNamePath[]) => FieldData[];
+    getFields: () => FieldData[];
 }
 
 export interface FormInstance {
     getFieldValue: (name: NamePath) => StoreValue;
     getFieldsValue: (nameList?: NamePath[] | true) => Store;
     getFieldError: (name: NamePath) => string[];
-    isFieldsTouched(nameList?: NamePath[], allFieldsTouched?: boolean): boolean;
+    getFieldsError: (nameList?: NamePath[]) => FieldError[];
+
+    isFieldsTouched (nameList?: NamePath[], allFieldsTouched?: boolean): boolean;
+
     isFieldTouched: (name: NamePath) => boolean;
     resetFields: (fields?: NamePath[]) => void;
     setFields: (fields: FieldData[]) => void;
@@ -93,7 +102,7 @@ export interface FormInstance {
     submit: () => void;
 }
 
-export type InternalFormInstance = Omit<FormInstance, 'validateFields'> &  {
+export type InternalFormInstance = Omit<FormInstance, 'validateFields'> & {
 
     /**
      * Passed by field context props

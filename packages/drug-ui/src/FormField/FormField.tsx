@@ -4,7 +4,7 @@ import * as PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { styles } from './FormField.style';
 import { createUseStyles } from '../styles';
-import { validate, Rule } from '../Form/validate';
+import { validate, Rule, RuleConfig } from '../Form/validate';
 import {
     NamePath,
     InternalNamePath,
@@ -13,13 +13,14 @@ import {
     FormInstance,
     EventArgs,
     FieldEntity,
-    NotifyInfo
+    NotifyInfo,
+    Meta
 } from '../Form/interface';
 import { isEmptyObject } from '../utils/index';
 import { FormContext, FormContextType } from '../Form/Form.context';
 import { FormFieldContext } from './FormField.context';
 import { toArray } from '../Form/utils';
-import { getNamePath, getValue, defaultGetValueFromEvent } from '../Form/utils/value';
+import { getNamePath, getValue, defaultGetValueFromEvent, containsNamePath } from '../Form/utils/value';
 
 export interface FormFieldProps extends React.HTMLAttributes<HTMLDivElement> {
     children: React.ReactElement;
@@ -44,25 +45,58 @@ const FormField: React.FC<FormFieldProps> = React.forwardRef<HTMLDivElement, For
     const context = React.useContext<InternalFormInstance>(FormFieldContext);
     const [isValidating, setIsValidating] = React.useState(false);
     const [errors, setErrors] = React.useState<string[]>([]);
+    const errorsRef = React.useRef<string[]>([]);
     const classes = useStyles();
     const classNames = classnames(
         classes.root,
         className
     );
     const validatePromise = React.useRef<Promise<string[]> | null>(null);
+
     const instance = React.useRef<FieldEntity>({
         props: {
             name,
             rules
         },
-        isFieldValidating: () => isValidating,
+        isFieldValidating: () => !!validatePromise,
         onStoreChange (prevStore: Store, namePathList: InternalNamePath[] | null, info: NotifyInfo) {
             const { getFieldsValue }: FormInstance = context;
             const values = getFieldsValue(true);
             const namePath = _getNamePath();
             const prevValue = _getValue(prevStore);
             const curValue = _getValue();
-            if (prevValue !== curValue) reRender({});
+            const namePathMatch = namePathList && containsNamePath(namePathList, namePath);
+            switch (info.type) {
+                case 'reset':
+                    if (!namePathList || namePathMatch) {
+                        setIsValidating(false);
+                        validatePromise.current = null;
+                        setErrors([]);
+                        errorsRef.current = [];
+                        reRender({});
+                        return;
+                    }
+                    break;
+                case 'setField':
+                    if (namePathMatch) {
+                        const { data } = info;
+                        if ('validating' in data) {
+                            setIsValidating(true);
+                            validatePromise.current = data.validating ? Promise.resolve([]) : null;
+                        }
+                        if ('errors' in data) {
+                            const errors = data.errors || [];
+                            setErrors(errors);
+                            errorsRef.current = errors;
+                        }
+                        reRender({});
+                        return;
+                    }
+                    break;
+                default:
+                    if (prevValue !== curValue) reRender({});
+                    break;
+            }
         },
         validateRules () {
             /*
@@ -75,16 +109,17 @@ const FormField: React.FC<FormFieldProps> = React.forwardRef<HTMLDivElement, For
             * promise 1.then  validatePromise.current !== promise
             * */
             // promise 2.then validatePromise.current === promise 多次调用只渲染最后一次
-            const promise = validate(_getNamePath(), _getValue(), rules || []);
+            const promise = validate(_getNamePath(), _getValue(), _getRules());
             validatePromise.current = promise;
             setIsValidating(true);
             setErrors([]);
+            errorsRef.current = [];
             promise.catch(e => e).then(errors => {
                 if (validatePromise.current === promise) {
-                    console.log(33333);
                     ReactDOM.unstable_batchedUpdates(() => {
                         setIsValidating(false);
                         setErrors(errors);
+                        errorsRef.current = errors;
                         validatePromise.current = null;
                     });
                 }
@@ -94,6 +129,14 @@ const FormField: React.FC<FormFieldProps> = React.forwardRef<HTMLDivElement, For
         getNamePath (): InternalNamePath {
             const namePath = getNamePath(name!);
             return 'name' in props ? [...namePath] : [];
+        },
+        getErrors: () => errorsRef.current,
+        getMeta () {
+            return {
+                validating: !!validatePromise.current,
+                errors: errorsRef.current,
+                name: [...getNamePath(name!)],
+            };
         }
     });
 
@@ -114,12 +157,22 @@ const FormField: React.FC<FormFieldProps> = React.forwardRef<HTMLDivElement, For
         return getValue(store || getFieldsValue(true), namePath);
     };
 
+    const _getRules = (): RuleConfig[] => {
+        return (rules || []).map(
+            (rule: Rule): RuleConfig => {
+                if (typeof rule === 'function') {
+                    return rule(context);
+                }
+                return rule;
+            }
+        );
+    };
+
     const getControlled = (childProps: { [name: string]: any } = {}) => {
         const namePath = _getNamePath();
         const { getInternalHooks }: InternalFormInstance = context;
         const { dispatch } = getInternalHooks();
         const value = _getValue();
-
         const originTriggerFunc: any = childProps[trigger!];
 
         const control = {

@@ -7,6 +7,7 @@ export const FormFieldContext = React.createContext<InternalFormInstance>({
     getFieldValue: fn,
     getFieldsValue: fn,
     getFieldError: fn,
+    getFieldsError: fn,
     isFieldsTouched: fn,
     isFieldTouched: fn,
     resetFields: fn,
